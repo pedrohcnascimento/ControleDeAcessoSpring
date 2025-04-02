@@ -50,7 +50,7 @@ let modoEdicao = false;
       const url = modoEdicao ? `http://localhost:8080/usuarios/${id}` : 'http://localhost:8080/usuarios';
 
       fetch(url, {
-          method: metodo,
+          method: PUT,
           headers: { 'Content-Type': 'application/json' },
           body: JSON.stringify({ id, nome })
       })
