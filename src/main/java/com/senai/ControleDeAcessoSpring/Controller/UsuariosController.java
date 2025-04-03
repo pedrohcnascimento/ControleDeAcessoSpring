@@ -1,68 +1,65 @@
 package com.senai.ControleDeAcessoSpring.Controller;
 
-
 import com.senai.ControleDeAcessoSpring.Entity.*;
+import com.senai.ControleDeAcessoSpring.Repository.UsuarioRepository;
+import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.HttpStatus;
+import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
-import java.util.ArrayList;
+
 import java.util.List;
+import java.util.Optional;
+
 
 @RestController
 @RequestMapping("/usuarios")
 public class UsuariosController {
-    private final List<Usuario> listaUsuarios = new ArrayList<>();
 
-    public UsuariosController(){
-        listaUsuarios.add(new Professor(1,1,"Rafael","rafael@gmail.com","-"));
-        listaUsuarios.add(new Coordenador(2,2,"Rafael","rafael@gmail.com","-"));
-        listaUsuarios.add(new AQV(3,3,"Rafael","rafael@gmail.com","-"));
-        listaUsuarios.add(new Aluno(4,4,"Rafael","rafael@gmail.com","-"));
-    }
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     @GetMapping
     public List<Usuario> getUsuarios(){
-        return listaUsuarios;
+        return usuarioRepository.findAll();
     }
 
     @GetMapping("/{id}")
-    public Usuario getUsuarios(@PathVariable Integer id){
-        return listaUsuarios.get(id);
-    }
-
-    @GetMapping("/{cargo}")
-    public List getUsuarios(@PathVariable String cargo){
-        List lista = new ArrayList<>();
-
-        for (Usuario u : listaUsuarios){
-            if (u.getCargo().equals(cargo)){
-                lista.add(u);
-            }
-        }
-        return lista;
+    public ResponseEntity<Usuario> getUsuariosById(@PathVariable long id){
+        Optional<Usuario> usuario = usuarioRepository.findById(id);
+        return usuario.map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
     }
 
     @PostMapping
-    public String postUsuarios(@RequestBody Usuario usuario){
-        listaUsuarios.add(usuario);
-        return "Usuario adicionado com sucesso";
+    public ResponseEntity<Usuario> postUsuarios(@RequestBody Usuario usuario){
+        return ResponseEntity.ok(usuarioRepository.save(usuario));
     }
 
-    @PutMapping("/{id}")
-    public String updateUsuarios(@RequestBody Usuario usuarioAtualizado ,@PathVariable Integer id){
-        for (Usuario u : listaUsuarios){
-            if (u.getId().equals(id)){
-                u.setNome(usuarioAtualizado.getNome());
-                return "Usuario editado com sucesso";
-            }
+    @PutMapping
+    public ResponseEntity<Usuario> updateUsuarios(@PathVariable long id, @RequestBody Usuario usuarioAtualizado){
+        Optional<Usuario> usuarioExistente = usuarioRepository.findById(id);
+        if (usuarioExistente.isPresent()){
+            Usuario usuario = usuarioExistente.get();
+
+            usuario.setIdAcesso(usuarioAtualizado.getIdAcesso());
+            usuario.setNome(usuarioAtualizado.getNome());
+            usuario.setTelefone(usuarioAtualizado.getTelefone());
+            usuario.setEmail(usuarioAtualizado.getEmail());
+            usuario.setFoto(usuarioAtualizado.getFoto());
+
+            return ResponseEntity.ok(usuarioRepository.save(usuario));
         }
-        return "Usuario não encontrado";
+        return ResponseEntity.notFound().build();
     }
 
-    @DeleteMapping("/{id}")
-    public String deletarUsuarios(@PathVariable Integer id){
-        if (listaUsuarios.get(id).equals(null)){
-            return "Usuário não encontrado";
+    @DeleteMapping
+    public ResponseEntity<Usuario> deleteUsuarios(@PathVariable long id){
+        Optional<Usuario> usuarioExistente = usuarioRepository.findById(id);
+
+        if (usuarioExistente.isPresent()){
+            usuarioRepository.deleteById(id);
+            return new ResponseEntity<>(HttpStatus.NO_CONTENT);
         }
-        listaUsuarios.remove(id-1);
-        return "Usuario deletado com sucesso";
+        return ResponseEntity.notFound().build();
     }
+
 }
