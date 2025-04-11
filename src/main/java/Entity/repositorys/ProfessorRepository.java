@@ -1,4 +1,7 @@
 package Entity.repositorys;
 
-public interface ProfessorRepository{
+import Entity.Professor;
+import org.springframework.data.jpa.repository.JpaRepository;
+
+public interface ProfessorRepository extends JpaRepository<Professor, Long> {
 }
