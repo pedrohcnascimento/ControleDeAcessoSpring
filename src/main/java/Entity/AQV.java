@@ -5,7 +5,5 @@ import lombok.Data;
 
 @Entity
 @Data
-public class Aluno extends Usuario{
-
-    private String turma;
+public class AQV extends Usuario{
 }
