@@ -7,3 +7,4 @@ public class Coordenador extends Usuario{
         this.cargo = "Coordenador";
     }
 }
+

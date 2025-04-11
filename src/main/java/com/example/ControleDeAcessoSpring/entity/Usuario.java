@@ -20,6 +20,7 @@ public abstract class Usuario {
         this.imagem = imagem;
     }
 
+
     public Integer getCpf() {
         return cpf;
     }
