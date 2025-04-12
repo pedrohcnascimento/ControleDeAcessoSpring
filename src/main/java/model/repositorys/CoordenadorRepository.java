@@ -1,6 +1,6 @@
-package Entity.repositorys;
+package model.repositorys;
 
-import Entity.Coordenador;
+import model.entity.Coordenador;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface CoordenadorRepository extends JpaRepository<Coordenador, Long> {

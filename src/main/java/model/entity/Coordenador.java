@@ -1,4 +1,4 @@
-package Entity;
+package model.entity;
 
 import jakarta.persistence.Entity;
 import lombok.Data;

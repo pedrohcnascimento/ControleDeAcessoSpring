@@ -1,6 +1,5 @@
-package Entity;
+package model.entity;
 
-import Entity.repositorys.ProfessorRepository;
 import jakarta.persistence.Entity;
 import lombok.Data;
 

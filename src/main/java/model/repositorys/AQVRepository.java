@@ -1,6 +1,6 @@
-package Entity.repositorys;
+package model.repositorys;
 
-import Entity.AQV;
+import model.entity.AQV;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface AQVRepository extends JpaRepository<AQV, Long> {

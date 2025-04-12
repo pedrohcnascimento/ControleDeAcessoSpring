@@ -1,4 +1,4 @@
-package Entity;
+package model.entity;
 
 public enum UnidadeCurricular {
 

@@ -1,4 +1,4 @@
-package Entity;
+package model.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.GeneratedValue;
