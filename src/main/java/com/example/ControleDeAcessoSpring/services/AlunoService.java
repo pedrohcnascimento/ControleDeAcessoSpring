@@ -1,7 +1,7 @@
-package controller.services;
+package com.example.ControleDeAcessoSpring.services;
 
-import model.entity.Aluno;
-import model.repositorys.AlunoRepository;
+import com.example.ControleDeAcessoSpring.model.entity.Aluno;
+import com.example.ControleDeAcessoSpring.model.repositorys.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,8 +15,7 @@ public class AlunoService {
     private AlunoRepository repository;
 
     public Aluno create(Aluno obj) {
-        repository.save(obj);
-        return obj;
+        return repository.save(obj);
     }
 
     public void delete(Long id) {

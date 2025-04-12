@@ -1,4 +1,4 @@
-package model.entity;
+package com.example.ControleDeAcessoSpring.model.entity;
 
 import jakarta.persistence.Entity;
 import lombok.Data;

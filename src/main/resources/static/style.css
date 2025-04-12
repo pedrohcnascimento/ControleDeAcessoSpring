@@ -46,6 +46,11 @@ body {
     padding: 2%;
 }
 
+#btn-group button:hover {
+    background-color: rgb(24, 101, 212);
+}
+
+
 #btn-group button:first-child {
     border-top-left-radius: 20px;
     border-bottom-left-radius: 20px;

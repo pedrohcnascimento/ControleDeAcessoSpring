@@ -1,4 +1,4 @@
-package model.entity;
+package com.example.ControleDeAcessoSpring.model.entity;
 
 import jakarta.persistence.Entity;
 import lombok.Data;
@@ -9,5 +9,5 @@ import java.util.List;
 @Data
 public class Coordenador extends Usuario{
 
-    private List<Professor> listaDeProfessores;
+    private List<String> listaDeProfessores;
 }
