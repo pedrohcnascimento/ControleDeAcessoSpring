@@ -1,4 +1,4 @@
-package com.example.ControleDeAcessoSpring.model.repositorys;
+package com.example.ControleDeAcessoSpring.model.repositories;
 
 import com.example.ControleDeAcessoSpring.model.entity.Aluno;
 import org.springframework.data.jpa.repository.JpaRepository;

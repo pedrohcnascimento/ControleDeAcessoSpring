@@ -1,7 +1,7 @@
 package com.example.ControleDeAcessoSpring.services;
 
 import com.example.ControleDeAcessoSpring.model.entity.Aluno;
-import com.example.ControleDeAcessoSpring.model.repositorys.AlunoRepository;
+import com.example.ControleDeAcessoSpring.model.repositories.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
