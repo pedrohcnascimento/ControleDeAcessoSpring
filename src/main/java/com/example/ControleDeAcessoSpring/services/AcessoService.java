@@ -39,7 +39,6 @@ public class AcessoService {
 
     private Acesso updateAluno(Optional<Acesso> newObj, Acesso obj) {
         newObj.get().setData(obj.getData());
-        newObj.get().setIdAcesso(obj.getIdAcesso());
         return obj;
     }
 }

@@ -16,7 +16,4 @@ public class Acesso {
 
     @Column(nullable = false)
     private Date data;
-
-    @Column(nullable = false)
-    private Long idAcesso;
 }
