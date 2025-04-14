@@ -15,12 +15,12 @@ public class CoordenadorController {
     private CoordenadorService service;
 
     @PostMapping
-    public Coordenador adicionarAluno(@RequestBody Coordenador obj) {
+    public Coordenador adicionarCoordenador(@RequestBody Coordenador obj) {
         return service.create(obj);
     }
 
     @GetMapping
-    public List<Coordenador> listarAlunos() {
+    public List<Coordenador> listarCoordenadores() {
         return service.getAll();
     }
 

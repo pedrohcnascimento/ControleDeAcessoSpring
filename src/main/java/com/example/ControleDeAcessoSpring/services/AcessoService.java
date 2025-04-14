@@ -33,11 +33,11 @@ public class AcessoService {
 
     public Acesso update(Acesso obj) {
         Optional<Acesso> newObj = repository.findById(obj.getId());
-        updateAluno(newObj, obj);
+        updateAcesso(newObj, obj);
         return repository.save(newObj.get());
     }
 
-    private Acesso updateAluno(Optional<Acesso> newObj, Acesso obj) {
+    private Acesso updateAcesso(Optional<Acesso> newObj, Acesso obj) {
         newObj.get().setData(obj.getData());
         return obj;
     }

@@ -15,12 +15,12 @@ public class ProfessorController {
     private ProfessorService service;
 
     @PostMapping
-    public Professor adicionarAluno(@RequestBody Professor obj) {
+    public Professor adicionarProfessor(@RequestBody Professor obj) {
         return service.create(obj);
     }
 
     @GetMapping
-    public List<Professor> listarAlunos() {
+    public List<Professor> listarProfessores() {
         return service.getAll();
     }
 

@@ -33,11 +33,11 @@ public class CoordenadorService {
 
     public Coordenador update(Coordenador obj) {
         Optional<Coordenador> newObj = repository.findById(obj.getId());
-        updateAluno(newObj, obj);
+        updateCoordenador(newObj, obj);
         return repository.save(newObj.get());
     }
 
-    private Coordenador updateAluno(Optional<Coordenador> newObj, Coordenador obj) {
+    private Coordenador updateCoordenador(Optional<Coordenador> newObj, Coordenador obj) {
         newObj.get().setNome(obj.getNome());
         newObj.get().setListaDeProfessores(obj.getListaDeProfessores());
         newObj.get().setIdade(obj.getIdade());

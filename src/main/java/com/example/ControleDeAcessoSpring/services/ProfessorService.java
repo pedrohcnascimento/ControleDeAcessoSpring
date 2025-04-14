@@ -33,11 +33,11 @@ public class ProfessorService {
 
     public Professor update(Professor obj) {
         Optional<Professor> newObj = repository.findById(obj.getId());
-        updateAluno(newObj, obj);
+        updateProfessor(newObj, obj);
         return repository.save(newObj.get());
     }
 
-    private Professor updateAluno(Optional<Professor> newObj, Professor obj) {
+    private Professor updateProfessor(Optional<Professor> newObj, Professor obj) {
         newObj.get().setNome(obj.getNome());
         newObj.get().setUnidadesCurriculares(obj.getUnidadesCurriculares());
         newObj.get().setTurma(obj.getTurma());

@@ -12,21 +12,21 @@ import java.util.List;
 @RequestMapping("/aluno")
 public class AlunoController {
     @Autowired
-    private AlunoService servico;
+    private AlunoService service;
 
     @PostMapping
     public Aluno adicionarAluno(@RequestBody Aluno obj) {
-        return servico.create(obj);
+        return service.create(obj);
     }
 
     @GetMapping
     public List<Aluno> listarAlunos() {
-        return servico.getAll();
+        return service.getAll();
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        servico.delete(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }

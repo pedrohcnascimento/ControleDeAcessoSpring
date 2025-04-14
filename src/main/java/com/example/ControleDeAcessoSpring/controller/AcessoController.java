@@ -12,21 +12,21 @@ import java.util.List;
 @RequestMapping("/acesso")
 public class AcessoController {
     @Autowired
-    private AcessoService servico;
+    private AcessoService service;
 
     @PostMapping
-    public Acesso adicionarAluno(@RequestBody Acesso obj) {
-        return servico.create(obj);
+    public Acesso adicionarAcesso(@RequestBody Acesso obj) {
+        return service.create(obj);
     }
 
     @GetMapping
-    public List<Acesso> listarAlunos() {
-        return servico.getAll();
+    public List<Acesso> listarAcessos() {
+        return service.getAll();
     }
 
     @DeleteMapping(value = "/{id}")
     public ResponseEntity<Void> deletar(@PathVariable Long id) {
-        servico.delete(id);
+        service.delete(id);
         return ResponseEntity.noContent().build();
     }
 }
