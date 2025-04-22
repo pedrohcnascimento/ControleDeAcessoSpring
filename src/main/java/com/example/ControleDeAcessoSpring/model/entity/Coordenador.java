@@ -9,5 +9,5 @@ import java.util.List;
 @Data
 public class Coordenador extends Usuario{
 
-    private List<String> listaDeProfessores;
+    private List<String> equipeDeProfessores;
 }
