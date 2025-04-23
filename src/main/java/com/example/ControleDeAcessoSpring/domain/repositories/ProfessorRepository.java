@@ -1,6 +1,6 @@
-package com.example.ControleDeAcessoSpring.model.repositories;
+package com.example.ControleDeAcessoSpring.domain.repositories;
 
-import com.example.ControleDeAcessoSpring.model.entity.Professor;
+import com.example.ControleDeAcessoSpring.domain.entity.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;
 
 public interface ProfessorRepository extends JpaRepository<Professor, Long> {

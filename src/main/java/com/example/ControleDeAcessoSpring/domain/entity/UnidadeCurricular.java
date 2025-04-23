@@ -1,4 +1,4 @@
-package com.example.ControleDeAcessoSpring.model.entity;
+package com.example.ControleDeAcessoSpring.domain.entity;
 
 public enum UnidadeCurricular {
     BACKEND,

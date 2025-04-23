@@ -1,12 +1,15 @@
-package com.example.ControleDeAcessoSpring.model.entity;
+package com.example.ControleDeAcessoSpring.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
-import lombok.Data;
+import lombok.*;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Aluno extends Usuario{
 
     @Column

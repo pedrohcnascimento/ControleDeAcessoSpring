@@ -1,10 +1,13 @@
-package com.example.ControleDeAcessoSpring.model.entity;
+package com.example.ControleDeAcessoSpring.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
 
 @MappedSuperclass
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public abstract class Usuario {
 
     @Id

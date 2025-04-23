@@ -1,11 +1,15 @@
-package com.example.ControleDeAcessoSpring.model.entity;
+package com.example.ControleDeAcessoSpring.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Data;
+import lombok.*;
+
 import java.util.Date;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Acesso {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)

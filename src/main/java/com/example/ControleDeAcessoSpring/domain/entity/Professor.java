@@ -1,15 +1,18 @@
-package com.example.ControleDeAcessoSpring.model.entity;
+package com.example.ControleDeAcessoSpring.domain.entity;
 
 import jakarta.persistence.Column;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.JoinTable;
-import lombok.Data;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
-@Data
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 public class Professor extends Usuario {
 
     @Column(nullable = false)

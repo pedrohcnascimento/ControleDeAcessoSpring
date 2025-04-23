@@ -1,4 +1,4 @@
-package com.example.ControleDeAcessoSpring.model.dto;
+package com.example.ControleDeAcessoSpring.domain.dto;
 
 import java.util.Date;
 
