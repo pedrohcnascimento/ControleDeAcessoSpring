@@ -1,7 +1,6 @@
-package com.senai.ControleDeAcessoSpring.Controller;
+package com.senai.ControleDeAcessoSpring.inteface.Controller;
 
-import com.senai.ControleDeAcessoSpring.Entity.*;
-import com.senai.ControleDeAcessoSpring.Repository.UsuarioRepository;
+import com.senai.ControleDeAcessoSpring.domain.Entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
