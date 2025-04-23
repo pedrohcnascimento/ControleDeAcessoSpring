@@ -1,9 +1,6 @@
 package com.example.ControleDeAcessoSpring.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -22,6 +19,18 @@ public class Professor extends Usuario {
             inverseJoinColumns = @JoinColumn(name = "turma_id")
     )
     private List<Turma> turma;
+
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "gerador_id_acesso")
+            @TableGenerator(
+                    name = "gerador_id_acesso",
+                    table = "id_generator",
+                    pkColumnName = "idUsuario",
+                    valueColumnName = "value_column",
+                    pkColumnValue = "professor",
+                    allocationSize = 1
+            )
+    Long idAcesso;
 
     @Column(nullable = false)
     private List<UnidadeCurricular> unidadesCurriculares;

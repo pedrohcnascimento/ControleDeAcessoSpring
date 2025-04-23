@@ -17,4 +17,8 @@ public class Acesso {
 
     @Column(nullable = false)
     private Date data;
+
+    @Column
+    @JoinColumn(name = "idAcesso")
+    private Long idAcesso;
 }
