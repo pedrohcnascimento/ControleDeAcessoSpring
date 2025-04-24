@@ -3,6 +3,8 @@ package com.example.ControleDeAcessoSpring.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.sql.Time;
+import java.util.Date;
 import java.util.List;
 
 @Entity
@@ -16,7 +18,7 @@ public class Turma {
     private Long id;
 
     @Column(nullable = false)
-    private String curso;
+    private String nome;
 
     @Column
     @ManyToOne(cascade = CascadeType.ALL)
@@ -35,4 +37,13 @@ public class Turma {
             inverseJoinColumns = @JoinColumn(name = "aluno_id")
     )
     private List<Aluno> alunos;
+
+    @Column(nullable = false)
+    private Curso curso;
+
+    @Column(nullable = false)
+    private Date dataDeInicio;
+
+    @Column(nullable = false)
+    private Time horarioDeEntrada;
 }

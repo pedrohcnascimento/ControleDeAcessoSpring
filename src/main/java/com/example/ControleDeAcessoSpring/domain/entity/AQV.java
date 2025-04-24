@@ -1,6 +1,6 @@
 package com.example.ControleDeAcessoSpring.domain.entity;
 
-import jakarta.persistence.Entity;
+import jakarta.persistence.*;
 import lombok.*;
 
 @Entity
@@ -9,4 +9,16 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class AQV extends Usuario{
+
+    @Column(nullable = false)
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "gerador_id_acesso")
+    @TableGenerator(
+            name = "gerador_id_acesso",
+            table = "id_generator",
+            pkColumnName = "idUsuario",
+            valueColumnName = "value_column",
+            pkColumnValue = "",
+            allocationSize = 1
+    )
+    Long idAcesso;
 }

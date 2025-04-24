@@ -19,4 +19,7 @@ public abstract class Usuario {
 
     @Column(nullable = false)
     private Integer idade;
+
+    @Column(nullable = false, unique = true)
+    private Long idAcesso;
 }

@@ -6,17 +6,29 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-@AllArgsConstructor
-@Setter
+import java.util.Date;
+
+@MappedSuperclass
 @Getter
+@Setter
 @NoArgsConstructor
-public class UnidadeCurricular {
+@AllArgsConstructor
+public class Ocorrencia {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private Integer cargaHoraria;
+    private String justificativa;
 
-    private Integer diasDaSemana;
+    @Column(nullable = false)
+    private Date dataEhora;
+
+    @Column(nullable = false)
+    private Status status;
+
+    @Column(nullable = false)
+    private TipoOcorrencia tipo;
+
 }
