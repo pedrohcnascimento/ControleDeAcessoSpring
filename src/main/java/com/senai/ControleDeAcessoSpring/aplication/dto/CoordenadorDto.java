@@ -1,5 +1,6 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
+import java.util.Date;
 import java.util.List;
 
 public record CoordenadorDto(
@@ -8,8 +9,7 @@ public record CoordenadorDto(
         String nome,
         String email,
         String telefone,
-        String cargo,
-        String foto,
+        Date dataDeNascimento,
         List<ProfessorDto> equipe)
 {
 }

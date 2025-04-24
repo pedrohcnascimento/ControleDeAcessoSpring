@@ -1,11 +1,12 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
+import java.util.Date;
+
 public record AQVDto(Long id,
                      Long idAcesso,
                      String nome,
                      String email,
                      String telefone,
-                     String cargo,
-                     String foto
+                     Date dataDeNascimento
                      ) {
 }

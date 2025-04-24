@@ -2,6 +2,7 @@ package com.senai.ControleDeAcessoSpring.aplication.dto;
 
 import com.senai.ControleDeAcessoSpring.domain.Entity.Cursos;
 
+import java.util.Date;
 import java.util.List;
 
 public record ProfessorDto(
@@ -10,9 +11,8 @@ public record ProfessorDto(
         String nome,
         String email,
         String telefone,
-        String cargo,
-        String turma,
-        String foto,
-        List<Cursos> cursos
+        Date dataDeNascimento,
+        List<Cursos> cursos,
+        List<TurmaDto> turmas
         ) {
 }
