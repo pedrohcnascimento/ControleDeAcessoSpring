@@ -3,7 +3,6 @@ package com.example.ControleDeAcessoSpring.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.util.Calendar;
 
 @Entity
 @Getter
