@@ -31,6 +31,11 @@ public class AlunoController {
                 .orElse(ResponseEntity.notFound().build());
     }
 
+    // Só uma ideia
+//    @GetMapping("/{id}/{idOcorrencia}")
+//    public ResponseEntity<OcorrenciaDto> buscarPorId(@PathVariable Long id, @PathVariable Long idOcorrencia) {
+//    }
+
     @PutMapping("/{id}")
     public ResponseEntity<String> atualizar(@PathVariable Long id,
                                             @RequestBody AlunoDto alunoDto) {
