@@ -9,6 +9,7 @@ public record AlunoDto(Long id,
                        String email,
                        String telefone,
                        Date dataDeNascimento,
+                       TurmaDto turma,
                        List<OcorrenciaDto> ocorrencias,
                        List<JustificativaDto> justificativas) {
 }
