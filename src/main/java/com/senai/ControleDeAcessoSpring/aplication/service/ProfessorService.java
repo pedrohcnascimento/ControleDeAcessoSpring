@@ -23,10 +23,8 @@ public class ProfessorService {
         professor.setNome(professorDto.nome());
         professor.setEmail(professorDto.email());
         professor.setTelefone(professorDto.telefone());
-        professor.setCargo("Professor");
-        professor.setTurma(professorDto.turma());
+        professor.setTurmas(professorDto.turmas());
         professor.setCursos(professorDto.cursos());
-        professor.setFoto(professorDto.foto());
 
         professorRepo.save(professor);
         return true;
@@ -39,9 +37,7 @@ public class ProfessorService {
                         professor.getNome(),
                         professor.getEmail(),
                         professor.getTelefone(),
-                        professor.getCargo(),
-                        professor.getTurma(),
-                        professor.getFoto(),
+                        professor.getTurmas(),
                         professor.getCursos()
                 )
         ).toList();
@@ -54,9 +50,7 @@ public class ProfessorService {
                 professor.getNome(),
                 professor.getEmail(),
                 professor.getTelefone(),
-                professor.getCargo(),
-                professor.getTurma(),
-                professor.getFoto(),
+                professor.getTurmas(),
                 professor.getCursos()
         ));
     }
@@ -68,10 +62,8 @@ public class ProfessorService {
             professor.setNome(professorDto.nome());
             professor.setEmail(professorDto.email());
             professor.setTelefone(professorDto.telefone());
-            professor.setTurma(professorDto.turma());
+            professor.setTurmas(professorDto.turmas());
             professor.setCursos(professorDto.cursos());
-            professor.setFoto(professorDto.foto());
-
             professorRepo.save(professor);
             return true;
         }).orElse(false);

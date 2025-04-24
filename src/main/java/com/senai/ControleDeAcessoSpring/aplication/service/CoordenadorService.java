@@ -1,7 +1,9 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.CoordenadorDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.CursoDto;
 import com.senai.ControleDeAcessoSpring.aplication.dto.ProfessorDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.UnidadeCurricularDto;
 import com.senai.ControleDeAcessoSpring.domain.Entity.Coordenador;
 import com.senai.ControleDeAcessoSpring.domain.Entity.Professor;
 import com.senai.ControleDeAcessoSpring.domain.Repository.CoordenadorRepository;
@@ -26,8 +28,6 @@ public class CoordenadorService {
         c.setNome(coordenadorDto.nome());
         c.setEmail(coordenadorDto.email());
         c.setTelefone(coordenadorDto.telefone());
-        c.setCargo("Coordenador");
-        c.setFoto(coordenadorDto.foto());
         c.setEquipeProfessores(mapEquipe(coordenadorDto.equipe()));
 
         coordenadorRepo.save(c);
@@ -42,10 +42,8 @@ public class CoordenadorService {
             professor.setNome(professorDto.nome());
             professor.setEmail(professorDto.email());
             professor.setTelefone(professorDto.telefone());
-            professor.setCargo("Professor");
-            professor.setTurma(professorDto.turma());
+            professor.setTurmas(new ArrayList<>(professorDto.turmas()));
             professor.setCursos(new ArrayList<>(professorDto.cursos()));
-            professor.setFoto(professorDto.foto());
             return professor;
         }).toList());
     }
@@ -57,18 +55,22 @@ public class CoordenadorService {
                 c.getNome(),
                 c.getEmail(),
                 c.getTelefone(),
-                c.getCargo(),
-                c.getFoto(),
                 c.getEquipeProfessores().stream().map(p -> new ProfessorDto(
                         p.getId(),
                         p.getIdAcesso(),
                         p.getNome(),
                         p.getEmail(),
                         p.getTelefone(),
-                        p.getCargo(),
-                        p.getTurma(),
-                        p.getCursos(),
-                        p.getFoto()
+                        p.getDataDeNascimento(),
+                        p.getCursos().stream().map(cursos -> new CursoDto(
+                                cursos.getNome(),
+                                cursos.getUnidadesCurriculares().stream().map(uc -> new UnidadeCurricularDto(
+                                        uc.getNome(),
+                                        uc.getCargaHoraria(),
+                                        uc.getQtdDiasNaSemana()
+                                )).toList()
+                        )),
+                        p.getTurmas()
                 )).toList()
         )).toList();
     }
@@ -80,8 +82,6 @@ public class CoordenadorService {
                         coordenador.getNome(),
                         coordenador.getEmail(),
                         coordenador.getTelefone(),
-                        coordenador.getCargo(),
-                        coordenador.getFoto(),
                         coordenador.getEquipeProfessores().stream().map(
                                 professor -> new ProfessorDto(
                                        professor.getId(),
@@ -89,10 +89,9 @@ public class CoordenadorService {
                                         professor.getNome(),
                                         professor.getEmail(),
                                         professor.getTelefone(),
-                                        professor.getCargo(),
-                                        professor.getTurma(),
+                                        professor.getDataDeNascimento(),
                                         professor.getCursos(),
-                                        professor.getFoto()
+                                        professor.getTurmas()
                                 )
                         ).toList()
                 )
@@ -107,7 +106,6 @@ public class CoordenadorService {
             coordenador.setNome(coordenadorDto.nome());
             coordenador.setEmail(coordenadorDto.email());
             coordenador.setTelefone(coordenadorDto.telefone());
-            coordenador.setFoto(coordenadorDto.foto());
             coordenador.setEquipeProfessores(mapEquipe(coordenadorDto.equipe()));
             coordenadorRepo.save(coordenador);
             return true;

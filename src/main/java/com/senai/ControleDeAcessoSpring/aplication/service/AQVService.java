@@ -23,9 +23,7 @@ public class AQVService {
         aqv.setNome(aqvDto.nome());
         aqv.setEmail(aqvDto.email());
         aqv.setTelefone(aqvDto.telefone());
-        aqv.setCargo("AQV");
-        aqv.setFoto(aqvDto.foto());
-
+        aqv.setDataDeNascimento(aqvDto.dataDeNascimento());
         return true;
     }
 
@@ -36,8 +34,7 @@ public class AQVService {
                 aqv.getNome(),
                 aqv.getEmail(),
                 aqv.getTelefone(),
-                aqv.getCargo(),
-                aqv.getFoto()
+                aqv.getDataDeNascimento()
             )
         ).toList();
     }
@@ -49,8 +46,7 @@ public class AQVService {
                 aqv.getNome(),
                 aqv.getEmail(),
                 aqv.getTelefone(),
-                aqv.getCargo(),
-                aqv.getFoto()
+                aqv.getDataDeNascimento()
         ));
     }
 
@@ -62,7 +58,7 @@ public class AQVService {
             aqv.setNome(aqvDto.nome());
             aqv.setEmail(aqvDto.email());
             aqv.setTelefone(aqvDto.telefone());
-            aqv.setFoto(aqvDto.foto());
+            aqv.setDataDeNascimento(aqvDto.dataDeNascimento());
 
             aqvRepository.save(aqv);
             return true;
