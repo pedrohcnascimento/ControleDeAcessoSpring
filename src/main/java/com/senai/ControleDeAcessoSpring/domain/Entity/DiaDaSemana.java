@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.List;
 
+@Entity
 @AllArgsConstructor
 @NoArgsConstructor
 @Setter
@@ -20,10 +21,6 @@ public class DiaDaSemana {
     @Column(nullable = false)
     private String nome;
 
-    @JoinTable(
-            name = "UnidadesCurriculares",
-            joinColumns = @JoinColumn(name = "DiaDaSemana"),
-            inverseJoinColumns = @JoinColumn(name = "UnidadeCurricular_id")
-    )
+    @ManyToOne
     private List<UnidadeCurricular> Ucs;
 }

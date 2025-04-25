@@ -12,19 +12,10 @@ import java.util.List;
 @AllArgsConstructor
 public class Professor extends Usuario {
 
-    @Column(nullable = false)
-    @JoinTable(
-            name = "turmas",
-            joinColumns = @JoinColumn(name = "professor_id"),
-            inverseJoinColumns = @JoinColumn(name = "turma_id")
-    )
+    @ManyToOne
     private List<Turma> turma;
 
-    @Column(nullable = false)
-    @JoinTable(
-            name = "unidades",
-            joinColumns = @JoinColumn(name = "professor_id"),
-            inverseJoinColumns = @JoinColumn(name = "unidade_id")
-    )
+    @ManyToOne
+    @JoinColumn(name = "coordenador_id")
     private List<UnidadeCurricular> unidadesCurriculares;
 }

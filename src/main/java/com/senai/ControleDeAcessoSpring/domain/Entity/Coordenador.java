@@ -1,9 +1,6 @@
 package com.senai.ControleDeAcessoSpring.domain.entity;
 
-import jakarta.persistence.Column;
-import jakarta.persistence.Entity;
-import jakarta.persistence.JoinColumn;
-import jakarta.persistence.JoinTable;
+import jakarta.persistence.*;
 import lombok.*;
 
 import java.util.List;
@@ -15,11 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 public class Coordenador extends Usuario{
 
-    @Column
-    @JoinTable(
-            name = "equipe_de_professores",
-            joinColumns = @JoinColumn(name = "coordenador_id"),
-            inverseJoinColumns = @JoinColumn(name = "professor_id")
-    )
+    @ManyToOne
     private List<Professor> equipeDeProfessores;
 }

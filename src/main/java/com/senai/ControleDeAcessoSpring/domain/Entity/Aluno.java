@@ -11,9 +11,9 @@ import lombok.*;
 @AllArgsConstructor
 public class Aluno extends Usuario{
 
-    @Column
-    @JoinColumn(name = "turma_id")
-    private Turma turma;
+    @ManyToOne
+    @JoinColumn(name = "subTurma_id")
+    private SubTurma subTurma;
 
     @Column
     @GeneratedValue(strategy = GenerationType.TABLE, generator = "gerador_id_acesso")

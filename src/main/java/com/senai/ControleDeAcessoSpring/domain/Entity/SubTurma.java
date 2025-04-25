@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -17,11 +18,7 @@ public class SubTurma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinTable(
-            name = "Alunos",
-            joinColumns = @JoinColumn(name = "Subturma_id"),
-            inverseJoinColumns = @JoinColumn(name = "Aluno_id")
-    )
+    @OneToMany(mappedBy = "subTurma")
     private List<Aluno> alunos;
 
     @Column(nullable = false)

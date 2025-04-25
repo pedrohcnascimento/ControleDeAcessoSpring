@@ -18,5 +18,6 @@ public class UnidadeCurricular {
     @Column(nullable = false)
     private Integer cargaHoraria;
 
+    @Column(nullable = false)
     private Integer diasDaSemana;
 }
