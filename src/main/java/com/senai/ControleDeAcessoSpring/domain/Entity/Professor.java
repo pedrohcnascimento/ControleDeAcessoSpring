@@ -1,22 +1,30 @@
-package com.senai.ControleDeAcessoSpring.domain.Entity;
+package com.senai.ControleDeAcessoSpring.domain.entity;
 
 import jakarta.persistence.*;
-import lombok.Getter;
-import lombok.Setter;
+import lombok.*;
 
 import java.util.List;
 
 @Entity
 @Getter
 @Setter
-public class Professor extends Usuario{
+@NoArgsConstructor
+@AllArgsConstructor
+public class Professor extends Usuario {
 
     @Column(nullable = false)
-    private String turma;
+    @JoinTable(
+            name = "turmas",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "turma_id")
+    )
+    private List<Turma> turma;
 
-    @CollectionTable(name = "curso_professores",joinColumns = @JoinColumn(name = "professor_id"))
-    @ElementCollection(targetClass = Cursos.class)
-    @Enumerated(EnumType.STRING)
-    @Column(name = "cursos")
-    private List<Cursos> cursos;
+    @Column(nullable = false)
+    @JoinTable(
+            name = "unidades",
+            joinColumns = @JoinColumn(name = "professor_id"),
+            inverseJoinColumns = @JoinColumn(name = "unidade_id")
+    )
+    private List<UnidadeCurricular> unidadesCurriculares;
 }
