@@ -1,4 +1,4 @@
-package com.example.ControleDeAcessoSpring.domain.entity;
+package com.senai.ControleDeAcessoSpring.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -18,7 +18,7 @@ public class Curso {
     private Long id;
 
     @Column(nullable = false)
-    private Cursos nome;
+    private String nome;
 
     @Column(nullable = false)
     @JoinTable(
