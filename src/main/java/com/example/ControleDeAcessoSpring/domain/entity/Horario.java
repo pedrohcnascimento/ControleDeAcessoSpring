@@ -1,9 +1,6 @@
 package com.example.ControleDeAcessoSpring.domain.entity;
 
-import jakarta.persistence.GeneratedValue;
-import jakarta.persistence.GenerationType;
-import jakarta.persistence.Id;
-import jakarta.persistence.JoinTable;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -22,8 +19,8 @@ public class Horario {
 
     @JoinTable(
             name = "dias_da_semana",
-            joinColumns = "Horario_id",
-            inverseJoinColumns = "DiaDaSemana_id"
+            joinColumns = @JoinColumn(name = "Horario_id"),
+            inverseJoinColumns = @JoinColumn(name = "DiaDaSemana_id")
     )
     private List<DiaDaSemana> diasDaSemana;
 }

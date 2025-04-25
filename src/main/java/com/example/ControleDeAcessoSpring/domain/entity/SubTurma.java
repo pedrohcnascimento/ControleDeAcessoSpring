@@ -19,8 +19,8 @@ public class SubTurma {
 
     @JoinTable(
             name = "Alunos",
-            joinColumns = @JoinColumn("Subturma_id"),
-            inverseJoinColumns = @JoinColumn("Aluno_id")
+            joinColumns = @JoinColumn(name = "Subturma_id"),
+            inverseJoinColumns = @JoinColumn(name = "Aluno_id")
     )
     private List<Aluno> alunos;
 

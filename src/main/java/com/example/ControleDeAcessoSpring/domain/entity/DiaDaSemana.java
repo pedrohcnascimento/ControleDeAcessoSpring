@@ -22,8 +22,8 @@ public class DiaDaSemana {
 
     @JoinTable(
             name = "UnidadesCurriculares",
-            joinColumns = "DiaDaSemana",
-            inverseJoinColumns = "UnidadeCurricular_id"
+            joinColumns = @JoinColumn(name = "DiaDaSemana"),
+            inverseJoinColumns = @JoinColumn(name = "UnidadeCurricular_id")
     )
     private List<UnidadeCurricular> Ucs;
 }

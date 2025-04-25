@@ -21,8 +21,8 @@ public class Turma {
 
     @JoinTable(
             name = "Sub_Turmas",
-            joinColumns = @JoinColumn("Turma_id"),
-            inverseJoinColumns = @JoinColumn("subTurma_id")
+            joinColumns = @JoinColumn(name = "Turma_id"),
+            inverseJoinColumns = @JoinColumn(name = "subTurma_id")
     )
     private List<SubTurma> subTurmas;
 
