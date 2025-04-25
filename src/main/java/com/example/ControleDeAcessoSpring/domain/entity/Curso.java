@@ -18,7 +18,7 @@ public class Curso {
     private Long id;
 
     @Column(nullable = false)
-    private String nome;
+    private Cursos nome;
 
     @Column(nullable = false)
     @JoinTable(
