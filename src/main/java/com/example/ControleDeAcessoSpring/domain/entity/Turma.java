@@ -7,7 +7,6 @@ import java.sql.Time;
 import java.util.Date;
 import java.util.List;
 
-@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,16 +19,13 @@ public class Turma {
     @Column(nullable = false)
     private String nome;
 
-    @Column
-    @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
-            name = "professores_da_turma",
-            joinColumns = @JoinColumn(name = "turma_id"),
-            inverseJoinColumns = @JoinColumn(name = "professor_id")
+            name = "Sub_Turmas",
+            joinColumns = @JoinColumn("Turma_id"),
+            inverseJoinColumns = @JoinColumn("subTurma_id")
     )
-    private List<Professor> professores;
+    private List<SubTurma> subTurmas;
 
-    @Column
     @ManyToOne(cascade = CascadeType.ALL)
     @JoinTable(
             name = "alunos_da_turma",

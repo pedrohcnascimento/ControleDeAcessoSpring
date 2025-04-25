@@ -6,28 +6,24 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.Date;
+import java.util.List;
 
-@Getter
-@Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class Ocorrencia {
-
+@NoArgsConstructor
+@Setter
+@Getter
+public class DiaDaSemana {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     @Column(nullable = false)
-    private String justificativa;
+    private String nome;
 
-    @Column(nullable = false)
-    private Date dataEhora;
-
-    @Column(nullable = false)
-    private Status status;
-
-    @Column(nullable = false)
-    private TipoOcorrencia tipo;
-
+    @JoinTable(
+            name = "UnidadesCurriculares",
+            joinColumns = "DiaDaSemana",
+            inverseJoinColumns = "UnidadeCurricular_id"
+    )
+    private List<UnidadeCurricular> Ucs;
 }
