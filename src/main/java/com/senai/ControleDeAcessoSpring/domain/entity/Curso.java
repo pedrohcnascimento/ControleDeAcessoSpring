@@ -8,6 +8,7 @@ import lombok.Setter;
 
 import java.util.List;
 
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
@@ -20,12 +21,7 @@ public class Curso {
     @Column(nullable = false)
     private String nome;
 
-    @Column(nullable = false)
-    @JoinTable(
-            name = "UnidadesCurriculares",
-            joinColumns = @JoinColumn(name = "Curso_id"),
-            inverseJoinColumns = @JoinColumn(name = "UnidadeCurricular_id")
-    )
+    @ManyToOne
     private List<UnidadeCurricular> unidadesCurriculares;
 
     @Column(nullable = false)
