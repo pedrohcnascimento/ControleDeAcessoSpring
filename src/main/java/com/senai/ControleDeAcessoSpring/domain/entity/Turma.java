@@ -20,8 +20,7 @@ public class Turma {
     @Column(nullable = false)
     private String nome;
 
-    @ManyToOne
-    @JoinColumn(name = "turma_id")
+    @OneToMany(mappedBy = "turma")
     private List<SubTurma> subTurmas;
 
     @OneToOne

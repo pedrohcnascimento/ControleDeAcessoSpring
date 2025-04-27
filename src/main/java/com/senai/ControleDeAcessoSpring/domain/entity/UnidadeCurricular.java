@@ -6,6 +6,9 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.util.List;
+
+@Entity
 @AllArgsConstructor
 @Setter
 @Getter
@@ -18,6 +21,14 @@ public class UnidadeCurricular {
     @Column(nullable = false)
     private Integer cargaHoraria;
 
-    @Column(nullable = false)
-    private Integer diasDaSemana;
+    @ManyToMany
+    @JoinTable(
+            name = "uc_dia_da_semana",
+            joinColumns = @JoinColumn(name = "uc_id"),
+            inverseJoinColumns = @JoinColumn(name = "dia_id")
+    )
+    private List<DiaDaSemana> diasDaSemana;
+
+    @OneToMany(mappedBy = "unidades_curricular_id")
+    private List<Professor> professor;
 }

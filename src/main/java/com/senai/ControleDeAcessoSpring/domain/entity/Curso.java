@@ -21,7 +21,7 @@ public class Curso {
     @Column(nullable = false)
     private String nome;
 
-    @ManyToOne
+    @OneToMany
     private List<UnidadeCurricular> unidadesCurriculares;
 
     @Column(nullable = false)

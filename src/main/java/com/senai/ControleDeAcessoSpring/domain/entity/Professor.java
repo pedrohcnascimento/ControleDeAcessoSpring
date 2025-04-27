@@ -15,10 +15,12 @@ import java.util.List;
 @AllArgsConstructor
 public class Professor extends Usuario {
 
-    @ManyToOne
+    @OneToMany
     private List<Turma> turma;
 
-    @ManyToOne
-    @JoinColumn(name = "coordenador_id")
+    @OneToMany(mappedBy = "professor")
     private List<UnidadeCurricular> unidadesCurriculares;
+
+    @OneToOne
+    private Coordenador coordenador;
 }

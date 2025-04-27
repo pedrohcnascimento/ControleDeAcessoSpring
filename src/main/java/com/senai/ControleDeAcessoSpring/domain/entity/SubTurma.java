@@ -23,4 +23,7 @@ public class SubTurma {
 
     @Column(nullable = false)
     private Horario horario;
+
+    @ManyToOne
+    private Turma turma;
 }

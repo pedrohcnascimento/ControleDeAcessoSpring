@@ -19,8 +19,8 @@ public class DiaDaSemana {
     private Long id;
 
     @Column(nullable = false)
-    private String nome;
+    private NomesDiaDaSemana nome;
 
-    @ManyToOne
+    @OneToMany
     private List<UnidadeCurricular> Ucs;
 }
