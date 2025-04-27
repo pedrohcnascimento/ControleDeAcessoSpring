@@ -10,8 +10,8 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class Coordenador extends Usuario{
+public class Coordenador extends Usuario {
 
-    @ManyToOne
+    @OneToMany(mappedBy = "coordenador")
     private List<Professor> equipeDeProfessores;
 }
