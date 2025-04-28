@@ -1,5 +1,7 @@
 package com.senai.ControleDeAcessoSpring.domain.entity;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.enums.Status;
+import com.senai.ControleDeAcessoSpring.domain.entity.enums.TipoOcorrencia;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -25,9 +27,11 @@ public class Ocorrencia {
     @Column(nullable = false)
     private Date dataEhora;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoOcorrencia tipo;
 

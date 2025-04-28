@@ -11,18 +11,5 @@ import lombok.*;
 public class Aluno extends Usuario{
 
     @ManyToOne
-    @JoinColumn(name = "subTurma_id")
     private SubTurma subTurma;
-
-    @Column
-    @GeneratedValue(strategy = GenerationType.TABLE, generator = "gerador_id_acesso")
-    @TableGenerator(
-            name = "gerador_id_acesso",
-            table = "id_generator",
-            pkColumnName = "idUsuario",
-            valueColumnName = "value_column",
-            pkColumnValue = "aluno",
-            allocationSize = 1
-    )
-    private Long idAcesso;
 }

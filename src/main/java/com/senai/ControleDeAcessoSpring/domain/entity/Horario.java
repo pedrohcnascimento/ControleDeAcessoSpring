@@ -18,10 +18,6 @@ public class Horario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @JoinTable(
-            name = "dias_da_semana",
-            joinColumns = @JoinColumn(name = "Horario_id"),
-            inverseJoinColumns = @JoinColumn(name = "DiaDaSemana_id")
-    )
+    @OneToMany(mappedBy = "horario")
     private List<DiaDaSemana> diasDaSemana;
 }

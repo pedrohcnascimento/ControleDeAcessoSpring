@@ -1,5 +1,7 @@
 package com.senai.ControleDeAcessoSpring.domain.entity;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.enums.Periodo;
+import com.senai.ControleDeAcessoSpring.domain.entity.enums.TipoDeCurso;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,18 +23,24 @@ public class Curso {
     @Column(nullable = false)
     private String nome;
 
-    @OneToMany
+    @OneToMany(mappedBy = "curso")
+    private List<Turma> turmas;
+
+    @OneToMany(mappedBy = "curso")
     private List<UnidadeCurricular> unidadesCurriculares;
 
     @Column(nullable = false)
     private Long cargaHoraria;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoDeCurso tipo;
 
     @Column(nullable = false)
     private Integer qtdDeSemestres;
 
+
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Periodo periodo;
 

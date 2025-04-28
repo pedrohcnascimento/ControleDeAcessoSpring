@@ -3,12 +3,12 @@ package com.senai.ControleDeAcessoSpring.domain.entity;
 import jakarta.persistence.*;
 import lombok.*;
 
-@MappedSuperclass
+@Entity
 @Getter
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public abstract class Usuario {
+public class Usuario {
 
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
@@ -21,11 +21,20 @@ public abstract class Usuario {
     private Integer idade;
 
     @Column(nullable = false, unique = true)
-    private Long idAcesso;
-
-    @Column(nullable = false, unique = true)
     private String email;
 
     @Column(nullable = false, unique = true)
     private String telefone;
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.TABLE, generator = "gerador_id_acesso")
+    @TableGenerator(
+            name = "gerador_id_acesso",
+            table = "id_generator",
+            pkColumnName = "idUsuario",
+            valueColumnName = "value_column",
+            pkColumnValue = "aluno",
+            allocationSize = 1
+    )
+    private Long idAcesso;
 }

@@ -23,8 +23,8 @@ public class Turma {
     @OneToMany(mappedBy = "turma")
     private List<SubTurma> subTurmas;
 
-    @OneToOne
-    @JoinColumn(name = "curso_id")
+    @ManyToOne
+    @JoinColumn
     private Curso curso;
 
     @Column(nullable = false)

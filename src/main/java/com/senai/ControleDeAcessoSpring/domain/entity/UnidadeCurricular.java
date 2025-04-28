@@ -29,6 +29,9 @@ public class UnidadeCurricular {
     )
     private List<DiaDaSemana> diasDaSemana;
 
-    @OneToMany(mappedBy = "unidades_curricular_id")
+    @OneToMany(mappedBy = "unidadesCurriculares")
     private List<Professor> professor;
+
+    @ManyToOne
+    private Curso curso;
 }

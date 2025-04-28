@@ -18,9 +18,9 @@ public class Professor extends Usuario {
     @OneToMany
     private List<Turma> turma;
 
-    @OneToMany(mappedBy = "professor")
+    @OneToMany
     private List<UnidadeCurricular> unidadesCurriculares;
 
-    @OneToOne
+    @ManyToOne
     private Coordenador coordenador;
 }

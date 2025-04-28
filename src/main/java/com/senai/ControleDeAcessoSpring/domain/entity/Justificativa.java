@@ -1,5 +1,7 @@
 package com.senai.ControleDeAcessoSpring.domain.entity;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.enums.Status;
+import com.senai.ControleDeAcessoSpring.domain.entity.enums.TipoJustificativa;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -16,6 +18,7 @@ public class Justificativa {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private TipoJustificativa tipo;
 
@@ -31,6 +34,7 @@ public class Justificativa {
     @Column
     private File anexo;
 
+    @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
 
