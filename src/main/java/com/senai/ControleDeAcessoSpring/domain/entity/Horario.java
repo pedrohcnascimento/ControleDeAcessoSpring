@@ -18,6 +18,6 @@ public class Horario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "horario")
+    @OneToMany(mappedBy = "horario", cascade = CascadeType.ALL)
     private List<DiaDaSemana> diasDaSemana;
 }
