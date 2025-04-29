@@ -34,4 +34,7 @@ public class UnidadeCurricular {
 
     @ManyToOne
     private Curso curso;
+
+    @OneToOne
+    private Aula aula;
 }

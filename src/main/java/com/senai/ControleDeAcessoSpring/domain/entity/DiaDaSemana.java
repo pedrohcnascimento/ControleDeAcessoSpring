@@ -23,10 +23,9 @@ public class DiaDaSemana {
     @Column(nullable = false)
     private NomesDiaDaSemana nome;
 
-    @OneToMany
-    private List<UnidadeCurricular> Ucs;
+    @OneToMany(mappedBy = "dia")
+    private List<Aula> aulas;
 
     @ManyToOne
-    @JoinColumn
     private Horario horario;
 }

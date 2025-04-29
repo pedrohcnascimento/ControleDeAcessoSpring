@@ -6,24 +6,25 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
-import java.util.List;
-
 @Entity
 @Getter
 @Setter
-@NoArgsConstructor
 @AllArgsConstructor
-public class SubTurma {
+@NoArgsConstructor
+public class Aula {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "subTurma")
-    private List<Aluno> alunos;
+    @OneToOne
+    private Professor professor;
 
     @OneToOne
-    private Horario horario;
+    private UnidadeCurricular uc;
+
+    @OneToOne
+    private Ambiente ambiente;
 
     @ManyToOne
-    private Turma turma;
+    private DiaDaSemana dia;
 }

@@ -3,6 +3,7 @@ package com.senai.ControleDeAcessoSpring.domain.entity;
 import com.senai.ControleDeAcessoSpring.domain.entity.enums.Status;
 import com.senai.ControleDeAcessoSpring.domain.entity.enums.TipoJustificativa;
 import jakarta.persistence.*;
+import jakarta.persistence.criteria.CriteriaBuilder;
 import lombok.*;
 
 import java.io.File;
@@ -37,5 +38,8 @@ public class Justificativa {
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
     private Status status;
+
+    @Column(nullable = false, updatable = false)
+    private final Integer prazoDeAceite = 7;
 
 }

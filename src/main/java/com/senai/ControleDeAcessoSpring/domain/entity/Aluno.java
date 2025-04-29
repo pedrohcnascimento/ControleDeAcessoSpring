@@ -9,7 +9,6 @@ import lombok.*;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Aluno extends Usuario{
-
     @ManyToOne
     private SubTurma subTurma;
 }

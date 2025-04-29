@@ -7,6 +7,7 @@ import com.senai.ControleDeAcessoSpring.domain.entity.Turma;
 import com.senai.ControleDeAcessoSpring.domain.entity.UnidadeCurricular;
 
 import java.util.List;
+import java.util.Scanner;
 
 @Entity
 @Getter
@@ -23,4 +24,7 @@ public class Professor extends Usuario {
 
     @ManyToOne
     private Coordenador coordenador;
+
+    @OneToOne
+    private Aula aula;
 }
