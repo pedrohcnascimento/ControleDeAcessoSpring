@@ -2,12 +2,8 @@ package com.senai.ControleDeAcessoSpring.domain.entity;
 
 import jakarta.persistence.*;
 import lombok.*;
-import com.senai.ControleDeAcessoSpring.domain.entity.Usuario;
-import com.senai.ControleDeAcessoSpring.domain.entity.Turma;
-import com.senai.ControleDeAcessoSpring.domain.entity.UnidadeCurricular;
 
 import java.util.List;
-import java.util.Scanner;
 
 @Entity
 @Getter
