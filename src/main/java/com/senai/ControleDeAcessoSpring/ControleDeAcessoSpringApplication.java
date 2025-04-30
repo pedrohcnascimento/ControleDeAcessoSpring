@@ -1,4 +1,4 @@
-package com.example.ControleDeAcessoSpring;
+package com.senai.ControleDeAcessoSpring;
 
 import org.springframework.boot.SpringApplication;
 import org.springframework.boot.autoconfigure.SpringBootApplication;
