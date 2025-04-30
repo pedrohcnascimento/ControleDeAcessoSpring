@@ -22,11 +22,6 @@ public class UnidadeCurricular {
     private Integer cargaHoraria;
 
     @ManyToMany
-    @JoinTable(
-            name = "uc_dia_da_semana",
-            joinColumns = @JoinColumn(name = "uc_id"),
-            inverseJoinColumns = @JoinColumn(name = "dia_id")
-    )
     private List<DiaDaSemana> diasDaSemana;
 
     @OneToMany(mappedBy = "unidadesCurriculares")
@@ -35,6 +30,6 @@ public class UnidadeCurricular {
     @ManyToOne
     private Curso curso;
 
-    @OneToOne
+    @OneToOne(mappedBy = "uc")
     private Aula aula;
 }

@@ -11,8 +11,8 @@ import java.util.List;
 @NoArgsConstructor
 @AllArgsConstructor
 public class Aluno extends Usuario{
-    @ManyToOne
-    private SubTurma subTurma;
+    @ManyToMany(mappedBy = "alunos")
+    private List<SubTurma> subTurma;
 
     @OneToMany
     private List<Ocorrencia> ocorrencia;

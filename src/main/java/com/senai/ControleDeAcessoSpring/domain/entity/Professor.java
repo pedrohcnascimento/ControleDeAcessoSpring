@@ -25,6 +25,6 @@ public class Professor extends Usuario {
     @ManyToOne
     private Coordenador coordenador;
 
-    @OneToOne
+    @OneToOne(mappedBy = "professor")
     private Aula aula;
 }

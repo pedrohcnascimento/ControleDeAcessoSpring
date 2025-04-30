@@ -18,7 +18,7 @@ public class SubTurma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "subTurma")
+    @ManyToMany
     private List<Aluno> alunos;
 
     @OneToOne
