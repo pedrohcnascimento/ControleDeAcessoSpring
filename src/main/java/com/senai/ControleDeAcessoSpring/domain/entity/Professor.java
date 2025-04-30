@@ -12,6 +12,9 @@ import java.util.List;
 @AllArgsConstructor
 @DiscriminatorValue("professor")
 public class Professor extends Usuario {
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
 
     @OneToMany
     private List<Turma> turma;
