@@ -1,7 +1,7 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.enums;
 
-public enum Status {
-    PENDENTE,
+public enum StatusOcorrencia {
     APROVADO,
-    REPROVADO
+    REPROVADO,
+    AGUARDANDO_PROFESSOR
 }
