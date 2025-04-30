@@ -38,7 +38,7 @@ public class Justificativa {
     private File anexo;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column
     private StatusOcorrencia statusOcorrencia;
 
     @Column(nullable = false, updatable = false)

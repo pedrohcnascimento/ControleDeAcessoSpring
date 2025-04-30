@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@DiscriminatorValue("professor")
 public class Professor extends Usuario {
 
     @OneToMany

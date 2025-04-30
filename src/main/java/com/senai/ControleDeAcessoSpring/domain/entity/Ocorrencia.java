@@ -24,18 +24,18 @@ public class Ocorrencia {
     @ManyToOne
     private Aluno aluno;
 
-    @Column(nullable = false)
+    @Column
     private String justificativa;
 
-    @Column(nullable = false)
+    @Column
     private Date dataEhora;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column
     private StatusOcorrencia statusOcorrencia;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column
     private TipoOcorrencia tipo;
 
 }

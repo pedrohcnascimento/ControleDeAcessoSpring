@@ -10,6 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
+@DiscriminatorValue("aluno")
 public class Aluno extends Usuario{
     @ManyToMany(mappedBy = "alunos")
     private List<SubTurma> subTurma;

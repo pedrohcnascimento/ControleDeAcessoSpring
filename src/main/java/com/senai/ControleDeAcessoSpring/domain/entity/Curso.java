@@ -20,7 +20,7 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String nome;
 
     @OneToMany(mappedBy = "curso")
@@ -29,14 +29,14 @@ public class Curso {
     @OneToMany(mappedBy = "curso")
     private List<UnidadeCurricular> unidadesCurriculares;
 
-    @Column(nullable = false)
+    @Column
     private Long cargaHoraria;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
+    @Column
     private TipoDeCurso tipo;
 
-    @Column(nullable = false)
+    @Column
     private Integer qtdDeSemestres;
 
 

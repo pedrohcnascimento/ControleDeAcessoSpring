@@ -17,7 +17,7 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    @Column
     private String nome;
 
     @OneToMany(mappedBy = "turma")
@@ -27,9 +27,9 @@ public class Turma {
     @JoinColumn
     private Curso curso;
 
-    @Column(nullable = false)
+    @Column
     private Date dataDeInicio;
 
-    @Column(nullable = false)
+    @Column
     private Time horarioDeEntrada;
 }
