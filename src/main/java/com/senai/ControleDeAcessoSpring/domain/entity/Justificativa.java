@@ -23,6 +23,9 @@ public class Justificativa {
     @Column(nullable = false)
     private TipoJustificativa tipo;
 
+    @ManyToOne
+    private Aluno aluno;
+
     @Column
     private String descricao;
 

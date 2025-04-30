@@ -21,6 +21,9 @@ public class Ocorrencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    @ManyToOne
+    private Aluno aluno;
+
     @Column(nullable = false)
     private String justificativa;
 
