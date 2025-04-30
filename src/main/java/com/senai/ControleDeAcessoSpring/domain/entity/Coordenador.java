@@ -12,9 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @DiscriminatorValue("coordenador")
 public class Coordenador extends Usuario {
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
 
     @OneToMany(mappedBy = "coordenador")
     private List<Professor> equipeDeProfessores;

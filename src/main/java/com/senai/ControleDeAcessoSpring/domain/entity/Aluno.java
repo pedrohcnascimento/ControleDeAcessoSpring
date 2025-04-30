@@ -12,10 +12,6 @@ import java.util.List;
 @AllArgsConstructor
 @DiscriminatorValue("aluno")
 public class Aluno extends Usuario{
-    @Id
-    @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
-
     @ManyToMany(mappedBy = "alunos")
     private List<SubTurma> subTurma;
 
