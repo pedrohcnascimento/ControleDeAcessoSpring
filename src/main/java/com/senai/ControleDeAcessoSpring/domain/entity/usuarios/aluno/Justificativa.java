@@ -1,7 +1,7 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno;
 
-import com.senai.ControleDeAcessoSpring.domain.enuns.StatusOcorrencia;
-import com.senai.ControleDeAcessoSpring.domain.enuns.TipoJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeJustificativa;
 import jakarta.persistence.*;
 import lombok.*;
 
@@ -20,7 +20,7 @@ public class Justificativa {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private TipoJustificativa tipo;
+    private TipoDeJustificativa tipo;
 
     @ManyToOne
     private Aluno aluno;
@@ -39,7 +39,7 @@ public class Justificativa {
 
     @Enumerated(EnumType.STRING)
     @Column
-    private StatusOcorrencia statusOcorrencia;
+    private StatusDaOcorrencia statusOcorrencia;
 
     @Column(nullable = false, updatable = false)
     private final Integer prazoDeAceite = 7;

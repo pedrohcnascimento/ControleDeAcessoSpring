@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.turma.horario;
 
-import com.senai.ControleDeAcessoSpring.domain.enuns.NomesDiaDaSemana;
+import com.senai.ControleDeAcessoSpring.domain.enuns.DiaDaSemana;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -21,7 +21,7 @@ public class AulaDoDia {
 
     @Enumerated(EnumType.STRING)
     @Column(nullable = false)
-    private NomesDiaDaSemana nome;
+    private DiaDaSemana nome;
 
     @OneToMany(mappedBy = "dia")
     private List<Aula> aulas;

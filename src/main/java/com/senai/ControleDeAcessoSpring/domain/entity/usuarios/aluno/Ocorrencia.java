@@ -1,7 +1,7 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno;
 
-import com.senai.ControleDeAcessoSpring.domain.enuns.StatusOcorrencia;
-import com.senai.ControleDeAcessoSpring.domain.enuns.TipoOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeOcorrencia;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -32,10 +32,10 @@ public class Ocorrencia {
 
     @Enumerated(EnumType.STRING)
     @Column
-    private StatusOcorrencia statusOcorrencia;
+    private StatusDaOcorrencia statusOcorrencia;
 
     @Enumerated(EnumType.STRING)
     @Column
-    private TipoOcorrencia tipo;
+    private TipoDeOcorrencia tipo;
 
 }

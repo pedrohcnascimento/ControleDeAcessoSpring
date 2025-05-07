@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.domain.enuns;
 
-public enum StatusOcorrencia {
+public enum StatusDaOcorrencia {
     APROVADO,
     REPROVADO,
     AGUARDANDO_PROFESSOR
