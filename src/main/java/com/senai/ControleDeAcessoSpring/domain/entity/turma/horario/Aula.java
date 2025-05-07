@@ -1,5 +1,8 @@
-package com.senai.ControleDeAcessoSpring.domain.entity;
+package com.senai.ControleDeAcessoSpring.domain.entity.turma.horario;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.Ambiente;
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -26,5 +29,5 @@ public class Aula {
     private Ambiente ambiente;
 
     @ManyToOne
-    private DiaDaSemana dia;
+    private AulaDoDia dia;
 }

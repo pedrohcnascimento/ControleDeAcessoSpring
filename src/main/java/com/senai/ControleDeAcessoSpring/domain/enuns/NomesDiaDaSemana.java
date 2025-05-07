@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.domain.entity.enums;
+package com.senai.ControleDeAcessoSpring.domain.enuns;
 
 public enum NomesDiaDaSemana {
     SEGUNDA,

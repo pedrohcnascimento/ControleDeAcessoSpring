@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.domain.entity;
+package com.senai.ControleDeAcessoSpring.domain.entity.usuarios;
 
 import jakarta.persistence.*;
 import lombok.*;

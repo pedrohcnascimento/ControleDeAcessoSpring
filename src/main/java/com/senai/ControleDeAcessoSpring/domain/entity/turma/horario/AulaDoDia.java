@@ -1,6 +1,6 @@
-package com.senai.ControleDeAcessoSpring.domain.entity;
+package com.senai.ControleDeAcessoSpring.domain.entity.turma.horario;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.enums.NomesDiaDaSemana;
+import com.senai.ControleDeAcessoSpring.domain.enuns.NomesDiaDaSemana;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -14,7 +14,7 @@ import java.util.List;
 @NoArgsConstructor
 @Setter
 @Getter
-public class DiaDaSemana {
+public class AulaDoDia {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;

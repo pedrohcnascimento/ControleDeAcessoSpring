@@ -1,5 +1,8 @@
-package com.senai.ControleDeAcessoSpring.domain.entity;
+package com.senai.ControleDeAcessoSpring.domain.entity.curso;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.Aula;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.AulaDoDia;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
@@ -22,7 +25,7 @@ public class UnidadeCurricular {
     private Integer cargaHoraria;
 
     @ManyToMany
-    private List<DiaDaSemana> diasDaSemana;
+    private List<AulaDoDia> diasDaSemana;
 
     @OneToMany(mappedBy = "unidadesCurriculares")
     private List<Professor> professor;

@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.domain.entity;
+package com.senai.ControleDeAcessoSpring.domain.entity.turma.horario;
 
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
@@ -13,17 +13,11 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-public class SubTurma {
+public class Horario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToMany
-    private List<Aluno> alunos;
-
-    @OneToOne
-    private Horario horario;
-
-    @ManyToOne
-    private Turma turma;
+    @OneToMany
+    private List<AulaDoDia> diasDaSemana;
 }

@@ -1,7 +1,7 @@
-package com.senai.ControleDeAcessoSpring.domain.entity;
+package com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.enums.StatusOcorrencia;
-import com.senai.ControleDeAcessoSpring.domain.entity.enums.TipoJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enuns.StatusOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoJustificativa;
 import jakarta.persistence.*;
 import lombok.*;
 

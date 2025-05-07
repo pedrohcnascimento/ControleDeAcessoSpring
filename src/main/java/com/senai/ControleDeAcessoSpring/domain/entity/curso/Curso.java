@@ -1,7 +1,8 @@
-package com.senai.ControleDeAcessoSpring.domain.entity;
+package com.senai.ControleDeAcessoSpring.domain.entity.curso;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.enums.Periodo;
-import com.senai.ControleDeAcessoSpring.domain.entity.enums.TipoDeCurso;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
+import com.senai.ControleDeAcessoSpring.domain.enuns.Periodo;
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeCurso;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

@@ -1,5 +1,6 @@
-package com.senai.ControleDeAcessoSpring.domain.entity;
+package com.senai.ControleDeAcessoSpring.domain.entity.turma;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
 import jakarta.persistence.*;
 import lombok.*;
 
