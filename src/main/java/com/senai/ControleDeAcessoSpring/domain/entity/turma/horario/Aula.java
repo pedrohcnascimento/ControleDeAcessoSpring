@@ -19,15 +19,15 @@ public class Aula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToOne
+    @ManyToOne
     private Professor professor;
 
-    @OneToOne
-    private UnidadeCurricular uc;
+    @ManyToOne
+    private UnidadeCurricular UnidadeCurricular;
 
-    @OneToOne
+    @ManyToOne
     private Ambiente ambiente;
 
     @ManyToOne
-    private AulaDoDia dia;
+    private AulaDoDia aulasDoDia;
 }

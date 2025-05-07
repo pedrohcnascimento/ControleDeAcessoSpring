@@ -5,6 +5,7 @@ import jakarta.persistence.*;
 import lombok.*;
 
 import java.sql.Time;
+import java.time.LocalDateTime;
 import java.util.Date;
 import java.util.List;
 
@@ -18,19 +19,15 @@ public class Turma {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
     private String nome;
+    private Date dataDeInicio;
+    private LocalDateTime horarioDeEntrada;
+    private Integer qtdSemestre;
+    private Integer qtdAulasPorDia;
 
     @OneToMany(mappedBy = "turma")
     private List<SubTurma> subTurmas;
 
     @ManyToOne
-    @JoinColumn
     private Curso curso;
-
-    @Column
-    private Date dataDeInicio;
-
-    @Column
-    private Time horarioDeEntrada;
 }

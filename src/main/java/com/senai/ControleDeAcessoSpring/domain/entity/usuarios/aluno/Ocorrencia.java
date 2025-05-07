@@ -1,5 +1,7 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaOcorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeOcorrencia;
 import jakarta.persistence.*;
@@ -8,6 +10,7 @@ import lombok.Getter;
 import lombok.NoArgsConstructor;
 import lombok.Setter;
 
+import java.time.LocalDateTime;
 import java.util.Date;
 
 @Entity
@@ -21,21 +24,22 @@ public class Ocorrencia {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @ManyToOne
-    private Aluno aluno;
-
-    @Column
-    private String justificativa;
-
-    @Column
-    private Date dataEhora;
+    private String descricao;
+    private LocalDateTime dataEHoraDaCriacao;
+    private LocalDateTime dataEHoraDaConclusao;
 
     @Enumerated(EnumType.STRING)
-    @Column
     private StatusDaOcorrencia statusOcorrencia;
 
     @Enumerated(EnumType.STRING)
-    @Column
-    private TipoDeOcorrencia tipo;
+    private TipoDeOcorrencia tipoDeOcorrencia;
 
+    @ManyToOne
+    private Aluno aluno;
+
+    @ManyToOne
+    private Professor professor;
+
+    @ManyToOne
+    private UnidadeCurricular unidadeCurricular;
 }

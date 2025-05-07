@@ -21,30 +21,23 @@ public class Curso {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column
-    private String nome;
-
     @OneToMany(mappedBy = "curso")
     private List<Turma> turmas;
 
     @OneToMany(mappedBy = "curso")
     private List<UnidadeCurricular> unidadesCurriculares;
 
-    @Column
-    private Long cargaHoraria;
+
 
     @Enumerated(EnumType.STRING)
-    @Column
     private TipoDeCurso tipo;
 
-    @Column
-    private Integer qtdDeSemestres;
-
+    private Long cargaHoraria;
+    private String nome;
+    private Integer toleranciaEmMinutos;
 
     @Enumerated(EnumType.STRING)
-    @Column(nullable = false)
     private Periodo periodo;
 
-    @Column(nullable = false)
-    private Integer toleranciaEmMinutos;
+
 }

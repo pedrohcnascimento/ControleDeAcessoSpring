@@ -19,4 +19,6 @@ public class Ambiente {
 
     @OneToOne(mappedBy = "ambiente")
     private Aula aula;
+
+    private String nome;
 }

@@ -10,6 +10,7 @@ import lombok.NoArgsConstructor;
 import lombok.Setter;
 
 import java.util.List;
+import java.util.Map;
 
 @Entity
 @AllArgsConstructor
@@ -21,8 +22,11 @@ public class UnidadeCurricular {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
+    private String nome;
     private Integer cargaHoraria;
+
+    @ElementCollection
+    private Map<Integer, Integer> cargaHorariaPorSemestre;
 
     @ManyToMany
     private List<AulaDoDia> diasDaSemana;
