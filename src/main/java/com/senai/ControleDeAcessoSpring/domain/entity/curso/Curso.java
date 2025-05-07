@@ -1,0 +1,25 @@
+package com.senai.ControleDeAcessoSpring.domain.entity.curso;
+
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeCurso;
+import jakarta.persistence.*;
+
+import java.util.List;
+
+@Entity
+public class Curso {
+
+    @Id
+    @GeneratedValue(strategy = GenerationType.IDENTITY)
+    private Long id;
+
+    private String titulo;
+
+    @Enumerated(EnumType.STRING)
+    private TipoDeCurso tipo;
+
+    private Integer cargaHoraria;
+    private Integer toleranciaMinutos;
+
+    @OneToMany(mappedBy = "curso")
+    private List<UnidadeCurricular> unidadeCurriculares;
+}
