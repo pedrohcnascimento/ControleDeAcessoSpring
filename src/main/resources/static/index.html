@@ -1,38 +1,116 @@
 <!DOCTYPE html>
-<html lang="PT-br">
+<html lang="pt-br">
 <head>
     <meta charset="UTF-8">
-    <title>Controle de acesso</title>
-    <link rel="stylesheet" href="Estilo/style.css">
+    <title>Controle de Acesso</title>
 </head>
 <body>
-<div class="container">
-    <form id="form-usuario">
-        <h2 id="form-titulo">Novo Usuário</h2>
-        ID: <input type="number" id="usuario-id" required><br>
-        Nome: <input type="text" id="usuario-nome" required><br>
-        <button type="submit">Salvar Usuário</button>
-        <button type="button" onclick="resetForm()">Cancelar</button>
-    </form>
 
-    <div class="tabela-container">
-        <h2>Lista de Usuários</h2>
-        <table border="1">
-            <thead>
-            <tr>
-                <th>Cargo</th>
-                <th>ID</th>
-                <th>IDAcesso</th>
-                <th>Nome</th>
-                <th>Ações</th>
-            </tr>
-            </thead>
-            <tbody id="tabela-usuarios">
-            <!-- usuários serão listados aqui -->
-            </tbody>
-        </table>
-    </div>
-</div>
-<script src="Scripts/script.js"></script>
+<h2>Lista de Usuários</h2>
+<table border="1">
+    <thead>
+    <tr>
+        <th>ID</th>
+        <th>Nome</th>
+        <th>Ações</th>
+    </tr>
+    </thead>
+    <tbody id="tabela-usuarios">
+    <!-- usuários serão listados aqui -->
+    </tbody>
+</table>
+
+<h2 id="form-titulo">Novo Usuário</h2>
+<form id="form-usuario">
+    ID: <input type="number" id="usuario-id" required><br><br>
+    Nome: <input type="text" id="usuario-nome" required><br><br>
+    <button type="submit">Salvar Usuário</button>
+    <button type="button" onclick="resetForm()">Cancelar</button>
+</form>
+<script>
+    let modoEdicao = false;
+
+    function carregarUsuarios() {
+        fetch('http://localhost:8080/usuarios')
+            .then(resposta => resposta.json())
+            .then(usuarios => {
+                const tabela = document.getElementById('tabela-usuarios');
+                tabela.innerHTML = '';
+
+                usuarios.forEach(usuario => {
+                    const linha = document.createElement('tr');
+
+                    const celulaId = document.createElement('td');
+                    celulaId.textContent = usuario.id;
+
+                    const celulaNome = document.createElement('td');
+                    celulaNome.textContent = usuario.nome;
+
+                    const celulaAcoes = document.createElement('td');
+                    celulaAcoes.innerHTML = `
+                        <button onclick="editarUsuario(${usuario.id}, '${usuario.nome}')">Editar</button>
+                        <button onclick="deletarUsuario(${usuario.id})">Excluir</button>
+                    `;
+
+                    linha.appendChild(celulaId);
+                    linha.appendChild(celulaNome);
+                    linha.appendChild(celulaAcoes);
+
+                    tabela.appendChild(linha);
+                });
+            });
+    }
+
+    document.getElementById('form-usuario').addEventListener('submit', function (evento) {
+        evento.preventDefault();
+
+        const id = parseInt(document.getElementById('usuario-id').value);
+        const nome = document.getElementById('usuario-nome').value;
+
+        const metodo = modoEdicao ? 'PUT' : 'POST';
+        const url = modoEdicao ? `http://localhost:8080/usuarios/${id}` : 'http://localhost:8080/usuarios';
+
+        fetch(url, {
+            method: metodo,
+            headers: { 'Content-Type': 'application/json' },
+            body: JSON.stringify({ id, nome })
+        })
+        .then(() => {
+            alert(`Usuário ${modoEdicao ? 'atualizado' : 'adicionado'} com sucesso!`);
+            carregarUsuarios();
+            resetForm();
+        })
+        .catch(() => alert('Erro ao salvar usuário.'));
+    });
+
+    function editarUsuario(id, nome) {
+        modoEdicao = true;
+        document.getElementById('form-titulo').textContent = 'Editar Usuário';
+        document.getElementById('usuario-id').value = id;
+        document.getElementById('usuario-id').disabled = true;
+        document.getElementById('usuario-nome').value = nome;
+    }
+
+    function deletarUsuario(id) {
+        if (confirm('Deseja excluir este usuário?')) {
+            fetch(`http://localhost:8080/usuarios/${id}`, { method: 'DELETE' })
+                .then(() => {
+                    alert('Usuário deletado com sucesso!');
+                    carregarUsuarios();
+                })
+                .catch(() => alert('Erro ao deletar usuário.'));
+        }
+    }
+
+    function resetForm() {
+        modoEdicao = false;
+        document.getElementById('form-titulo').textContent = 'Novo Usuário';
+        document.getElementById('usuario-id').value = '';
+        document.getElementById('usuario-id').disabled = false;
+        document.getElementById('usuario-nome').value = '';
+    }
+
+    carregarUsuarios();
+</script>
 </body>
 </html>
