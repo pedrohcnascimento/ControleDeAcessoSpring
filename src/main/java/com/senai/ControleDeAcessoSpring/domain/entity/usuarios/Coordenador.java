@@ -10,7 +10,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorValue("coordenador")
+@DiscriminatorValue("COORDENADOR")
 public class Coordenador extends Usuario {
 
     @OneToMany(mappedBy = "coordenador")

@@ -12,14 +12,14 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorValue("aluno")
+@DiscriminatorValue("ALUNO")
 public class Aluno extends Usuario {
-    @ManyToMany(mappedBy = "alunos")
-    private List<SubTurma> subTurma;
+    @ManyToMany(mappedBy = "aluno")
+    private List<Ocorrencia> subTurma;
 
-    @OneToMany
+    @OneToMany(mappedBy = "aluno")
     private List<Ocorrencia> ocorrencia;
 
-    @OneToMany
+    @ManyToMany
     private List<Justificativa> justificativas;
 }

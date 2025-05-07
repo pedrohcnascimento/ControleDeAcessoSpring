@@ -3,6 +3,9 @@ package com.senai.ControleDeAcessoSpring.domain.entity.usuarios;
 import jakarta.persistence.*;
 import lombok.*;
 
+import java.time.LocalDate;
+import java.util.List;
+
 @Entity
 @Getter
 @Setter
@@ -15,15 +18,13 @@ public abstract class Usuario {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @Column(nullable = false)
     private String nome;
-
-    @Column(nullable = false)
+    private String cpf;
+    private LocalDate dataNascimento;
     private Integer idade;
-
-    @Column(nullable = false, unique = true)
     private String email;
-
-    @Column(nullable = false, unique = true)
     private String telefone;
+
+    @ElementCollection(fetch = FetchType.EAGER)
+    private List<String> permissoes;
 }

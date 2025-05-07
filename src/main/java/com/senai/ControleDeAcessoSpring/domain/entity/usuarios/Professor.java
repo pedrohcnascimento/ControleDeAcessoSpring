@@ -13,7 +13,7 @@ import java.util.List;
 @Setter
 @NoArgsConstructor
 @AllArgsConstructor
-@DiscriminatorValue("professor")
+@DiscriminatorValue("PROFESSOR")
 public class Professor extends Usuario {
 
     @OneToMany
