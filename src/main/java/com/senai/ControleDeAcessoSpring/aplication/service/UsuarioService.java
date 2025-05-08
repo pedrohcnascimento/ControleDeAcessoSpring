@@ -1,6 +1,5 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.UsuarioDto;
 
 import com.senai.ControleDeAcessoSpring.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
