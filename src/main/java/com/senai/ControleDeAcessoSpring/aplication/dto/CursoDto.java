@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-import com.senai.ControleDeAcessoSpring.domain.Entity.TipoCurso;
+import com.senai.ControleDeAcessoSpring.domain.entity.TipoCurso;
 
 import java.util.List;
 

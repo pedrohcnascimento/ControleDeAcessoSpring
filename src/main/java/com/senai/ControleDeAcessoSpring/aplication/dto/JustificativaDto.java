@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-import com.senai.ControleDeAcessoSpring.domain.Entity.TipoJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.entity.TipoJustificativa;
 
 import java.io.File;
 import java.util.Date;

@@ -1,8 +1,6 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.AlunoDto;
-import com.senai.ControleDeAcessoSpring.domain.Entity.Aluno;
-import com.senai.ControleDeAcessoSpring.domain.Repository.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

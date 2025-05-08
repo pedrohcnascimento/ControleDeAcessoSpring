@@ -1,7 +1,7 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-import com.senai.ControleDeAcessoSpring.domain.Entity.StatusJustificativa;
-import com.senai.ControleDeAcessoSpring.domain.Entity.TipoOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.entity.StatusJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.entity.TipoOcorrencia;
 
 import java.util.Date;
 

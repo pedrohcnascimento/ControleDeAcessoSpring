@@ -1,7 +1,5 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-import com.senai.ControleDeAcessoSpring.domain.Entity.Cursos;
-
 import java.util.Date;
 import java.util.List;
 

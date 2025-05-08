@@ -1,6 +1,5 @@
 package com.senai.ControleDeAcessoSpring.inteface.Controller;
 
-import com.senai.ControleDeAcessoSpring.domain.Entity.Usuario;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;
