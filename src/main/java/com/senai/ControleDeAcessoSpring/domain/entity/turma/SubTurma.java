@@ -4,10 +4,12 @@ import com.senai.ControleDeAcessoSpring.domain.entity.turma.horarios.HorarioPadr
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horarios.HorarioSemanal;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
+@Data
 public class SubTurma {
 
     @Id

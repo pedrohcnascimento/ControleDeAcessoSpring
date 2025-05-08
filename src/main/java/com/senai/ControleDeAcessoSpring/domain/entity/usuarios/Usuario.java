@@ -1,10 +1,12 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.usuarios;
 
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeUsuario;
 import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 @Entity
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
@@ -24,4 +26,5 @@ public abstract class Usuario {
 
     @ElementCollection(fetch = FetchType.EAGER)
     protected List<String> permissoes;
+
 }
