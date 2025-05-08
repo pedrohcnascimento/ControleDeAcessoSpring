@@ -1,12 +1,19 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-import com.senai.ControleDeAcessoSpring.domain.Entity.StatusJustificativa;
-import com.senai.ControleDeAcessoSpring.domain.Entity.TipoOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
 
-import java.util.Date;
+import java.time.LocalDateTime;
 
-public record OcorrenciaDto (String justificativa,
-                             Date dataEHora,
-                             StatusJustificativa status,
-                             TipoOcorrencia tipoOcorrencia){
+public record OcorrenciaDto (
+        Long id,
+        TipoDeOcorrencia tipoDeOcorrencia,
+        String descricao,
+        StatusDaOcorrencia status,
+        LocalDateTime dataHoraCriacao,
+        LocalDateTime dataHoraConclusao,
+        Long alunoId,
+        Long professorResponsavelId,
+        Long unidadeCurricularId
+){
 }
