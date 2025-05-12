@@ -1,6 +1,9 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-public record UnidadeCurricularDto(String nome,
-                                   int cargaHoraria,
-                                   int qtdDiasNaSemana) {
+public record UnidadeCurricularDto(
+        Long id,
+        String nome,
+        Integer cargaHorariaTotal,
+        Integer cargarHorariaPorSemestre
+) {
 }

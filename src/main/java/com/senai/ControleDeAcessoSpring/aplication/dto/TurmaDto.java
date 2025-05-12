@@ -1,11 +1,17 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-import java.util.List;
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
+
+import java.time.LocalDate;
+import java.time.LocalTime;
 
 public record TurmaDto(
         Long id,
-        List<ProfessorDto> professores,
-        List<AlunoDto> alunos,
-        Cursos curso
+        String nome,
+        String periodo,
+        LocalDate dataInicial,
+        LocalTime horarioEntrada,
+        Integer qtdSemestres,
+        Integer aulasPorDia
 ) {
 }

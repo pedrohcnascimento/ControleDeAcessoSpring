@@ -2,11 +2,13 @@ package com.senai.ControleDeAcessoSpring.domain.entity.curso;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 import java.util.Map;
 
 @Entity
+@Data
 public class UnidadeCurricular {
 
     @Id

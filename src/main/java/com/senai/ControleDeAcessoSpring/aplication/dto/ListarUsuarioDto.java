@@ -1,16 +1,12 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-
-import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeUsuario;
-
 import java.time.LocalDate;
 
-public record UsuarioDto (
+public record ListarUsuarioDto(
         Long id,
         String nome,
         String cpf,
         LocalDate dataNascimento,
-        String email,
-        TipoDeUsuario tipoDeUsuario
-){
+        String email
+        ) {
 }

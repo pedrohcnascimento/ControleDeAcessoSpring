@@ -1,14 +1,15 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.TipoCurso;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeCurso;
 
 import java.util.List;
 
-public record CursoDto(String nome,
-                       List<UnidadeCurricularDto> unidadesCurriculares,
-                       Long cargaHoraria,
-                       TipoCurso tipoCurso,
-                       int qtdSemestres,
-                       String periodo,
-                       int toleranciaAtraso) {
+public record CursoDto(
+        Long id,
+        String titulo,
+        TipoDeCurso tipo,
+        Integer cargaHoraria,
+        Integer toleranciaMinutos,
+        List<UnidadeCurricularDto> unidadeCurriculares
+) {
 }
