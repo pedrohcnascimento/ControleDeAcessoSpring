@@ -22,7 +22,7 @@ public class AulaDoDia {
     @Enumerated(EnumType.STRING)
     private DiaDaSemana nome;
 
-    @OneToMany(mappedBy = "aulasDia", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "aulasDoDia", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderColumn(name = "ordem")
     private List<Aula> aulas;
 

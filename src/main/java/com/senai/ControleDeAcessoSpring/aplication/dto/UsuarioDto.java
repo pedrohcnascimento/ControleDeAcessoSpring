@@ -1,7 +1,7 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
 
-import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeUsuario;
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeUsuario;
 
 import java.time.LocalDate;
 

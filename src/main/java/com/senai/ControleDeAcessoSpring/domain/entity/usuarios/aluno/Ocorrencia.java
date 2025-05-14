@@ -2,8 +2,8 @@ package com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
-import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
-import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeOcorrencia;
 import jakarta.persistence.*;
 
 import java.time.LocalDate;
