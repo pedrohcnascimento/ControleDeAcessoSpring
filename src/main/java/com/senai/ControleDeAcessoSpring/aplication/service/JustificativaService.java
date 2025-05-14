@@ -1,12 +1,14 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.JustificativaDto;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.repository.JustificativaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 
@@ -23,9 +25,10 @@ public class JustificativaService {
         justificativa.setAnexo(dto.anexo());
         justificativa.setDataInicial(dto.dataInicial());
         justificativa.setQtdDias(dto.qtdDias());
-        justificativa.setDataHoraCriacao(dto.dataHoraCriacao());
-        justificativa.setDataHoraConclusao(dto.dataHoraConclusao());
+        justificativa.setDataHoraCriacao(LocalDateTime.now());
+        justificativa.setDataHoraConclusao(null);
         justificativa.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
+        justificativa.setAluno(null);
         justificativaRepository.save(justificativa);
     }
 
@@ -40,7 +43,7 @@ public class JustificativaService {
                justificativa.getDataHoraCriacao(),
                justificativa.getDataHoraConclusao(),
                justificativa.getStatus(),
-               justificativa.getAluno().getId()
+               null //justificativa.getAluno().getId()
        )).toList();
     }
 
@@ -55,14 +58,16 @@ public class JustificativaService {
                 justificativa.getDataHoraCriacao(),
                 justificativa.getDataHoraConclusao(),
                 justificativa.getStatus(),
-                justificativa.getAluno().getId()
+                null //justificativa.getAluno().getId()
         ));
     }
 
     public boolean alterarStatus(Long id, StatusDaJustificativa status) {
         justificativaRepository.findById(id).map(justificativa -> {
-                    justificativa.setStatus(StatusDaJustificativa.valueOf(String.valueOf(status)));
-
+                    justificativa.setStatus(status);
+                    if (status.equals(StatusDaJustificativa.APROVADO) || status.equals(StatusDaJustificativa.REPROVADO)) {
+                        justificativa.setDataHoraConclusao(LocalDateTime.now());
+                    }
                     justificativaRepository.save(justificativa);
                     return true;
         }
