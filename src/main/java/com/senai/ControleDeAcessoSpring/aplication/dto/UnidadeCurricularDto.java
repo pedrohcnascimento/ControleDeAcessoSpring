@@ -8,7 +8,4 @@ public record UnidadeCurricularDto(
         Integer cargaHorariaTotal,
         Integer cargaHorariaPorSemestre
 ) {
-    public static Object toDTO(UnidadeCurricular unidadeCurricular) {
-
-    }
 }

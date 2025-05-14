@@ -59,7 +59,7 @@ public class CursoService {
                 .map(uc -> new UnidadeCurricularDto(
                         uc.getId(),
                         uc.getNome(),
-                        uc.getCargaHorariaPorSemestre().size(),
+                        uc.getCargaHorariaTotal(),
                         uc.getCargaHorariaTotal()
                 )).toList();
     }
