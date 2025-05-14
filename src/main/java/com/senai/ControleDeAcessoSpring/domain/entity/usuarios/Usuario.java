@@ -1,30 +1,30 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.usuarios;
 
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeUsuario;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.Data;
 
 import java.time.LocalDate;
 import java.util.List;
+import java.util.Locale;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @Inheritance(strategy = InheritanceType.SINGLE_TABLE)
 @DiscriminatorColumn(name = "tipo_usuario", discriminatorType = DiscriminatorType.STRING)
+@Data
 public abstract class Usuario {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    private Long id;
+    protected Long id;
 
-    private String nome;
-    private String cpf;
-    private LocalDate dataNascimento;
-    private Integer idade;
-    private String email;
-    private String telefone;
+    protected String nome;
+    protected String cpf;
+    protected LocalDate dataNascimento;
+    protected String idAcesso;
+    protected String email;
+    protected String senha;
 
     @ElementCollection(fetch = FetchType.EAGER)
-    private List<String> permissoes;
+    protected List<String> permissoes;
+
 }

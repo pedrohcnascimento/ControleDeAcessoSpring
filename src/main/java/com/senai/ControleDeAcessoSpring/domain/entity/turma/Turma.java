@@ -4,30 +4,28 @@ import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
 import jakarta.persistence.*;
 import lombok.*;
 
-import java.sql.Time;
-import java.time.LocalDateTime;
-import java.util.Date;
+import java.time.LocalDate;
+import java.time.LocalTime;
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Turma {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
-    private Date dataDeInicio;
-    private LocalDateTime horarioDeEntrada;
-    private Integer qtdSemestre;
-    private Integer qtdAulasPorDia;
-
-    @OneToMany(mappedBy = "turma")
-    private List<SubTurma> subTurmas;
+    private String periodo;
+    private LocalDate dataInicial;
+    private LocalTime horarioEntrada;
+    private Integer qtdSemestres;
+    private Integer qtdAulasporDia;
 
     @ManyToOne
     private Curso curso;
+
+    @OneToMany
+    private List<SubTurma> subTurmas;
 }

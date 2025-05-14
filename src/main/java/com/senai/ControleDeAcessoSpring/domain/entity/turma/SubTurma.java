@@ -1,27 +1,25 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.turma;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadrao;
-import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioSemanal;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horarios.HorarioPadrao;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horarios.HorarioSemanal;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class SubTurma {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
     private String nome;
+
+    @ManyToOne
+    private Turma turma;
 
     @ManyToMany(mappedBy = "subTurmas")
     private List<Aluno> alunos;
@@ -33,7 +31,4 @@ public class SubTurma {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "sub_turma_id")
     private List<HorarioSemanal> horariosSemanais;
-
-    @ManyToOne
-    private Turma turma;
 }

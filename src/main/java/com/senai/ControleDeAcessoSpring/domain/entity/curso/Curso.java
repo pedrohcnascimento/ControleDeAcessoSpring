@@ -1,43 +1,27 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.curso;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
-import com.senai.ControleDeAcessoSpring.domain.enuns.Periodo;
-import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeCurso;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeCurso;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
-import lombok.Getter;
-import lombok.NoArgsConstructor;
-import lombok.Setter;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
+@Data
 public class Curso {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
-    @OneToMany(mappedBy = "curso")
-    private List<Turma> turmas;
-
-    @OneToMany(mappedBy = "curso")
-    private List<UnidadeCurricular> unidadesCurriculares;
-
-
+    private String titulo;
 
     @Enumerated(EnumType.STRING)
     private TipoDeCurso tipo;
 
-    private Long cargaHoraria;
-    private String nome;
-    private Integer toleranciaEmMinutos;
+    private Integer cargaHoraria;
+    private Integer toleranciaMinutos;
 
-    @Enumerated(EnumType.STRING)
-    private Periodo periodo;
-
-
+    @OneToMany(mappedBy = "curso")
+    private List<UnidadeCurricular> unidadeCurriculares;
 }

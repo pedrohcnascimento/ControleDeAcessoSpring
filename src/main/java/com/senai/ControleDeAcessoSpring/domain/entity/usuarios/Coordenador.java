@@ -1,18 +1,9 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.usuarios;
 
-import jakarta.persistence.*;
-import lombok.*;
-
-import java.util.List;
+import jakarta.persistence.DiscriminatorValue;
+import jakarta.persistence.Entity;
 
 @Entity
-@Getter
-@Setter
-@NoArgsConstructor
-@AllArgsConstructor
 @DiscriminatorValue("COORDENADOR")
 public class Coordenador extends Usuario {
-
-    @OneToMany(mappedBy = "coordenador")
-    private List<Professor> equipeDeProfessores;
 }
