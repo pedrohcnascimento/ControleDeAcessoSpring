@@ -19,14 +19,14 @@ public class CursoService {
     CursoRepository cursoRepository;
 
     public void cadastrarCurso(CursoDto cursoDto){
-        Curso curso = new Curso();
-        curso.setTitulo(cursoDto.titulo());
-        curso.setTipo(cursoDto.tipo());
-        curso.setCargaHoraria(cursoDto.cargaHoraria());
-        curso.setToleranciaMinutos(cursoDto.toleranciaMinutos());
-        curso.setUnidadeCurriculares(mapUnidadeCurriculares(cursoDto.unidadeCurriculares(), curso));
-        
-        cursoRepository.save(curso);
+            Curso curso = new Curso();
+            curso.setTitulo(cursoDto.titulo());
+            curso.setTipo(cursoDto.tipo());
+            curso.setCargaHoraria(cursoDto.cargaHoraria());
+            curso.setToleranciaMinutos(cursoDto.toleranciaMinutos());
+            curso.setUnidadeCurriculares(mapUnidadeCurriculares(cursoDto.unidadeCurriculares(), curso));
+
+            cursoRepository.save(curso);
     }
 
     private List<UnidadeCurricular> mapUnidadeCurriculares(List<UnidadeCurricularDto> unidadeCurricularesDto, Curso curso) {
@@ -34,7 +34,7 @@ public class CursoService {
                 .map(dto -> {
                     UnidadeCurricular uc = new UnidadeCurricular();
                     uc.setNome(dto.nome());
-                    uc.setCargaHorariaTotal(dto.cargarHorariaPorSemestre());
+                    uc.setCargaHorariaTotal(dto.cargaHorariaPorSemestre());
                     uc.setCurso(curso);
                     return uc;
                 })
