@@ -83,7 +83,6 @@ public class TurmaService {
                 ),*/
                 busca.getStatus()
         );
-
         return turma;
     }
 }
