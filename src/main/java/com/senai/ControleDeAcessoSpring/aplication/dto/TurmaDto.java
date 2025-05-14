@@ -1,7 +1,5 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
-
 import java.time.LocalDate;
 import java.time.LocalTime;
 
