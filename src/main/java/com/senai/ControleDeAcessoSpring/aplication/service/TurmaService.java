@@ -22,14 +22,13 @@ public class TurmaService {
     public void cadastrarTurma(TurmaDto dto) {
         Turma novaTurma = new Turma();
 
-        novaTurma.setId(dto.id());
         novaTurma.setNome(dto.nome());
         novaTurma.setPeriodo(dto.periodo());
         novaTurma.setDataInicial(dto.dataInicial());
         novaTurma.setHorarioEntrada(dto.horarioEntrada());
         novaTurma.setQtdSemestres(dto.qtdSemestres());
         novaTurma.setQtdAulasporDia(dto.qtdAulasPorDia());
-        novaTurma.setCurso(cursoRepository.findById(dto.curso().id()).get());
+        //novaTurma.setCurso(cursoRepository.findById(dto.curso().id()).get());
         novaTurma.setStatus(dto.status());
 
         turmaRepository.save(novaTurma);
@@ -37,14 +36,13 @@ public class TurmaService {
 
     public List<TurmaDto> listar() {
         return turmaRepository.findAll().stream().map(t -> new TurmaDto(
-                t.getId(),
                 t.getNome(),
                 t.getPeriodo(),
                 t.getDataInicial(),
                 t.getHorarioEntrada(),
                 t.getQtdSemestres(),
                 t.getQtdAulasporDia(),
-                new CursoDto(
+                /*new CursoDto(
                         t.getCurso().getId(),
                         t.getCurso().getTitulo(),
                         t.getCurso().getTipo(),
@@ -56,23 +54,36 @@ public class TurmaService {
                                 uc.getCargaHorariaTotal(),
                                 uc.getCargaHorariaPorSemestre().size()
                         )).toList()
-                ),
+                ),*/
                 t.getStatus()
         )).toList();
     }
 
-    public TurmaDto listarPorId(Long id) {
+    public TurmaDto BuscarPorId(Long id) {
         Turma busca = turmaRepository.findById(id).get();
         TurmaDto turma = new TurmaDto(
-                busca.getId(),
                 busca.getNome(),
                 busca.getPeriodo(),
                 busca.getDataInicial(),
                 busca.getHorarioEntrada(),
                 busca.getQtdSemestres(),
                 busca.getQtdAulasporDia(),
-                busca.getCurso(),
+                /*new CursoDto(
+                        busca.getCurso().getId(),
+                        busca.getCurso().getTitulo(),
+                        busca.getCurso().getTipo(),
+                        busca.getCurso().getCargaHoraria(),
+                        busca.getCurso().getToleranciaMinutos(),
+                        busca.getCurso().getUnidadeCurriculares().stream().map(uc -> new UnidadeCurricularDto(
+                                uc.getId(),
+                                uc.getNome(),
+                                uc.getCargaHorariaTotal(),
+                                uc.getCargaHorariaPorSemestre().size()
+                        )).toList()
+                ),*/
                 busca.getStatus()
-        )
+        );
+
+        return turma;
     }
 }
