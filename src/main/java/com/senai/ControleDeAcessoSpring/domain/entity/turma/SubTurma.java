@@ -17,6 +17,7 @@ public class SubTurma {
     private Long id;
 
     private String nome;
+    private Boolean status;
 
     @ManyToOne
     private Turma turma;

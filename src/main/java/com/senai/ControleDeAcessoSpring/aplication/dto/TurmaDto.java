@@ -12,6 +12,8 @@ public record TurmaDto(
         LocalDate dataInicial,
         LocalTime horarioEntrada,
         Integer qtdSemestres,
-        Integer aulasPorDia
+        Integer qtdAulasPorDia,
+        CursoDto curso,
+        Boolean status
 ) {
 }

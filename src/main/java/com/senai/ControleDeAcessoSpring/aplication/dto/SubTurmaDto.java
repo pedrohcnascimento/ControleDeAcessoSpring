@@ -5,6 +5,7 @@ import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadra
 public record SubTurmaDto(
         Long id,
         String nome,
-        HorarioPadrao horarioPadrao
-) {
+        Boolean status
+)
+{
 }
