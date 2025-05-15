@@ -2,8 +2,7 @@ package com.senai.ControleDeAcessoSpring.aplication.service;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.OcorrenciaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
-import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
-import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaOcorrencia;
 import com.senai.ControleDeAcessoSpring.domain.repository.OcorrenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

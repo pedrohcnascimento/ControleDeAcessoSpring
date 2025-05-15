@@ -1,9 +1,8 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.JustificativaDto;
-import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
-import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.repository.JustificativaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -26,7 +25,7 @@ public class JustificativaService {
         justificativa.setAtivo(true);
         justificativa.setDataHoraCriacao(LocalDateTime.now());
         justificativa.setDataHoraConclusao(null);
-        justificativa.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
+        justificativa.setStatus(StatusDaJustificativa.ANALISE);
         justificativaRepository.save(justificativa);
     }
 

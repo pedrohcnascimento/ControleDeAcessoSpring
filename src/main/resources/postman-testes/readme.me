@@ -1,0 +1,108 @@
+# Controle de Acesso - API de Usuários
+Este README fornece instruções de como devem ser realizadas cada requisição para determinado endpoint no sistema, assim como as respostas esperadas.
+
+## Endpoints Disponíveis
+
+### 1. Cadastrar Usuário (POST)
+
+* **URL:** `/usuarios`
+* **Método:** POST
+* **Descrição:** Cria um novo usuário no sistema.
+* **Exemplo de Body:**
+
+```json
+{
+  "nome": "Diego Genuino",
+  "cpf": "12345678900",
+  "dataNascimento": "2000-05-15",
+  "idAcesso": "acesso123",
+  "email": "diego.genuino@gmail.com",
+  "senha": "senha123",
+  "permissoes": ["ADMIN", "USER"]
+}
+```
+
+* **Resposta Esperada:**
+
+  * **Status:** 200 OK
+
+### 2. Listar Usuários (GET)
+
+* **URL:** `/usuarios`
+* **Método:** GET
+* **Descrição:** Retorna a lista de todos os usuários cadastrados.
+* **Resposta Esperada:**
+
+```json
+[
+  {
+    "id": 1,
+    "nome": "Diego Genuino",
+    "email": "diego.genuino@gmail.com"
+  },
+  {
+    "id": 2,
+    "nome": "Maria Souza",
+    "email": "maria.souza@email.com"
+  }
+]
+```
+
+### 3. Buscar Usuário por ID (GET)
+
+* **URL:** `/usuarios/{id}`
+* **Método:** GET
+* **Descrição:** Retorna os detalhes de um usuário específico pelo ID.
+* **Exemplo de URL:** `/usuarios/1`
+* **Resposta Esperada:**
+
+```json
+{
+  "id": 1,
+  "nome": "Diego Genuino",
+  "email": "diego.genuino@gmail.com"
+}
+```
+
+* **Status 404:** Caso o usuário não seja encontrado.
+
+### 4. Atualizar Usuário (PUT)
+
+* **URL:** `/usuarios/{id}`
+* **Método:** PUT
+* **Descrição:** Atualiza as informações de um usuário específico pelo ID.
+* **Exemplo de Body:**
+
+```json
+{
+  "nome": "Diego Genuino de Oliveira",
+  "cpf": "12345678900",
+  "dataNascimento": "2000-05-15",
+  "idAcesso": "acesso123",
+  "email": "diego.genuino@gmail.com",
+  "senha": "novasenha123",
+  "permissoes": ["USER"]
+}
+```
+
+* **Resposta Esperada:**
+
+```plaintext
+Atualizado com sucesso
+```
+
+* **Status 400:** Falha ao atualizar.
+
+### 5. Deletar Usuário (DELETE)
+
+* **URL:** `/usuarios/{id}`
+* **Método:** DELETE
+* **Descrição:** Remove um usuário do sistema pelo ID.
+* **Exemplo de URL:** `/usuarios/1`
+* **Resposta Esperada:**
+
+```plaintext
+Usuario deletado com sucesso
+```
+
+* **Status 404:** Caso o usuário não seja encontrado.

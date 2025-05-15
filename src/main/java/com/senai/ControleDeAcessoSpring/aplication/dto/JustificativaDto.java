@@ -1,8 +1,8 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
-import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
-import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeJustificativa;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
