@@ -11,6 +11,7 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
 
 @Service
 public class OcorrenciaService {
@@ -19,9 +20,8 @@ public class OcorrenciaService {
     OcorrenciaRepository ocorrenciaRepository;
 
     public void cadastrarOcorrencia(OcorrenciaDto dto) {
-        Ocorrencia ocorrencia = new Ocorrencia();
-        ocorrencia.setTipo(dto.tipoDeOcorrencia());
-        ocorrencia.setDescricao(dto.descricao());
+        Ocorrencia ocorrencia = dto.fromDto();
+        ocorrencia.setAtivo(true);
         ocorrencia.setStatus(StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO);
         ocorrencia.setDataHoraCriacao(LocalDateTime.now());
         ocorrencia.setDataHoraConclusao(null);
@@ -32,31 +32,21 @@ public class OcorrenciaService {
     }
 
     public List<OcorrenciaDto> listar() {
-        return ocorrenciaRepository.findAll().stream().map(ocorrencia -> new OcorrenciaDto(
-                ocorrencia.getId(),
-                ocorrencia.getTipo(),
-                ocorrencia.getDescricao(),
-                ocorrencia.getStatus(),
-                ocorrencia.getDataHoraCriacao(),
-                ocorrencia.getDataHoraConclusao(),
-                null,
-                null,
-                null //teste
-        )).toList();
+        return ocorrenciaRepository.findByAtivoTrue()
+                .stream().map(OcorrenciaDto::toDto)
+                .collect(Collectors.toList());
     }
 
     public Optional<OcorrenciaDto> buscarPorId(Long id) {
-        return ocorrenciaRepository.findById(id).map(ocorrencia -> new OcorrenciaDto(
-                ocorrencia.getId(),
-                ocorrencia.getTipo(),
-                ocorrencia.getDescricao(),
-                ocorrencia.getStatus(),
-                ocorrencia.getDataHoraCriacao(),
-                ocorrencia.getDataHoraConclusao(),
-                null,
-                null,
-                null //Teste
-        ));
+        return ocorrenciaRepository.findById(id).map(OcorrenciaDto::toDto);
+    }
+
+    public boolean inativar(Long id) {
+        return ocorrenciaRepository.findById(id).map(ocorrencia -> {
+            ocorrencia.setAtivo(false);
+            ocorrenciaRepository.save(ocorrencia);
+            return true;
+        }).orElse(false);
     }
 
     public boolean alterarStatus(Long id, StatusDaOcorrencia status) {

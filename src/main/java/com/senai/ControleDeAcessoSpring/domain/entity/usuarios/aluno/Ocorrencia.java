@@ -37,4 +37,7 @@ public class Ocorrencia {
 
     @ManyToOne
     private UnidadeCurricular unidadeCurricular;
+
+    @Column(name = "ativo")
+    private boolean ativo;
 }

@@ -43,4 +43,13 @@ public class OcorrenciaController {
             return ResponseEntity.notFound().build();
         }
     }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> inativar(@PathVariable Long id) {
+        if (ocorrenciaService.inativar(id)) {
+            return ResponseEntity.ok("Ocorrência inativada");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
 }
