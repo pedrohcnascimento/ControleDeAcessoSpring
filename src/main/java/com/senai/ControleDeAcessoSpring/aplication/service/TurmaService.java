@@ -85,4 +85,24 @@ public class TurmaService {
         );
         return turma;
     }
+
+    public Boolean deletarTurma(Long id) {
+        return turmaRepository.findById(id).map(t -> {
+            t.setStatus(false);
+            turmaRepository.save(t);
+            return true;
+        }).orElse(false);
+    }
+
+    public Boolean atualizarTurma(Long id, TurmaDto novaTurma) {
+        return turmaRepository.findById(id).map(t -> {
+            t.setNome(novaTurma.nome());
+            t.setPeriodo(novaTurma.periodo());
+            t.setHorarioEntrada(novaTurma.horarioEntrada());
+            t.setQtdSemestres(novaTurma.qtdSemestres());
+            t.setDataInicial(novaTurma.dataInicial());
+            turmaRepository.save(t);
+            return true;
+        }).orElse(false);
+    }
 }
