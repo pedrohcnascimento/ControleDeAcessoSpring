@@ -10,6 +10,6 @@ public record CursoDto(
         TipoDeCurso tipo,
         Integer cargaHoraria,
         Integer toleranciaMinutos,
-        List<UnidadeCurricularDto> unidadeCurriculares
+        List<UnidadeCurricularDto> unidadesCurriculares
 ) {
 }
