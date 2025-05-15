@@ -24,7 +24,7 @@ public class CursoService {
             curso.setTipo(cursoDto.tipo());
             curso.setCargaHoraria(cursoDto.cargaHoraria());
             curso.setToleranciaMinutos(cursoDto.toleranciaMinutos());
-            curso.setUnidadeCurriculares(mapUnidadeCurriculares(cursoDto.unidadeCurriculares(), curso));
+            curso.setUnidadesCurriculares(mapUnidadeCurriculares(cursoDto.unidadesCurriculares(), curso));
 
             cursoRepository.save(curso);
     }
@@ -50,7 +50,7 @@ public class CursoService {
                         curso.getTipo(),
                         curso.getCargaHoraria(),
                         curso.getToleranciaMinutos(),
-                        mapUnidadeCurricularesParaDto(curso.getUnidadeCurriculares())
+                        mapUnidadeCurricularesParaDto(curso.getUnidadesCurriculares())
                 )).toList();
     }
 
@@ -72,7 +72,7 @@ public class CursoService {
                         curso.getTipo(),
                         curso.getCargaHoraria(),
                         curso.getToleranciaMinutos(),
-                        mapUnidadeCurricularesParaDto(curso.getUnidadeCurriculares())
+                        mapUnidadeCurricularesParaDto(curso.getUnidadesCurriculares())
                 ));
     }
 
