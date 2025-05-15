@@ -18,18 +18,20 @@ public record UsuarioDto (
         String email,
         TipoDeUsuario tipoDeUsuario
 ){
-    public static UsuarioDto toDto(Usuario u) {
+  public static UsuarioDto toDto(Usuario u) {
         TipoDeUsuario tipo = switch (u) {
             case Aluno a -> TipoDeUsuario.ALUNO;
             case Professor p -> TipoDeUsuario.PROFESSOR;
             case Coordenador p -> TipoDeUsuario.COORDENADOR;
             case AQV p -> TipoDeUsuario.AQV;
             default -> throw new IllegalArgumentException("Usuario desconhacido detectado!");
+
         };
         return new UsuarioDto(u.getId(), u.getNome(), u.getCpf(), u.getDataNascimento(), u.getEmail(), tipo);
     }
 
     public Usuario fromDto () {
+
         Usuario usuario = switch (tipoDeUsuario) {
             case ALUNO -> new Aluno();
             case PROFESSOR -> new Professor();

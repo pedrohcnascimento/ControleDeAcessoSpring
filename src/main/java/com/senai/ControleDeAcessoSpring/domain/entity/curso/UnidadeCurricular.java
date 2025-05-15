@@ -2,6 +2,7 @@ package com.senai.ControleDeAcessoSpring.domain.entity.curso;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
 
 import java.util.List;
@@ -17,9 +18,6 @@ public class UnidadeCurricular {
 
     private String nome;
     private Integer cargaHorariaTotal;
-
-    @ElementCollection
-    private Map<Integer, Integer> cargaHorariaPorSemestre;
 
     @ManyToOne
     private Curso curso;
