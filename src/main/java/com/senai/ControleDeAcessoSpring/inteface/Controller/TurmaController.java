@@ -13,38 +13,37 @@ import java.util.List;
 public class TurmaController {
 
     @Autowired
-    private TurmaService turmaService;
+    private TurmaService service;
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarTurma(@RequestBody TurmaDto turmaDto){
-        turmaService.cadastrarTurma(turmaDto);
-        return ResponseEntity.ok().build();
+    public ResponseEntity<String> cadastrarTurma(@RequestBody TurmaDto turma) {
+        service.cadastrarTurma(turma);
+        return ResponseEntity.ok("Turma adicionada com sucesso!");
+    }
+
+    @PostMapping("/{id}")
+    public ResponseEntity<TurmaDto> acharTurmaPorId(@PathVariable Long id) {
+        return ResponseEntity.ok(service.BuscarPorId(id));
     }
 
     @GetMapping
-    public ResponseEntity<List<TurmaDto>> listarTurmas(){
-        return ResponseEntity.ok(turmaService.listarTurmas());
-    }
-
-    @GetMapping("/{id}")
-    public ResponseEntity<TurmaDto> buscarPorId(@PathVariable Long id){
-        return turmaService.buscarTurmaPorId(id).map(ResponseEntity::ok).orElse(ResponseEntity.notFound().build());
-    }
-
-    @PutMapping("/{id}")
-    public ResponseEntity<String> atualizarUsuario(@PathVariable Long id, @RequestBody TurmaDto turmaDto){
-        if (!turmaService.atualizarTurma(id, turmaDto)) {
-            return ResponseEntity.badRequest().body("Falha ao atualizar");
-        }
-        return ResponseEntity.ok("Atualizado com sucesso");
+    public List<TurmaDto> listarTurmas() {
+        return service.listar();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarTurma(@PathVariable Long id){
-        if (turmaService.deletarTurma(id)) {
-            return ResponseEntity.ok("Usuario deletado com sucesso");
+    public ResponseEntity<String> desativarTurma(@PathVariable Long id) {
+        if (service.deletarTurma(id)) {
+            return ResponseEntity.ok("Turma desativada com exito!");
         }
         return ResponseEntity.notFound().build();
     }
 
+    @PutMapping("/{id}")
+    public ResponseEntity<String> atualizarTurma(@PathVariable Long id, @RequestBody TurmaDto novaTurma) {
+        if (service.atualizarTurma(id, novaTurma)) {
+            return ResponseEntity.ok("Turma atualizada com exito");
+        }
+        return ResponseEntity.notFound().build();
+    }
 }

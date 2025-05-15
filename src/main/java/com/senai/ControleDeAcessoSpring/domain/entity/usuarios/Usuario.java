@@ -1,5 +1,6 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.usuarios;
 
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeUsuario;
 import jakarta.persistence.*;
 import lombok.Data;
 
@@ -21,7 +22,7 @@ public abstract class Usuario {
     protected String idAcesso;
     protected String email;
     protected String senha;
-    protected boolean ativo;
+    protected Boolean ativo;
 
     @ElementCollection(fetch = FetchType.EAGER)
     protected List<String> permissoes;

@@ -22,6 +22,7 @@ public class Turma {
     private LocalTime horarioEntrada;
     private Integer qtdSemestres;
     private Integer qtdAulasporDia;
+    private Boolean status;
 
     @ManyToOne
     private Curso curso;

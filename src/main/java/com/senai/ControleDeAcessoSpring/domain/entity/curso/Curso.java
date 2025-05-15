@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.curso;
 
-import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeCurso;
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeCurso;
 import jakarta.persistence.*;
 import lombok.Data;
 

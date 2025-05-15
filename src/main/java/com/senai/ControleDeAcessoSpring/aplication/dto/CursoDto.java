@@ -1,8 +1,6 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
-import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
-import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeCurso;
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeCurso;
 
 import java.util.List;
 import java.util.stream.Collectors;
@@ -18,4 +16,3 @@ public record CursoDto(
         List<UnidadeCurricularDto> unidadeCurriculares
 ) {
 }
-

@@ -6,7 +6,7 @@ import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Coordenador;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
-import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeUsuario;
+import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeUsuario;
 
 import java.time.LocalDate;
 
@@ -18,18 +18,20 @@ public record UsuarioDto (
         String email,
         TipoDeUsuario tipoDeUsuario
 ){
-    public static UsuarioDto toDTO(Usuario u) {
+  public static UsuarioDto toDto(Usuario u) {
         TipoDeUsuario tipo = switch (u) {
             case Aluno a -> TipoDeUsuario.ALUNO;
             case Professor p -> TipoDeUsuario.PROFESSOR;
-            case Coordenador c -> TipoDeUsuario.COORDENADOR;
-            case AQV aqv -> TipoDeUsuario.AQV;
-            default -> throw new IllegalArgumentException("Tipo de usuário desconhecido");
+            case Coordenador p -> TipoDeUsuario.COORDENADOR;
+            case AQV p -> TipoDeUsuario.AQV;
+            default -> throw new IllegalArgumentException("Usuario desconhacido detectado!");
+
         };
         return new UsuarioDto(u.getId(), u.getNome(), u.getCpf(), u.getDataNascimento(), u.getEmail(), tipo);
     }
 
-    public Usuario fromDTO() {
+    public Usuario fromDto () {
+
         Usuario usuario = switch (tipoDeUsuario) {
             case ALUNO -> new Aluno();
             case PROFESSOR -> new Professor();
