@@ -1,13 +1,15 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.turma;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.turma.horarios.HorarioPadrao;
-import com.senai.ControleDeAcessoSpring.domain.entity.turma.horarios.HorarioSemanal;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadrao;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioSemanal;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import jakarta.persistence.*;
+import lombok.Data;
 
 import java.util.List;
 
 @Entity
+@Data
 public class SubTurma {
 
     @Id
@@ -15,6 +17,7 @@ public class SubTurma {
     private Long id;
 
     private String nome;
+    private Boolean status;
 
     @ManyToOne
     private Turma turma;

@@ -2,12 +2,14 @@ package com.senai.ControleDeAcessoSpring.domain.entity.turma;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
 import jakarta.persistence.*;
+import lombok.*;
 
 import java.time.LocalDate;
 import java.time.LocalTime;
 import java.util.List;
 
 @Entity
+@Data
 public class Turma {
 
     @Id
@@ -20,6 +22,7 @@ public class Turma {
     private LocalTime horarioEntrada;
     private Integer qtdSemestres;
     private Integer qtdAulasporDia;
+    private Boolean status;
 
     @ManyToOne
     private Curso curso;
