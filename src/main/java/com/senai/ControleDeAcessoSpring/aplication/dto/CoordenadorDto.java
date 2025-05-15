@@ -1,0 +1,31 @@
+package com.senai.ControleDeAcessoSpring.aplication.dto;
+
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Coordenador;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
+
+import java.time.LocalDate;
+
+public record CoordenadorDto(
+        Long id,
+        String nome,
+        String cpf,
+        LocalDate dataNascimento,
+        String email
+) {
+    public static CoordenadorDto toDTO(Coordenador c) {
+        return new CoordenadorDto(c.getId(), c.getNome(), c.getCpf(), c.getDataNascimento(), c.getEmail());
+    }
+
+    public Coordenador fromDTO() {
+        Coordenador coordenador = new Coordenador();
+        coordenador.setId(id);
+        coordenador.setNome(nome);
+        coordenador.setCpf(cpf);
+        coordenador.setEmail(email);
+        coordenador.setDataNascimento(dataNascimento);
+        coordenador.setAtivo(true);
+        coordenador.setIdAcesso("");
+        coordenador.setSenha("");
+        return coordenador;
+    }
+}
