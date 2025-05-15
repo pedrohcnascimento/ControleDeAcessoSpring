@@ -44,4 +44,13 @@ public class JustificativaController {
         }
     }
 
+    @DeleteMapping("/{id}")
+    public ResponseEntity<String> inativar(@PathVariable Long id) {
+        if (justificativaService.inativar(id)) {
+            return ResponseEntity.ok("Justificativa inativada");
+        } else {
+            return ResponseEntity.notFound().build();
+        }
+    }
+
 }

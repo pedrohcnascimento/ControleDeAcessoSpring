@@ -11,6 +11,9 @@ import org.springframework.stereotype.Service;
 import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
+import java.util.stream.Collectors;
+
+import static java.util.stream.Collectors.toList;
 
 @Service
 public class JustificativaService {
@@ -19,47 +22,30 @@ public class JustificativaService {
     JustificativaRepository justificativaRepository;
 
     public void cadastrarJustificativa(JustificativaDto dto) {
-        Justificativa justificativa = new Justificativa();
-        justificativa.setTipo(dto.tipoDeJustificativa());
-        justificativa.setDescricao(dto.descricao());
-        justificativa.setAnexo(dto.anexo());
-        justificativa.setDataInicial(dto.dataInicial());
-        justificativa.setQtdDias(dto.qtdDias());
+        Justificativa justificativa = dto.fromDto();
+        justificativa.setAtivo(true);
         justificativa.setDataHoraCriacao(LocalDateTime.now());
         justificativa.setDataHoraConclusao(null);
         justificativa.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
-        justificativa.setAluno(null);
         justificativaRepository.save(justificativa);
     }
 
     public List<JustificativaDto> listar() {
-       return justificativaRepository.findAll().stream().map(justificativa -> new JustificativaDto(
-               justificativa.getId(),
-               justificativa.getTipo(),
-               justificativa.getDescricao(),
-               justificativa.getAnexo(),
-               justificativa.getDataInicial(),
-               justificativa.getQtdDias(),
-               justificativa.getDataHoraCriacao(),
-               justificativa.getDataHoraConclusao(),
-               justificativa.getStatus(),
-               null //justificativa.getAluno().getId()
-       )).toList();
+       return justificativaRepository.findByAtivoTrue()
+               .stream().map(JustificativaDto::toDto)
+               .collect(Collectors.toList());
     }
 
     public Optional<JustificativaDto> buscarPorId(Long id) {
-        return justificativaRepository.findById(id).map(justificativa -> new JustificativaDto(
-                justificativa.getId(),
-                justificativa.getTipo(),
-                justificativa.getDescricao(),
-                justificativa.getAnexo(),
-                justificativa.getDataInicial(),
-                justificativa.getQtdDias(),
-                justificativa.getDataHoraCriacao(),
-                justificativa.getDataHoraConclusao(),
-                justificativa.getStatus(),
-                null //justificativa.getAluno().getId()
-        ));
+        return justificativaRepository.findById(id).map(JustificativaDto::toDto);
+    }
+
+    public boolean inativar(Long id) {
+        return justificativaRepository.findById(id).map(justificativa -> {
+            justificativa.setAtivo(false);
+            justificativaRepository.save(justificativa);
+            return true;
+        }).orElse(false);
     }
 
     public boolean alterarStatus(Long id, StatusDaJustificativa status) {

@@ -31,4 +31,7 @@ public class Justificativa {
 
     @ManyToOne
     private Aluno aluno;
+
+    @Column(name = "ativo")
+    private boolean ativo;
 }
