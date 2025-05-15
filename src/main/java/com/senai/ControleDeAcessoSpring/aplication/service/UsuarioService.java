@@ -16,24 +16,24 @@ public class UsuarioService {
     @Autowired private UsuarioRepository usuarioRepository;
 
     public void cadastrarUsuario(UsuarioDto dto) {
-        usuarioRepository.save(dto.fromDTO());
+        usuarioRepository.save(dto.fromDto());
     }
 
     public List<UsuarioDto> listarAtivos() {
         return usuarioRepository.findByAtivoTrue()
-                .stream().map(UsuarioDto::toDTO)
+                .stream().map(UsuarioDto::toDto)
                 .collect(Collectors.toList());
     }
 
     public Optional<UsuarioDto> buscarPorId(Long id) {
         return usuarioRepository.findById(id)
-                .filter(Usuario::isAtivo)
-                .map(UsuarioDto::toDTO);
+                .filter(Usuario::getAtivo)
+                .map(UsuarioDto::toDto);
     }
 
     public boolean atualizar(Long id, UsuarioDto dto) {
         return usuarioRepository.findById(id).map(usuario -> {
-            Usuario usuarioAtualizado = dto.fromDTO();
+            Usuario usuarioAtualizado = dto.fromDto();
             usuario.setNome(usuarioAtualizado.getNome());
             usuario.setEmail(usuarioAtualizado.getEmail());
             usuario.setDataNascimento(usuarioAtualizado.getDataNascimento());

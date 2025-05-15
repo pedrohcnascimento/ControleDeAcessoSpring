@@ -27,7 +27,7 @@ public class AqvService {
 
     public Optional<AqvDto> buscarPorId(Long id) {
         return aqvRepository.findById(id)
-                .filter(AQV::isAtivo)
+                .filter(AQV::getAtivo)
                 .map(AqvDto::toDTO);
     }
 

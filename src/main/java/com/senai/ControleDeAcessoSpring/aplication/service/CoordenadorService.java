@@ -30,7 +30,7 @@ public class CoordenadorService {
 
     public Optional<CoordenadorDto> buscarPorId(Long id) {
         return coordenadorRepository.findById(id)
-                .filter(Coordenador::isAtivo)
+                .filter(Coordenador::getAtivo)
                 .map(CoordenadorDto::toDTO);
     }
 

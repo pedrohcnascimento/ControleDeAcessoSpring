@@ -28,7 +28,7 @@ public class AlunoService {
 
     public Optional<AlunoDto> buscarPorId(Long id) {
         return alunoRepository.findById(id)
-                .filter(Aluno::isAtivo)
+                .filter(Aluno::getAtivo)
                 .map(AlunoDto::toDTO);
     }
 

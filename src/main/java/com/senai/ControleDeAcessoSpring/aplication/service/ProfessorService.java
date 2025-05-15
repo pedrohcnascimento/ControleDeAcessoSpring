@@ -28,7 +28,7 @@ public class ProfessorService {
 
     public Optional<ProfessorDto> buscarPorId(Long id) {
         return professorRepository.findById(id)
-                .filter(Professor::isAtivo)
+                .filter(Professor::getAtivo)
                 .map(ProfessorDto::toDTO);
     }
 
