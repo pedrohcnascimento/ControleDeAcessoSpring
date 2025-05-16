@@ -1,7 +1,7 @@
 package com.senai.ControleDeAcessoSpring.inteface.Controller;
 
-import com.seusistema.controleacesso.ambiente.dto.AmbienteDTO;
-import com.seusistema.controleacesso.ambiente.service.AmbienteService;
+import com.senai.ControleDeAcessoSpring.aplication.dto.AmbienteDTO;
+import com.senai.ControleDeAcessoSpring.aplication.service.AmbienteService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;
 import org.springframework.http.ResponseEntity;

@@ -1,8 +1,8 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
-import com.seusistema.controleacesso.ambiente.dto.AmbienteDTO;
-import com.seusistema.controleacesso.ambiente.model.Ambiente;
-import com.seusistema.controleacesso.ambiente.repository.AmbienteRepository;
+import com.senai.ControleDeAcessoSpring.aplication.dto.AmbienteDTO;
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.Ambiente;
+import com.senai.ControleDeAcessoSpring.domain.repository.AmbienteRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

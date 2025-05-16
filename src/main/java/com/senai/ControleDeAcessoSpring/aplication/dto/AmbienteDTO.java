@@ -1,8 +1,6 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-package com.seusistema.controleacesso.ambiente.dto;
-
-import com.seusistema.controleacesso.ambiente.model.Ambiente;
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.Ambiente;
 import lombok.Data;
 
 @Data
@@ -29,5 +27,29 @@ public class AmbienteDTO {
         dto.setDescricao(ambiente.getDescricao());
         dto.setAtivo(ambiente.isAtivo());
         return dto;
+    }
+
+    public String getNome() {
+        return this.nome;
+    }
+
+    public String getDescricao() {
+        return this.descricao;
+    }
+
+    public void setId(Long id) {
+        this.id = id;
+    }
+
+    public void setNome(String nome) {
+        this.nome = nome;
+    }
+
+    public void setDescricao(String descricao) {
+        this.descricao = descricao;
+    }
+
+    public void setAtivo(boolean ativo) {
+        this.ativo = ativo;
     }
 }

@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.domain.repository;
 
-import com.seusistema.controleacesso.ambiente.model.Ambiente;
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.Ambiente;
 import org.springframework.data.jpa.repository.JpaRepository;
 import org.springframework.stereotype.Repository;
 

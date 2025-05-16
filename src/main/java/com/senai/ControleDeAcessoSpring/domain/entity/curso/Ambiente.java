@@ -4,8 +4,8 @@ import jakarta.persistence.Entity;
 import jakarta.persistence.GeneratedValue;
 import jakarta.persistence.GenerationType;
 import jakarta.persistence.Id;
-
-import jakarta.persistence.*;
+import jakarta.persistence.Table;
+import jakarta.persistence.Column;
 import lombok.Data;
 
 @Entity
@@ -24,4 +24,32 @@ public class Ambiente {
 
     @Column(nullable = false)
     private boolean ativo = true;
+
+    public void setNome(String nome) {
+    }
+
+    public void setId(Long id) {
+    }
+
+    public void setDescricao(String descricao) {
+    }
+
+    public void setAtivo(boolean ativo) {
+    }
+
+    public Long getId() {
+        return 0L;
+    }
+
+    public String getNome() {
+        return "";
+    }
+
+    public String getDescricao() {
+        return "";
+    }
+
+    public boolean isAtivo() {
+        return false;
+    }
 }
