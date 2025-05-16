@@ -51,4 +51,8 @@ public class AlunoService {
             return true;
         }).orElse(false);
     }
+
+    public Aluno buscarNoRepository(Long id) {
+            return alunoRepository.findById(id).get();
+    }
 }

@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.interface_ui.controller;
+package com.senai.ControleDeAcessoSpring.inteface.controller;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.JustificativaDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.JustificativaService;

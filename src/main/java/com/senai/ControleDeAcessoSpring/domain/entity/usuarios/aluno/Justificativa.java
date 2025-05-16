@@ -4,12 +4,15 @@ import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeJustificativa;
 import jakarta.persistence.*;
 import lombok.Data;
+import lombok.NoArgsConstructor;
+import lombok.NonNull;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 
 @Entity
 @Data
+@NoArgsConstructor
 public class Justificativa {
 
     @Id
@@ -30,6 +33,7 @@ public class Justificativa {
     private StatusDaJustificativa status;
 
     @ManyToOne
+    @NonNull
     private Aluno aluno;
 
     @Column(name = "ativo")

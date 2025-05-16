@@ -18,15 +18,24 @@ public class OcorrenciaService {
     @Autowired
     OcorrenciaRepository ocorrenciaRepository;
 
+    @Autowired
+    AlunoService alunoService;
+
+    @Autowired
+    ProfessorService professorService;
+
+    @Autowired
+    UnidadeCurricularService unidadeCurricularService;
+
     public void cadastrarOcorrencia(OcorrenciaDto dto) {
         Ocorrencia ocorrencia = dto.fromDto();
         ocorrencia.setAtivo(true);
         ocorrencia.setStatus(StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO);
         ocorrencia.setDataHoraCriacao(LocalDateTime.now());
         ocorrencia.setDataHoraConclusao(null);
-        ocorrencia.setAluno(null);
-        ocorrencia.setProfessorResponsavel(null);
-        ocorrencia.setUnidadeCurricular(null);
+        ocorrencia.setAluno(alunoService.buscarNoRepository(dto.idAluno()));
+        ocorrencia.setProfessorResponsavel(professorService.buscarNoRepository(dto.idProfessorResponsavel()));
+        ocorrencia.setUnidadeCurricular(unidadeCurricularService.buscarNoRepository(dto.idUnidadeCurricular()));
         ocorrenciaRepository.save(ocorrencia);
     }
 

@@ -34,7 +34,8 @@ public class CursoService {
                 .map(dto -> {
                     UnidadeCurricular uc = new UnidadeCurricular();
                     uc.setNome(dto.nome());
-                    uc.setCargaHorariaTotal(dto.cargaHorariaPorSemestre());
+                    uc.setCargaHorariaTotal(dto.cargaHorariaTotal());
+                    uc.setCargaHorariaPorSemestre(dto.cargaHorariaPorSemestre());
                     uc.setCurso(curso);
                     return uc;
                 })
@@ -60,7 +61,8 @@ public class CursoService {
                         uc.getId(),
                         uc.getNome(),
                         uc.getCargaHorariaTotal(),
-                        uc.getCargaHorariaTotal()
+                        uc.getCargaHorariaPorSemestre(),
+                        uc.getCurso().getId()
                 )).toList();
     }
 
@@ -94,5 +96,9 @@ public class CursoService {
             return true;
         }
         return false;
+    }
+
+    public Curso buscarNoRepository(Long id) {
+        return cursoRepository.findById(id).get();
     }
 }

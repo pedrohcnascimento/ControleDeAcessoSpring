@@ -51,4 +51,8 @@ public class ProfessorService {
             return true;
         }).orElse(false);
     }
+
+    public Professor buscarNoRepository(Long id) {
+        return professorRepository.findById(id).get();
+    }
 }

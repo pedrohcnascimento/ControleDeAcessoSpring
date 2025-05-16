@@ -1,8 +1,10 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
+import com.senai.ControleDeAcessoSpring.aplication.service.AlunoService;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
 import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeJustificativa;
+import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
@@ -17,8 +19,9 @@ public record JustificativaDto(
         LocalDateTime dataHoraCriacao,
         LocalDateTime dataHoraConclusao,
         StatusDaJustificativa status,
-        Long alunoId
+        Long idAluno
 ) {
+
 
     public static JustificativaDto toDto(Justificativa j) {
         return new JustificativaDto(
@@ -31,7 +34,7 @@ public record JustificativaDto(
                 j.getDataHoraCriacao(),
                 j.getDataHoraConclusao(),
                 j.getStatus(),
-                null
+                j.getAluno().getId()
         );
     }
 
@@ -46,7 +49,6 @@ public record JustificativaDto(
         j.setDataHoraCriacao(this.dataHoraCriacao);
         j.setDataHoraConclusao(this.dataHoraConclusao);
         j.setStatus(this.status);
-        j.setAluno(null);
         return j;
     }
 }

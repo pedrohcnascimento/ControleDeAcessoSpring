@@ -13,9 +13,9 @@ public record OcorrenciaDto (
         StatusDaOcorrencia status,
         LocalDateTime dataHoraCriacao,
         LocalDateTime dataHoraConclusao,
-        Long alunoId,
-        Long professorResponsavelId,
-        Long unidadeCurricularId
+        Long idAluno,
+        Long idProfessorResponsavel,
+        Long idUnidadeCurricular
 ){
 
     public static OcorrenciaDto toDto(Ocorrencia o) {
@@ -26,9 +26,9 @@ public record OcorrenciaDto (
                 o.getStatus(),
                 o.getDataHoraCriacao(),
                 o.getDataHoraConclusao(),
-                null,
-                null,
-                null
+                o.getAluno().getId(),
+                o.getProfessorResponsavel().getId(),
+                o.getUnidadeCurricular().getId()
         );
     }
 
@@ -40,9 +40,6 @@ public record OcorrenciaDto (
         o.setDataHoraCriacao(this.dataHoraCriacao);
         o.setDataHoraConclusao(this.dataHoraConclusao);
         o.setStatus(this.status);
-        o.setAluno(null);
-        o.setProfessorResponsavel(null);
-        o.setUnidadeCurricular(null);
         return o;
     }
 }

@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.inteface.Controller;
+package com.senai.ControleDeAcessoSpring.inteface.controller;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.TurmaDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.TurmaService;
@@ -23,7 +23,7 @@ public class TurmaController {
 
     @PostMapping("/{id}")
     public ResponseEntity<TurmaDto> acharTurmaPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.BuscarPorId(id));
+        return ResponseEntity.ok(service.buscarPorId(id));
     }
 
     @GetMapping

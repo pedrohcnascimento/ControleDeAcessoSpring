@@ -18,10 +18,14 @@ public class UnidadeCurricular {
 
     private String nome;
     private Integer cargaHorariaTotal;
+    private List<Integer> cargaHorariaPorSemestre;
 
     @ManyToOne
     private Curso curso;
 
     @ManyToMany
     private List<Professor> professores;
+
+    @Column(name = "ativo")
+    private boolean ativo;
 }
