@@ -2,7 +2,7 @@ package com.senai.ControleDeAcessoSpring.aplication.service;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.JustificativaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
-import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.repository.JustificativaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -11,8 +11,6 @@ import java.time.LocalDateTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
-
-import static java.util.stream.Collectors.toList;
 
 @Service
 public class JustificativaService {

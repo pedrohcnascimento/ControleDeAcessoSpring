@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.domain.enuns;
+package com.senai.ControleDeAcessoSpring.domain.enums;
 
 public enum TipoDeCurso {
     CAI(20, 50),

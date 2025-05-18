@@ -2,7 +2,7 @@ package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.JustificativaDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.JustificativaService;
-import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
