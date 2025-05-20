@@ -1,7 +1,6 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Coordenador;
-import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 
 import java.time.LocalDate;
 

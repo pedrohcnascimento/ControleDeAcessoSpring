@@ -9,6 +9,7 @@ import com.senai.ControleDeAcessoSpring.domain.repository.CursoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.Collections;
 import java.util.List;
 import java.util.Optional;
 
@@ -24,7 +25,7 @@ public class CursoService {
             curso.setTipo(cursoDto.tipo());
             curso.setCargaHoraria(cursoDto.cargaHoraria());
             curso.setToleranciaMinutos(cursoDto.toleranciaMinutos());
-            curso.setUnidadesCurriculares(mapUnidadeCurriculares(cursoDto.unidadesCurriculares(), curso));
+            curso.setUnidadesCurriculares(Collections.emptyList());
 
             cursoRepository.save(curso);
     }

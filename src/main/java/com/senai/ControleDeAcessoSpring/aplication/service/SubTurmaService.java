@@ -1,9 +1,7 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.SubTurmaDto;
-import com.senai.ControleDeAcessoSpring.aplication.dto.TurmaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
-import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
 import com.senai.ControleDeAcessoSpring.domain.repository.SubTurmaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;

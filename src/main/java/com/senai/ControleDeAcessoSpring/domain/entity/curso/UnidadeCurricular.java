@@ -2,11 +2,10 @@ package com.senai.ControleDeAcessoSpring.domain.entity.curso;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import jakarta.persistence.*;
-import lombok.AllArgsConstructor;
 import lombok.Data;
 
+import java.util.ArrayList;
 import java.util.List;
-import java.util.Map;
 
 @Entity
 @Data
@@ -28,4 +27,5 @@ public class UnidadeCurricular {
 
     @Column(name = "ativo")
     private boolean ativo;
+
 }

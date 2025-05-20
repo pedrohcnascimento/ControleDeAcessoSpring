@@ -1,10 +1,8 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
-import com.senai.ControleDeAcessoSpring.aplication.service.AlunoService;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
 import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeJustificativa;
-import org.springframework.beans.factory.annotation.Autowired;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
