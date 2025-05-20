@@ -1,6 +1,5 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.usuarios;
 
-import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeUsuario;
 import jakarta.persistence.*;
 import lombok.Data;
 
