@@ -16,6 +16,7 @@ public record UsuarioDto (
         String cpf,
         LocalDate dataNascimento,
         String email,
+        String idAcesso,
         TipoDeUsuario tipoDeUsuario
 ){
   public static UsuarioDto toDto(Usuario u) {
@@ -27,7 +28,7 @@ public record UsuarioDto (
             default -> throw new IllegalArgumentException("Usuario desconhacido detectado!");
 
         };
-        return new UsuarioDto(u.getId(), u.getNome(), u.getCpf(), u.getDataNascimento(), u.getEmail(), tipo);
+        return new UsuarioDto(u.getId(), u.getNome(), u.getCpf(), u.getDataNascimento(), u.getEmail(), u.getIdAcesso(), tipo);
     }
 
     public Usuario fromDto () {
@@ -44,7 +45,7 @@ public record UsuarioDto (
         usuario.setEmail(email);
         usuario.setDataNascimento(dataNascimento);
         usuario.setAtivo(true);
-        usuario.setIdAcesso("");
+        usuario.setIdAcesso(idAcesso);
         usuario.setSenha("");
         return usuario;
     }
