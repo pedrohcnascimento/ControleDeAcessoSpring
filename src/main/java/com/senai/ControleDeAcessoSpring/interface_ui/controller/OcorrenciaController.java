@@ -2,7 +2,7 @@ package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.OcorrenciaDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.OcorrenciaService;
-import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaOcorrencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
