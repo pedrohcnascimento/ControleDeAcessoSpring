@@ -1,9 +1,13 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.OcorrenciaDto;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
-import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.repository.AlunoRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.OcorrenciaRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -17,6 +21,9 @@ public class OcorrenciaService {
 
     @Autowired
     OcorrenciaRepository ocorrenciaRepository;
+
+    @Autowired
+    UsuarioRepository usuarioRepository;
 
     public void cadastrarOcorrencia(OcorrenciaDto dto) {
         Ocorrencia ocorrencia = dto.fromDto();
@@ -59,5 +66,17 @@ public class OcorrenciaService {
                 }
         ).orElse(false);
         return false;
+    }
+
+    public void criarOcorrenciaDeAcesso(String idAcesso) {
+        Optional<Usuario> usuarioOpt = usuarioRepository.findByIdAcesso(idAcesso);
+        if (usuarioOpt.isPresent()) {
+            System.out.println("O usuario existe!");
+            if (usuarioOpt.get() instanceof Aluno aluno) {
+                System.out.println("O usuario é um aluno!");
+            }
+        } else {
+            System.out.println("O usuario não existe e não pode te machucar!");
+        }
     }
 }
