@@ -3,6 +3,8 @@ package com.senai.ControleDeAcessoSpring.aplication.service;
 import com.senai.ControleDeAcessoSpring.aplication.dto.CursoDto;
 import com.senai.ControleDeAcessoSpring.aplication.dto.TurmaDto;
 import com.senai.ControleDeAcessoSpring.aplication.dto.UnidadeCurricularDto;
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
 import com.senai.ControleDeAcessoSpring.domain.repository.CursoRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.TurmaRepository;

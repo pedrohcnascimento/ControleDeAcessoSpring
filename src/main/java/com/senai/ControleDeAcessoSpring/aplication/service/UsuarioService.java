@@ -50,4 +50,38 @@ public class UsuarioService {
             return true;
         }).orElse(false);
     }
+
+    public void cadastrarIdAcesso(Long idUsuario, String idAcesso){
+        if (verificarIdAcesso(idAcesso, idUsuario)) {
+            usuarioRepository.findById(idUsuario).ifPresent(usuario -> {
+                usuario.setIdAcesso(idAcesso);
+                usuarioRepository.save(usuario);
+                System.out.println("ID de acesso cadastrado com sucesso.");
+            });
+        }
+    }
+
+    public void atualizarIdAcesso(Long idUsuario, String idAcesso){
+        if (verificarIdAcesso(idAcesso, idUsuario)) {
+            usuarioRepository.findById(idUsuario).map(usuario -> {
+                usuario.setIdAcesso(idAcesso);
+                usuarioRepository.save(usuario);
+                System.out.println("ID de acesso atualizado com sucesso.");
+                return true;
+            });
+        }
+    }
+
+    private boolean verificarIdAcesso(String idAcesso, Long idUsuario) {
+        Optional<Usuario> usuarioOptionalIdAcesso = usuarioRepository.findByIdAcesso(idAcesso);
+        Optional<Usuario> usuarioOptionalId = usuarioRepository.findById(idUsuario);
+        if (usuarioOptionalIdAcesso.isPresent()) {
+           System.out.println("ID de acesso já cadastrado para outro aluno.");
+           return false;
+        }else if (usuarioOptionalId.isEmpty()){
+            System.out.println("Aluno não encontrado.");
+            return false;
+        }
+        return true;
+    }
 }
