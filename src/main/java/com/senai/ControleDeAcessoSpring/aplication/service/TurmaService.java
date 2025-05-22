@@ -1,11 +1,11 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.CursoDto;
 import com.senai.ControleDeAcessoSpring.aplication.dto.TurmaDto;
-import com.senai.ControleDeAcessoSpring.aplication.dto.UnidadeCurricularDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
 import com.senai.ControleDeAcessoSpring.domain.repository.CursoRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.TurmaRepository;
+import com.senai.ControleDeAcessoSpring.domain.service.HorarioService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -19,6 +19,10 @@ public class TurmaService {
     @Autowired
     private CursoRepository cursoRepository;
 
+    @Autowired
+    private HorarioService horarioService;
+
+    @Transactional
     public void cadastrarTurma(TurmaDto dto) {
         Turma novaTurma = new Turma();
 
@@ -33,7 +37,7 @@ public class TurmaService {
 
         turmaRepository.save(novaTurma);
     }
-
+    
     public List<TurmaDto> listar() {
         return turmaRepository.findAll().stream().map(t -> new TurmaDto(
                 t.getNome(),
@@ -86,6 +90,7 @@ public class TurmaService {
         return turma;
     }
 
+    @Transactional
     public Boolean deletarTurma(Long id) {
         return turmaRepository.findById(id).map(t -> {
             t.setStatus(false);
@@ -94,6 +99,7 @@ public class TurmaService {
         }).orElse(false);
     }
 
+    @Transactional
     public Boolean atualizarTurma(Long id, TurmaDto novaTurma) {
         return turmaRepository.findById(id).map(t -> {
             t.setNome(novaTurma.nome());

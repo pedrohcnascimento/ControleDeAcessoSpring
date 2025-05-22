@@ -5,6 +5,7 @@ import com.senai.ControleDeAcessoSpring.aplication.dto.TurmaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
 import com.senai.ControleDeAcessoSpring.domain.repository.SubTurmaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,6 +16,7 @@ public class SubTurmaService {
     @Autowired
     private SubTurmaRepository subTurmaRepository;
 
+    @Transactional
     public void cadastrarSubTurma(SubTurmaDto dto) {
         SubTurma novaSubTurma = new SubTurma();
 
@@ -24,6 +26,7 @@ public class SubTurmaService {
         subTurmaRepository.save(novaSubTurma);
     }
 
+    @Transactional
     public Boolean deletarSubTurma(Long id) {
         return subTurmaRepository.findById(id).map(st -> {
             st.setStatus(false);
@@ -31,6 +34,7 @@ public class SubTurmaService {
         }).orElse(false);
     }
 
+    @Transactional
     public Boolean atualizarSubTurma(Long id, SubTurmaDto novaSubTurma) {
         return subTurmaRepository.findById(id).map(st -> {
             st.setNome(novaSubTurma.nome());

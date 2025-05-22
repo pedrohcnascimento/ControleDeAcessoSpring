@@ -19,6 +19,8 @@ public class Aula {
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
 
+    private Integer ordem;
+
     @ManyToOne
     private Professor professor;
 
