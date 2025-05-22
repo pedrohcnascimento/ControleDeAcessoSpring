@@ -32,4 +32,7 @@ public class SubTurma {
     @OneToMany(cascade = CascadeType.ALL)
     @JoinColumn(name = "sub_turma_id")
     private List<HorarioSemanal> horariosSemanais;
+
+    @OneToMany(mappedBy = "subTurma", cascade = CascadeType.ALL, orphanRemoval = true)
+    private List<Semestre> semestres;
 }

@@ -23,7 +23,7 @@ public class TurmaController {
 
     @PostMapping("/{id}")
     public ResponseEntity<TurmaDto> acharTurmaPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.BuscarPorId(id));
+        return ResponseEntity.ok(service.BuscarPorId(id).get());
     }
 
     @GetMapping

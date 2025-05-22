@@ -30,8 +30,8 @@ public class HorarioService {
     @Autowired
     private AmbienteRepository ambienteRepository;
 
-    public HorarioPadrao criarHorarioPadraoVazio(Semestre semestre, LocalDate segundaFeira) {
-        return criarHorarioVazio(new HorarioPadrao(), semestre, segundaFeira);
+    public HorarioPadrao criarHorarioPadraoVazio(Semestre semestre) {
+        return criarHorarioVazio(new HorarioPadrao(), semestre, null);
     }
 
     public HorarioSemanal criarHorarioSemanalVazio(Semestre semestre, LocalDate segundaFeira) {
