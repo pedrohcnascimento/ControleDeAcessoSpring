@@ -52,5 +52,9 @@ public class OcorrenciaController {
             return ResponseEntity.notFound().build();
         }
     }
-}
 
+    @PostMapping("/criarOcorrenciaDeAcesso")
+    public void criarOcorrenciaDeAtraso(String idAcesso) {
+        ocorrenciaService.criarOcorrenciaDeAcesso(idAcesso);
+    }
+}

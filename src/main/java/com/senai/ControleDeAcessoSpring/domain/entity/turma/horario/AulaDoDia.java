@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.turma.horario;
 
-import com.senai.ControleDeAcessoSpring.domain.enuns.DiaDaSemana;
+import com.senai.ControleDeAcessoSpring.domain.enums.DiaDaSemana;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;

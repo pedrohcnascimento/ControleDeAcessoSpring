@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.inteface.Controller;
+package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.ProfessorDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.ProfessorService;
