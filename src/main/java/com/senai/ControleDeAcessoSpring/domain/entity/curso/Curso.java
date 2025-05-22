@@ -24,4 +24,11 @@ public class Curso {
 
     @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
     private List<UnidadeCurricular> unidadesCurriculares;
+
+    public Curso(String titulo, TipoDeCurso tipo, Integer cargaHoraria, Integer toleranciaMinutos) {
+        this.titulo = titulo;
+        this.tipo = tipo;
+        this.cargaHoraria = cargaHoraria;
+        this.toleranciaMinutos = toleranciaMinutos;
+    }
 }

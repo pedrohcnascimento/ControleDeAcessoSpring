@@ -24,4 +24,9 @@ public class UnidadeCurricular {
 
     @ManyToMany
     private List<Professor> professores;
+
+    public UnidadeCurricular(String nome, Integer cargaHorariaTotal) {
+        this.nome = nome;
+        this.cargaHorariaTotal = cargaHorariaTotal;
+    }
 }

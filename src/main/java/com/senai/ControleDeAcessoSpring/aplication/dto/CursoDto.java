@@ -1,5 +1,6 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
 import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeCurso;
 
 import java.util.List;
@@ -12,4 +13,7 @@ public record CursoDto(
         Integer toleranciaMinutos,
         List<UnidadeCurricularDto> unidadesCurriculares
 ) {
+    public static CursoDto fromDto(Curso curso) {
+        return new CursoDto()
+    }
 }

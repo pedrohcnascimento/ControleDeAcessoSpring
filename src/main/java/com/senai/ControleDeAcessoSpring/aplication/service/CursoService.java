@@ -6,6 +6,7 @@ import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 import com.senai.ControleDeAcessoSpring.domain.repository.CursoRepository;
 
+import com.senai.ControleDeAcessoSpring.domain.repository.UnidadeCurrricularRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,17 +17,24 @@ import java.util.Optional;
 public class CursoService {
 
     @Autowired
-    CursoRepository cursoRepository;
+    private CursoRepository cursoRepository;
 
-    public void cadastrarCurso(CursoDto cursoDto){
-            Curso curso = new Curso();
-            curso.setTitulo(cursoDto.titulo());
-            curso.setTipo(cursoDto.tipo());
-            curso.setCargaHoraria(cursoDto.cargaHoraria());
-            curso.setToleranciaMinutos(cursoDto.toleranciaMinutos());
-            curso.setUnidadesCurriculares(mapUnidadeCurriculares(cursoDto.unidadesCurriculares(), curso));
+    @Autowired
+    private UnidadeCurrricularRepository unidadeCurrricularRepository;
 
-            cursoRepository.save(curso);
+    public CursoDto cadastrarCurso(CursoDto cursoDto){
+
+        final Curso curso = cursoRepository.save(
+                new Curso(
+                        cursoDto.titulo(),
+                        cursoDto.tipo(),
+                        cursoDto.cargaHoraria(),
+                        cursoDto.toleranciaMinutos()
+                )
+        );
+
+        List<UnidadeCurricularDto> unidades = cursoDto.unidadesCurriculares();
+
     }
 
     private List<UnidadeCurricular> mapUnidadeCurriculares(List<UnidadeCurricularDto> unidadeCurricularesDto, Curso curso) {
