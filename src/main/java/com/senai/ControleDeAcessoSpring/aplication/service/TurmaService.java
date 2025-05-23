@@ -12,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TurmaService {
@@ -107,4 +108,27 @@ public class TurmaService {
             return true;
         }).orElse(false);
     }
+
+    public boolean vincularACurso(Long idTurma, Long idCurso){
+        Optional<Curso> cursoOptional = cursoRepository.findById(idCurso);
+        Optional<Turma> turmaOptional = turmaRepository.findById(idTurma);
+
+        if (turmaOptional.isPresent()){
+            if (cursoOptional.isPresent()){
+                turmaOptional.map(turma -> {
+                    turma.setCurso(cursoOptional.get());
+                    return true;
+                });
+            }
+        }
+        return false;
+    }
+
+//    public boolean adicionarSubTurma(Long idTurma, List<SubTurma> subTurmas){
+//        Optional<Turma> turmaOptional = turmaRepository.findById(idTurma);
+//        if (turmaOptional.isPresent()){
+//
+//        }
+//        return false;
+//    }
 }
