@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.aplication.service;
+package com.senai.ControleDeAcessoSpring.aplication.service.usuarios;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.ProfessorDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;

@@ -1,12 +1,10 @@
-package com.senai.ControleDeAcessoSpring.aplication.service;
+package com.senai.ControleDeAcessoSpring.aplication.service.curso;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.curso.CursoDto;
-import com.senai.ControleDeAcessoSpring.aplication.dto.curso.UnidadeCurricularDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 import com.senai.ControleDeAcessoSpring.domain.repository.curso.CursoRepository;
 
-import com.senai.ControleDeAcessoSpring.domain.repository.curso.UnidadeCurrricularRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.turma.horario.UnidadeCurricularRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -23,7 +21,7 @@ public class CursoService {
     @Autowired
     private UnidadeCurricularRepository unidadeCurricularRepository;
 
-    public CursoDto salvar(CursoDto dto) {
+    public void salvar(CursoDto dto) {
 
         final Curso curso = cursoRepository.save(
                 new Curso(
@@ -44,8 +42,6 @@ public class CursoService {
         unidadeCurricularRepository.saveAll(unidades);
 
         curso.setUnidadesCurriculares(unidades);
-
-        return CursoDto.toDto(curso);
     }
 
     public List<CursoDto> listarTodos() {

@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.aplication.service;
+package com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.JustificativaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
