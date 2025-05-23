@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.aplication.dto;
+package com.senai.ControleDeAcessoSpring.aplication.dto.turma;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
 import com.senai.ControleDeAcessoSpring.domain.enums.Periodo;

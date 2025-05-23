@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.AqvDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.AqvDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.AqvService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

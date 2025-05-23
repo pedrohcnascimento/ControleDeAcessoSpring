@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.aplication.dto;
+package com.senai.ControleDeAcessoSpring.aplication.dto.turma.horario;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.AulaDoDia;
 import com.senai.ControleDeAcessoSpring.domain.enums.DiaDaSemana;

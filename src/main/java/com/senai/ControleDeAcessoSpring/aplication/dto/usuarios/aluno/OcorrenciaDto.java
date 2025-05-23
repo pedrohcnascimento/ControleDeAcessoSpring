@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.aplication.dto;
+package com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;

@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.aplication.dto;
+package com.senai.ControleDeAcessoSpring.aplication.dto.turma.horario;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.Aula;
 
@@ -20,7 +20,6 @@ public record AulaDto(
     }
 
     public Aula fromDto() {
-        Aula aula = new Aula();
-        return aula;
+        return new Aula();
     }
 }

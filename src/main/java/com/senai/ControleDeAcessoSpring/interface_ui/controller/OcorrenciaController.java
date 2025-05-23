@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.OcorrenciaDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.OcorrenciaDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.OcorrenciaService;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
 import org.springframework.beans.factory.annotation.Autowired;

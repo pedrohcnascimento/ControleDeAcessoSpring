@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.SubTurmaDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.turma.SubTurmaDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.SubTurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;

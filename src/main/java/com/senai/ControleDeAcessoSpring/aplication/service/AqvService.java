@@ -1,8 +1,8 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.AqvDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.AqvDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.AQV;
-import com.senai.ControleDeAcessoSpring.domain.repository.AqvRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.AqvRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

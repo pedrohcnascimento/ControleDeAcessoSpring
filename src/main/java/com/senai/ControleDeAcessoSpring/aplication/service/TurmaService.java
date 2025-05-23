@@ -1,12 +1,12 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.TurmaDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.turma.TurmaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Semestre;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
-import com.senai.ControleDeAcessoSpring.domain.repository.CursoRepository;
-import com.senai.ControleDeAcessoSpring.domain.repository.TurmaRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.curso.CursoRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.turma.TurmaRepository;
 import com.senai.ControleDeAcessoSpring.domain.service.HorarioService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;

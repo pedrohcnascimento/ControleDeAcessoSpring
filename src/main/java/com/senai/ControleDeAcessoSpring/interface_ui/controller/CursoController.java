@@ -1,7 +1,7 @@
 package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.RespostaApiDto;
-import com.senai.ControleDeAcessoSpring.aplication.dto.CursoDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.curso.CursoDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.CursoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.HttpStatus;

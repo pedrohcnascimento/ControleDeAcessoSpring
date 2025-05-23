@@ -1,12 +1,12 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.CursoDto;
-import com.senai.ControleDeAcessoSpring.aplication.dto.UnidadeCurricularDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.curso.CursoDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.curso.UnidadeCurricularDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
-import com.senai.ControleDeAcessoSpring.domain.repository.CursoRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.curso.CursoRepository;
 
-import com.senai.ControleDeAcessoSpring.domain.repository.UnidadeCurrricularRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.curso.UnidadeCurrricularRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

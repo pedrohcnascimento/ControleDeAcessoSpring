@@ -1,8 +1,8 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.ProfessorDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.ProfessorDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
-import com.senai.ControleDeAcessoSpring.domain.repository.ProfessorRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

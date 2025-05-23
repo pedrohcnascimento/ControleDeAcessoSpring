@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.domain.repository;
+package com.senai.ControleDeAcessoSpring.domain.repository.usuarios;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import org.springframework.data.jpa.repository.JpaRepository;

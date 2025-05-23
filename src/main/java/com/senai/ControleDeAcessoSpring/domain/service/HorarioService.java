@@ -1,20 +1,18 @@
 package com.senai.ControleDeAcessoSpring.domain.service;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.AulaDoDiaDto;
-import com.senai.ControleDeAcessoSpring.aplication.dto.AulaDto;
-import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
+import com.senai.ControleDeAcessoSpring.aplication.dto.turma.horario.AulaDoDiaDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.turma.horario.AulaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Semestre;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.*;
 import com.senai.ControleDeAcessoSpring.domain.enums.DiaDaSemana;
-import com.senai.ControleDeAcessoSpring.domain.repository.AmbienteRepository;
-import com.senai.ControleDeAcessoSpring.domain.repository.ProfessorRepository;
-import com.senai.ControleDeAcessoSpring.domain.repository.UnidadeCurrricularRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.curso.AmbienteRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.ProfessorRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.curso.UnidadeCurrricularRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 import java.util.ArrayList;
 import java.util.List;
 
