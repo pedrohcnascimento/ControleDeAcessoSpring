@@ -1,24 +1,27 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
-import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaOcorrencia;
-import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
 
 import java.time.LocalDateTime;
 
-public record OcorrenciaDto (
+public record OcorrenciaDto(
         Long id,
-        TipoDeOcorrencia tipoDeOcorrencia,
+        TipoDeOcorrencia tipo,
         String descricao,
         StatusDaOcorrencia status,
         LocalDateTime dataHoraCriacao,
         LocalDateTime dataHoraConclusao,
-        Long idAluno,
-        Long idProfessorResponsavel,
-        Long idUnidadeCurricular
-){
+        Aluno aluno,
+        Professor professorResponsavel,
+        UnidadeCurricular unidadeCurricular
 
-    public static OcorrenciaDto toDto(Ocorrencia o) {
+) {
+    public static OcorrenciaDto toDto(Ocorrencia o){
         return new OcorrenciaDto(
                 o.getId(),
                 o.getTipo(),
@@ -26,20 +29,22 @@ public record OcorrenciaDto (
                 o.getStatus(),
                 o.getDataHoraCriacao(),
                 o.getDataHoraConclusao(),
-                o.getAluno().getId(),
-                o.getProfessorResponsavel().getId(),
-                o.getUnidadeCurricular().getId()
-        );
+                o.getAluno(),
+                o.getProfessorResponsavel(),
+                o.getUnidadeCurricular());
     }
 
-    public Ocorrencia fromDto() {
+    public Ocorrencia fromDto(){
         Ocorrencia o = new Ocorrencia();
-        o.setId(this.id);
-        o.setTipo(this.tipoDeOcorrencia);
-        o.setDescricao(this.descricao);
-        o.setDataHoraCriacao(this.dataHoraCriacao);
-        o.setDataHoraConclusao(this.dataHoraConclusao);
-        o.setStatus(this.status);
+        o.setId(id);
+        o.setTipo(tipo);
+        o.setDescricao(descricao);
+        o.setStatus(status);
+        o.setDataHoraCriacao(dataHoraCriacao);
+        o.setDataHoraConclusao(dataHoraConclusao);
+        o.setAluno(aluno);
+        o.setProfessorResponsavel(professorResponsavel);
+        o.setUnidadeCurricular(unidadeCurricular);
         return o;
     }
 }

@@ -1,15 +1,18 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.curso;
 
-import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeCurso;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeCurso;
 import jakarta.persistence.*;
+import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class Curso {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -17,11 +20,18 @@ public class Curso {
     private String titulo;
 
     @Enumerated(EnumType.STRING)
-    private TipoDeCurso tipo;
+    private TipoDeCurso tipoDeCurso;
 
     private Integer cargaHoraria;
     private Integer toleranciaMinutos;
 
-    @OneToMany(mappedBy = "curso", cascade = CascadeType.ALL, orphanRemoval = true)
+    @OneToMany(mappedBy = "curso")
     private List<UnidadeCurricular> unidadesCurriculares;
+
+    public Curso(String titulo, TipoDeCurso tipoDeCurso, Integer cargaHoraria, Integer tolerancia) {
+        this.titulo = titulo;
+        this.tipoDeCurso = tipoDeCurso;
+        this.cargaHoraria = cargaHoraria;
+        this.toleranciaMinutos = tolerancia;
+    }
 }

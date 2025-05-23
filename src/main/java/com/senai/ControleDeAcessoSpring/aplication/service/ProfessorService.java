@@ -16,25 +16,25 @@ public class ProfessorService {
     @Autowired
     private ProfessorRepository professorRepository;
 
-    public void cadastrarProfessor(ProfessorDto dto) {
-        professorRepository.save(dto.fromDTO());
+    public void cadastrarUsuario(ProfessorDto dto) {
+        professorRepository.save(dto.fromDto());
     }
 
     public List<ProfessorDto> listarAtivos() {
         return professorRepository.findByAtivoTrue()
-                .stream().map(ProfessorDto::toDTO)
+                .stream().map(ProfessorDto::toDto)
                 .collect(Collectors.toList());
     }
 
     public Optional<ProfessorDto> buscarPorId(Long id) {
         return professorRepository.findById(id)
-                .filter(Professor::getAtivo)
-                .map(ProfessorDto::toDTO);
+                .filter(Professor::isAtivo)
+                .map(ProfessorDto::toDto);
     }
 
     public boolean atualizar(Long id, ProfessorDto dto) {
         return professorRepository.findById(id).map(professor -> {
-            Professor professorAtualizado = dto.fromDTO();
+            Professor professorAtualizado = dto.fromDto();
             professor.setNome(professorAtualizado.getNome());
             professor.setEmail(professorAtualizado.getEmail());
             professor.setDataNascimento(professorAtualizado.getDataNascimento());
@@ -50,9 +50,5 @@ public class ProfessorService {
             professorRepository.save(professor);
             return true;
         }).orElse(false);
-    }
-
-    public Professor buscarNoRepository(Long id) {
-        return professorRepository.findById(id).get();
     }
 }

@@ -9,43 +9,45 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/cursos")
+@RequestMapping("/curso")
 public class CursoController {
+
 
     @Autowired
     private CursoService cursoService;
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarCurso(@RequestBody CursoDto cursoDto) {
-        cursoService.cadastrarCurso(cursoDto);
+    public ResponseEntity<CursoDto> salvar(@RequestBody CursoDto dto) {
+        cursoService.salvar(dto);
         return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public ResponseEntity<List<CursoDto>> listarCursos() {
-        return ResponseEntity.ok(cursoService.listarCursos());
+    public ResponseEntity<List<CursoDto>> listarTodos() {
+        cursoService.listarTodos();
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping("/{id}")
-    public ResponseEntity<CursoDto> buscarCursoPorId(@PathVariable Long id) {
-        return cursoService.buscarCursoPorId(id)
+    public ResponseEntity<CursoDto> buscarPorId(@PathVariable Long id) {
+        return cursoService.buscarPorId(id)
                 .map(ResponseEntity::ok)
                 .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<Void> atualizarCurso(@PathVariable Long id, @RequestBody CursoDto cursoDto) {
-        if (cursoService.atualizarCurso(id, cursoDto)) {
+    public ResponseEntity<CursoDto> atualizar(@PathVariable Long id, @RequestBody CursoDto dto) {
+        try {
+            cursoService.atualizar(id, dto);
             return ResponseEntity.ok().build();
+        } catch (RuntimeException e) {
+            return ResponseEntity.notFound().build();
         }
-        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<Void> deletarCurso(@PathVariable Long id) {
-        if (cursoService.deletarCurso(id)) {
-            return ResponseEntity.ok().build();
-        }
-        return ResponseEntity.notFound().build();
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        cursoService.deletar(id);
+        return ResponseEntity.noContent().build();
     }
 }

@@ -1,26 +1,22 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
-import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaJustificativa;
-import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeJustificativa;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 public record JustificativaDto(
         Long id,
-        TipoDeJustificativa tipoDeJustificativa,
+        TipoDeJustificativa tipo,
         String descricao,
         String anexo,
         LocalDate dataInicial,
         Integer qtdDias,
-        LocalDateTime dataHoraCriacao,
-        LocalDateTime dataHoraConclusao,
         StatusDaJustificativa status,
-        Long idAluno
+        Aluno aluno
 ) {
-
-
     public static JustificativaDto toDto(Justificativa j) {
         return new JustificativaDto(
                 j.getId(),
@@ -29,24 +25,21 @@ public record JustificativaDto(
                 j.getAnexo(),
                 j.getDataInicial(),
                 j.getQtdDias(),
-                j.getDataHoraCriacao(),
-                j.getDataHoraConclusao(),
                 j.getStatus(),
-                j.getAluno().getId()
+                j.getAluno()
         );
     }
 
     public Justificativa fromDto() {
-        Justificativa j = new Justificativa();
-        j.setId(this.id);
-        j.setTipo(this.tipoDeJustificativa);
-        j.setDescricao(this.descricao);
-        j.setAnexo(this.anexo);
-        j.setDataInicial(this.dataInicial);
-        j.setQtdDias(this.qtdDias);
-        j.setDataHoraCriacao(this.dataHoraCriacao);
-        j.setDataHoraConclusao(this.dataHoraConclusao);
-        j.setStatus(this.status);
-        return j;
+        Justificativa justificativa = new Justificativa();
+        justificativa.setId(id);
+        justificativa.setTipo(tipo);
+        justificativa.setDescricao(descricao);
+        justificativa.setAnexo(anexo);
+        justificativa.setDataInicial(dataInicial);
+        justificativa.setQtdDias(qtdDias);
+        justificativa.setStatus(status);
+        justificativa.setAluno(aluno);
+        return justificativa;
     }
 }

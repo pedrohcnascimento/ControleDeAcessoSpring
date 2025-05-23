@@ -1,16 +1,42 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
+import com.senai.ControleDeAcessoSpring.domain.enums.Periodo;
+
 import java.time.LocalDate;
 import java.time.LocalTime;
 
 public record TurmaDto(
-        String nome,
-        String periodo,
+        Long id,
+        String siglaDaTurma,
+        Periodo periodo,
         LocalDate dataInicial,
         LocalTime horarioEntrada,
         Integer qtdSemestres,
         Integer qtdAulasPorDia,
-        CursoDto curso,
-        Boolean status
+        Long cursoId
 ) {
+    public static TurmaDto toDto(Turma turma) {
+        return new TurmaDto(
+                turma.getId(),
+                turma.getSiglaDaTurma(),
+                turma.getPeriodo(),
+                turma.getDataInicial(),
+                turma.getHorarioEntrada(),
+                turma.getQtdSemestres(),
+                turma.getQtdAulasPorDia(),
+                turma.getCurso() != null ? turma.getCurso().getId() : null
+        );
+    }
+
+    public Turma fromDto() {
+        Turma turma = new Turma();
+        turma.setSiglaDaTurma(siglaDaTurma);
+        turma.setPeriodo(periodo);
+        turma.setDataInicial(dataInicial);
+        turma.setHorarioEntrada(horarioEntrada);
+        turma.setQtdSemestres(qtdSemestres);
+        turma.setQtdAulasPorDia(qtdAulasPorDia);
+        return turma;
+    }
 }

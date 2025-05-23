@@ -9,36 +9,43 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/subTurma")
+@RequestMapping("/subturmas")
 public class SubTurmaController {
+
     @Autowired
     private SubTurmaService service;
+
+    @PostMapping("/{turmaId}")
+    public ResponseEntity<Void> criar(@PathVariable Long turmaId) {
+        service.criarSubTurma(turmaId);
+        return ResponseEntity.ok().build();
+    }
 
     @GetMapping
     public ResponseEntity<List<SubTurmaDto>> listar() {
         return ResponseEntity.ok(service.listar());
     }
 
-    @PostMapping
-    public ResponseEntity<String> cadastrarSubTurma(@RequestBody SubTurmaDto subTurma) {
-        service.cadastrarSubTurma(subTurma);
-        return ResponseEntity.ok("Sub Turma criada com sucesso!");
-    }
-
-    @PostMapping("/{id}")
-    public ResponseEntity<SubTurmaDto> listarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.listarPorId(id));
+    @GetMapping("/{id}")
+    public ResponseEntity<SubTurmaDto> buscarPorId(@PathVariable Long id) {
+        return service.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> atualizarSubTurma(@PathVariable Long id, @RequestBody SubTurmaDto subTurmaDto) {
-        service.atualizarSubTurma(id, subTurmaDto);
-        return ResponseEntity.ok("Sub Turma atualizada!");
+    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody SubTurmaDto dto) {
+        if (service.atualizar(id, dto)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
-    public ResponseEntity<String> deletarSubTurma(@PathVariable Long id) {
-        service.deletarSubTurma(id);
-        return ResponseEntity.ok("Sub Turma deletada com sucesso!");
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        if (service.deletar(id)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 }

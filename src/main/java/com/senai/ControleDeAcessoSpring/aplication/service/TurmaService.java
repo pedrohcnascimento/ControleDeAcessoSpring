@@ -3,108 +3,93 @@ package com.senai.ControleDeAcessoSpring.aplication.service;
 import com.senai.ControleDeAcessoSpring.aplication.dto.CursoDto;
 import com.senai.ControleDeAcessoSpring.aplication.dto.TurmaDto;
 import com.senai.ControleDeAcessoSpring.aplication.dto.UnidadeCurricularDto;
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.Semestre;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
 import com.senai.ControleDeAcessoSpring.domain.repository.CursoRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.TurmaRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
+import java.util.Optional;
 
 @Service
 public class TurmaService {
+
     @Autowired
     private TurmaRepository turmaRepository;
 
     @Autowired
     private CursoRepository cursoRepository;
 
-    public void cadastrarTurma(TurmaDto dto) {
-        Turma novaTurma = new Turma();
+    @Autowired
+    private HorarioService horarioService;
 
-        novaTurma.setNome(dto.nome());
-        novaTurma.setPeriodo(dto.periodo());
-        novaTurma.setDataInicial(dto.dataInicial());
-        novaTurma.setHorarioEntrada(dto.horarioEntrada());
-        novaTurma.setQtdSemestres(dto.qtdSemestres());
-        novaTurma.setQtdAulasporDia(dto.qtdAulasPorDia());
-        novaTurma.setCurso(cursoRepository.findById(dto.curso().id()).get());
-        novaTurma.setStatus(dto.status());
+    @Transactional
+    public void criarTurma(TurmaDto dto) {
+        Turma turma = dto.fromDto();
 
-        turmaRepository.save(novaTurma);
-    }
+        Curso curso = cursoRepository.findById(dto.cursoId())
+                .orElseThrow(() -> new RuntimeException("Curso não encontrado"));
+        turma.setCurso(curso);
 
-    public List<TurmaDto> listar() {
-        return turmaRepository.findAll().stream().map(t -> new TurmaDto(
-                t.getNome(),
-                t.getPeriodo(),
-                t.getDataInicial(),
-                t.getHorarioEntrada(),
-                t.getQtdSemestres(),
-                t.getQtdAulasporDia(),
-                new CursoDto(
-                        t.getCurso().getId(),
-                        t.getCurso().getTitulo(),
-                        t.getCurso().getTipo(),
-                        t.getCurso().getCargaHoraria(),
-                        t.getCurso().getToleranciaMinutos(),
-                        t.getCurso().getUnidadesCurriculares().stream().map(uc -> new UnidadeCurricularDto(
-                                uc.getId(),
-                                uc.getNome(),
-                                uc.getCargaHorariaTotal(),
-                                uc.getCargaHorariaPorSemestre(),
-                                uc.getCurso().getId()
-                                                )).toList()
-                ),
-                t.getStatus()
-        )).toList();
-    }
+        SubTurma subTurma = new SubTurma();
+        turma.getSubTurmas().add(subTurma);
 
-    public TurmaDto buscarPorId(Long id) {
-        Turma busca = turmaRepository.findById(id).get();
-        TurmaDto turma = new TurmaDto(
-                busca.getNome(),
-                busca.getPeriodo(),
-                busca.getDataInicial(),
-                busca.getHorarioEntrada(),
-                busca.getQtdSemestres(),
-                busca.getQtdAulasporDia(),
-                new CursoDto(
-                        busca.getCurso().getId(),
-                        busca.getCurso().getTitulo(),
-                        busca.getCurso().getTipo(),
-                        busca.getCurso().getCargaHoraria(),
-                        busca.getCurso().getToleranciaMinutos(),
-                        busca.getCurso().getUnidadesCurriculares().stream().map(uc -> new UnidadeCurricularDto(
-                                uc.getId(),
-                                uc.getNome(),
-                                uc.getCargaHorariaTotal(),
-                                uc.getCargaHorariaPorSemestre(),
-                                uc.getCurso().getId()
-                        )).toList()
-                ),
-                busca.getStatus()
+        subTurma.setNome("Turma "+ turma.getSubTurmas().size());
+        subTurma.setTurma(turma);
+
+        Semestre semestre = new Semestre();
+        subTurma.getSemestres().add(semestre);
+        semestre.setNomeDaTurma(
+                subTurma.getSemestres().size() +
+                        subTurma.getTurma().getSiglaDaTurma() +
+                        subTurma.getTurma().getPeriodo().getSigla()
         );
-        return turma;
+
+        semestre.setSubTurma(subTurma);
+        semestre.setNumero(subTurma.getSemestres().size());
+
+        semestre.setHorarioPadrao(horarioService.criarHorarioPadraoVazio(semestre));
+        semestre.setHorariosSemanais(new ArrayList<>());
+
+        turmaRepository.save(turma);
     }
 
-    public Boolean deletarTurma(Long id) {
-        return turmaRepository.findById(id).map(t -> {
-            t.setStatus(false);
-            turmaRepository.save(t);
-            return true;
-        }).orElse(false);
+    public List<TurmaDto> listarTurmas() {
+        return turmaRepository.findAll().stream()
+                .map(TurmaDto::toDto).toList();
     }
 
-    public Boolean atualizarTurma(Long id, TurmaDto novaTurma) {
-        return turmaRepository.findById(id).map(t -> {
-            t.setNome(novaTurma.nome());
-            t.setPeriodo(novaTurma.periodo());
-            t.setHorarioEntrada(novaTurma.horarioEntrada());
-            t.setQtdSemestres(novaTurma.qtdSemestres());
-            t.setDataInicial(novaTurma.dataInicial());
-            turmaRepository.save(t);
-            return true;
-        }).orElse(false);
+    public Optional<TurmaDto> buscarPorId(Long id) {
+        return turmaRepository.findById(id).map(TurmaDto::toDto);
+    }
+
+    @Transactional
+    public boolean atualizarTurma(Long id, TurmaDto dto) {
+        Optional<Turma> optional = turmaRepository.findById(id);
+        if (optional.isEmpty()) return false;
+
+        Turma turma = optional.get();
+        turma.setSiglaDaTurma(dto.siglaDaTurma());
+        turma.setPeriodo(dto.periodo());
+        turma.setDataInicial(dto.dataInicial());
+        turma.setHorarioEntrada(dto.horarioEntrada());
+        turma.setQtdSemestres(dto.qtdSemestres());
+        turma.setQtdAulasPorDia(dto.qtdAulasPorDia());
+
+        turmaRepository.save(turma);
+        return true;
+    }
+
+    public boolean deletarTurma(Long id) {
+        Optional<Turma> optional = turmaRepository.findById(id);
+        if (optional.isEmpty()) return false;
+        turmaRepository.deleteById(id);
+        return true;
     }
 }

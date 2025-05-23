@@ -9,15 +9,14 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/professores")
+@RequestMapping("/professor")
 public class ProfessorController {
-
     @Autowired
-    private ProfessorService professorService;
+    ProfessorService professorService;
 
     @PostMapping
     public ResponseEntity<Void> cadastrarUsuario(@RequestBody ProfessorDto dto) {
-        professorService.cadastrarProfessor(dto);
+        professorService.cadastrarUsuario(dto);
         return ResponseEntity.ok().build();
     }
 

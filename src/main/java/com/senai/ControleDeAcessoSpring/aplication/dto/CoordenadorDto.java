@@ -8,14 +8,20 @@ public record CoordenadorDto(
         Long id,
         String nome,
         String cpf,
-        LocalDate dataNascimento,
-        String email
+        String email,
+        LocalDate dataNascimento
 ) {
-    public static CoordenadorDto toDTO(Coordenador c) {
-        return new CoordenadorDto(c.getId(), c.getNome(), c.getCpf(), c.getDataNascimento(), c.getEmail());
+    public static CoordenadorDto toDto(Coordenador c) {
+        return new CoordenadorDto(
+                c.getId(),
+                c.getNome(),
+                c.getCpf(),
+                c.getEmail(),
+                c.getDataNascimento()
+        );
     }
 
-    public Coordenador fromDTO() {
+    public Coordenador fromDto() {
         Coordenador coordenador = new Coordenador();
         coordenador.setId(id);
         coordenador.setNome(nome);

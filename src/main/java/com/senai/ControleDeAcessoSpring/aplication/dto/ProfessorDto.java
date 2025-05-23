@@ -3,28 +3,37 @@ package com.senai.ControleDeAcessoSpring.aplication.dto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 
 import java.time.LocalDate;
+import java.util.ArrayList;
 
 public record ProfessorDto(
         Long id,
         String nome,
         String cpf,
         LocalDate dataNascimento,
+        String idAcesso,
         String email
 ) {
-    public static ProfessorDto toDTO(Professor p) {
-        return new ProfessorDto(p.getId(), p.getNome(), p.getCpf(), p.getDataNascimento(), p.getEmail());
+    public static ProfessorDto toDto(Professor p) {
+        return new ProfessorDto(
+                p.getId(),
+                p.getNome(),
+                p.getCpf(),
+                p.getDataNascimento(),
+                p.getIdAcesso(),
+                p.getEmail()
+        );
     }
-
-    public Professor fromDTO() {
-        Professor professor = new Professor();
-        professor.setId(id);
-        professor.setNome(nome);
-        professor.setCpf(cpf);
-        professor.setEmail(email);
-        professor.setDataNascimento(dataNascimento);
-        professor.setAtivo(true);
-        professor.setIdAcesso("");
-        professor.setSenha("");
-        return professor;
+    public Professor fromDto() {
+        return new Professor(
+                id,
+                nome,
+                cpf,
+                dataNascimento,
+                idAcesso,
+                email,
+                "",
+                true,
+                new ArrayList<>()
+        );
     }
 }

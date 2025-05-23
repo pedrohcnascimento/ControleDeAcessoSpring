@@ -9,14 +9,13 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/alunos")
+@RequestMapping("/aluno")
 public class AlunoController {
-
     @Autowired
     AlunoService alunoService;
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarUsuario(@RequestBody AlunoDto dto) {
+    public ResponseEntity<Void> cadastrarAluno(@RequestBody AlunoDto dto) {
         alunoService.cadastrarAluno(dto);
         return ResponseEntity.ok().build();
     }
@@ -48,5 +47,4 @@ public class AlunoController {
         }
         return ResponseEntity.notFound().build();
     }
-
 }

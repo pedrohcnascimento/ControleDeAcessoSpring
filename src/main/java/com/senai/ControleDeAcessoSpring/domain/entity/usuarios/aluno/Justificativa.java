@@ -1,20 +1,15 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno;
 
-import com.senai.ControleDeAcessoSpring.domain.enuns.StatusDaJustificativa;
-import com.senai.ControleDeAcessoSpring.domain.enuns.TipoDeJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeJustificativa;
 import jakarta.persistence.*;
 import lombok.Data;
-import lombok.NoArgsConstructor;
-import lombok.NonNull;
 
 import java.time.LocalDate;
-import java.time.LocalDateTime;
 
 @Entity
 @Data
-@NoArgsConstructor
 public class Justificativa {
-
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -26,16 +21,11 @@ public class Justificativa {
     private String anexo;
     private LocalDate dataInicial;
     private Integer qtdDias;
-    private LocalDateTime dataHoraCriacao;
-    private LocalDateTime dataHoraConclusao;
+    private Boolean ativo;
 
     @Enumerated(EnumType.STRING)
     private StatusDaJustificativa status;
 
     @ManyToOne
-    @NonNull
     private Aluno aluno;
-
-    @Column(name = "ativo")
-    private boolean ativo;
 }

@@ -4,18 +4,24 @@ import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.AQV;
 
 import java.time.LocalDate;
 
-public record AqvDto (
+public record AQVDto(
         Long id,
         String nome,
         String cpf,
-        LocalDate dataNascimento,
-        String email
+        String email,
+        LocalDate dataNascimento
 ){
-    public static AqvDto toDTO(AQV aqv) {
-        return new AqvDto(aqv.getId(), aqv.getNome(), aqv.getCpf(), aqv.getDataNascimento(), aqv.getEmail());
+    public static AQVDto toDto(AQV a) {
+        return new AQVDto(
+                a.getId(),
+                a.getNome(),
+                a.getCpf(),
+                a.getEmail(),
+                a.getDataNascimento()
+        );
     }
 
-    public AQV fromDTO() {
+    public AQV fromDto(){
         AQV aqv = new AQV();
         aqv.setId(id);
         aqv.setNome(nome);
@@ -23,8 +29,6 @@ public record AqvDto (
         aqv.setEmail(email);
         aqv.setDataNascimento(dataNascimento);
         aqv.setAtivo(true);
-        aqv.setIdAcesso("");
-        aqv.setSenha("");
         return aqv;
     }
 }

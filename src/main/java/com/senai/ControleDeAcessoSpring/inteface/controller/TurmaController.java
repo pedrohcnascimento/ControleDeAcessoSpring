@@ -9,41 +9,39 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/turmas")
+@RequestMapping("/turma")
 public class TurmaController {
 
     @Autowired
-    private TurmaService service;
+    private TurmaService turmaService;
 
     @PostMapping
-    public ResponseEntity<String> cadastrarTurma(@RequestBody TurmaDto turma) {
-        service.cadastrarTurma(turma);
-        return ResponseEntity.ok("Turma adicionada com sucesso!");
-    }
-
-    @PostMapping("/{id}")
-    public ResponseEntity<TurmaDto> acharTurmaPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.buscarPorId(id));
+    public ResponseEntity<Void> criar(@RequestBody TurmaDto dto) {
+        turmaService.criarTurma(dto);
+        return ResponseEntity.ok().build();
     }
 
     @GetMapping
-    public List<TurmaDto> listarTurmas() {
-        return service.listar();
+    public ResponseEntity<List<TurmaDto>> listar() {
+        return ResponseEntity.ok(turmaService.listarTurmas());
     }
 
-    @DeleteMapping("/{id}")
-    public ResponseEntity<String> desativarTurma(@PathVariable Long id) {
-        if (service.deletarTurma(id)) {
-            return ResponseEntity.ok("Turma desativada com exito!");
-        }
-        return ResponseEntity.notFound().build();
+    @GetMapping("/{id}")
+    public ResponseEntity<TurmaDto> buscarPorId(@PathVariable Long id) {
+        return turmaService.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
-    public ResponseEntity<String> atualizarTurma(@PathVariable Long id, @RequestBody TurmaDto novaTurma) {
-        if (service.atualizarTurma(id, novaTurma)) {
-            return ResponseEntity.ok("Turma atualizada com exito");
-        }
+    public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody TurmaDto dto) {
+        if (turmaService.atualizarTurma(id, dto)) return ResponseEntity.ok().build();
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}")
+    public ResponseEntity<Void> deletar(@PathVariable Long id) {
+        if (turmaService.deletarTurma(id)) return ResponseEntity.ok().build();
         return ResponseEntity.notFound().build();
     }
 }

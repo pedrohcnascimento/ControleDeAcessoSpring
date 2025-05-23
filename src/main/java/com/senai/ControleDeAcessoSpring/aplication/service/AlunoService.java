@@ -14,27 +14,27 @@ import java.util.stream.Collectors;
 public class AlunoService {
 
     @Autowired
-    AlunoRepository alunoRepository;
+    private AlunoRepository alunoRepository;
 
     public void cadastrarAluno(AlunoDto dto) {
-        alunoRepository.save(dto.fromDTO());
+        alunoRepository.save(dto.fromDto());
     }
 
     public List<AlunoDto> listarAtivos() {
-        return alunoRepository.findByAtivoTrue()
-                .stream().map(AlunoDto::toDTO)
+        return alunoRepository.findByAtivoTrue().stream()
+                .map(AlunoDto::toDto)
                 .collect(Collectors.toList());
     }
 
     public Optional<AlunoDto> buscarPorId(Long id) {
         return alunoRepository.findById(id)
-                .filter(Aluno::getAtivo)
-                .map(AlunoDto::toDTO);
+                .filter(Aluno::isAtivo)
+                .map(AlunoDto::toDto);
     }
 
     public boolean atualizar(Long id, AlunoDto dto) {
         return alunoRepository.findById(id).map(aluno -> {
-            Aluno alunoAtualizado = dto.fromDTO();
+            Aluno alunoAtualizado = dto.fromDto();
             aluno.setNome(alunoAtualizado.getNome());
             aluno.setEmail(alunoAtualizado.getEmail());
             aluno.setDataNascimento(alunoAtualizado.getDataNascimento());
@@ -45,14 +45,10 @@ public class AlunoService {
     }
 
     public boolean inativar(Long id) {
-        return alunoRepository.findById(id).map(aluno -> {
-            aluno.setAtivo(false);
-            alunoRepository.save(aluno);
+        return alunoRepository.findById(id).map(professor -> {
+            professor.setAtivo(false);
+            alunoRepository.save(professor);
             return true;
         }).orElse(false);
-    }
-
-    public Aluno buscarNoRepository(Long id) {
-            return alunoRepository.findById(id).get();
     }
 }
