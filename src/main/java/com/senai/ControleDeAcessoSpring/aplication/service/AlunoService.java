@@ -1,11 +1,16 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.AlunoDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.JustificativaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
+import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.repository.AlunoRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.JustificativaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,6 +20,9 @@ public class AlunoService {
 
     @Autowired
     private AlunoRepository alunoRepository;
+
+    @Autowired
+    private JustificativaRepository justificativaRepository;
 
     public void cadastrarAluno(AlunoDto dto) {
         alunoRepository.save(dto.fromDto());
@@ -32,6 +40,10 @@ public class AlunoService {
                 .map(AlunoDto::toDto);
     }
 
+    public List<JustificativaDto> listarJustificativas(Long id) {
+        return alunoRepository.findById(id).get().getJustificativas().stream().map(JustificativaDto::toDtoSemAluno).toList();
+    }
+
     public boolean atualizar(Long id, AlunoDto dto) {
         return alunoRepository.findById(id).map(aluno -> {
             Aluno alunoAtualizado = dto.fromDto();
@@ -40,6 +52,20 @@ public class AlunoService {
             aluno.setDataNascimento(alunoAtualizado.getDataNascimento());
             aluno.setCpf(alunoAtualizado.getCpf());
             alunoRepository.save(aluno);
+            return true;
+        }).orElse(false);
+    }
+
+    public boolean criarJustificativa(Long id, JustificativaDto justificativaDto) {
+        Justificativa j = justificativaDto.fromDto();
+        j.setAluno(alunoRepository.findById(id).get());
+        j.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
+        j.setDataHoraCriacao(LocalTime.now()); // Hora em que é cadastrada
+        j.setDataHoraConclusao(null); // Ainda não foi concluída
+        j.setAtivo(true); // Ativo quando cria
+        return alunoRepository.findById(id).map(aluno -> {
+            aluno.getJustificativas().add(j);
+            justificativaRepository.save(j);
             return true;
         }).orElse(false);
     }

@@ -1,6 +1,7 @@
 package com.senai.ControleDeAcessoSpring.inteface.controller;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.AlunoDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.JustificativaDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.AlunoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -32,10 +33,23 @@ public class AlunoController {
         return ResponseEntity.ok(alunoService.listarAtivos());
     }
 
+    @GetMapping("/{id}/justificativas")
+    public ResponseEntity<List<JustificativaDto>> listarJustificativas(@PathVariable Long id) {
+        return ResponseEntity.ok(alunoService.listarJustificativas(id));
+    }
+
     @PutMapping("/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody AlunoDto dto) {
         if (alunoService.atualizar(id, dto)) {
             return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @PutMapping("/{id}/justificativas")
+    public ResponseEntity<String> criarJustificativa(@PathVariable Long id, @RequestBody JustificativaDto justificativaDto) {
+        if (alunoService.criarJustificativa(id, justificativaDto)) {
+            return ResponseEntity.ok("Justificativa adicionada!");
         }
         return ResponseEntity.notFound().build();
     }

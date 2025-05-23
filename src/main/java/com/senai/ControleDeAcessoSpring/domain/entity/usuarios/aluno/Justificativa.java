@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalTime;
 
 @Entity
 @Data
@@ -21,11 +22,14 @@ public class Justificativa {
     private String anexo;
     private LocalDate dataInicial;
     private Integer qtdDias;
+    private LocalTime dataHoraCriacao;
+    private LocalTime dataHoraConclusao;
     private Boolean ativo;
 
     @Enumerated(EnumType.STRING)
     private StatusDaJustificativa status;
 
     @ManyToOne
+    @JoinColumn(name = "aluno_id")
     private Aluno aluno;
 }

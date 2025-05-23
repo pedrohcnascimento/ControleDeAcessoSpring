@@ -19,7 +19,7 @@ public class SubTurma {
     @JoinColumn(name = "turma_id")
     private Turma turma;
 
-    @OneToMany(mappedBy = "subTurma", cascade = CascadeType.ALL)
+    @ManyToMany//(mappedBy = "subTurma", cascade = CascadeType.ALL)
     private List<Aluno> alunos;
 
     @OneToMany(mappedBy = "subTurma", cascade = CascadeType.ALL, orphanRemoval = true)

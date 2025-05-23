@@ -17,7 +17,7 @@ public class Aluno extends Usuario {
     @OneToMany(mappedBy = "aluno")
     private List<Justificativa> justificativas;
 
-    @ManyToOne
-    @JoinColumn(name = "sub_turma_id") // FK na tabela aluno
+    @ManyToMany
+    //@JoinColumn(name = "sub_turma_id") // Chave estrangeira na tabela aluno
     private List<SubTurma> subTurmas;
 }

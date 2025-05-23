@@ -48,7 +48,7 @@ public class OcorrenciaService {
             long diferencaMinutos = Math.abs(diferenca.toMinutes());
 
             if (diferencaMinutos > 300) {
-                //Turma errada, buscar na outra
+                break; //Turma errada, buscar na outra
             } else if (horaAtual.isAfter(horarioLimite)) {
                 return true;
             }
