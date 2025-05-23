@@ -13,7 +13,7 @@ public record HorarioSemanalDto(
         LocalDate semanaRefencial,
         List<AulaDoDiaDto> listaAulasDoDia
 ) {
-    public static HorarioSemanalDto fromDto(HorarioSemanal semanal) {
+    public static HorarioSemanalDto toDto(HorarioSemanal semanal) {
         return new HorarioSemanalDto(
                 semanal.getId(),
                 semanal.getSemestre().getId(),
@@ -22,7 +22,7 @@ public record HorarioSemanalDto(
         );
     }
 
-    public HorarioSemanal toDto() {
+    public HorarioSemanal fromDto() {
         HorarioSemanal semanal = new HorarioSemanal();
 
         semanal.setId(id);

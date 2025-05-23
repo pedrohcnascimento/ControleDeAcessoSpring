@@ -7,7 +7,7 @@ public record AmbienteDto(
         String nome,
         Boolean ativo
 ) {
-    public static AmbienteDto fromDto(Ambiente ambiente) {
+    public static AmbienteDto toDto(Ambiente ambiente) {
         return new AmbienteDto(
                 ambiente.getId(),
                 ambiente.getNome(),
@@ -15,7 +15,7 @@ public record AmbienteDto(
         );
     }
 
-    public Ambiente toDto() {
+    public Ambiente fromDto() {
         Ambiente ambiente = new Ambiente();
 
         ambiente.setId(id);

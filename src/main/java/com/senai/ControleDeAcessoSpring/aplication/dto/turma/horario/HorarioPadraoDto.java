@@ -9,14 +9,14 @@ public record HorarioPadraoDto(
     List<AulaDoDiaDto> listaAulasDoDia
     )
 {
-    public HorarioPadraoDto fromDto(HorarioPadrao padrao) {
+    public static HorarioPadraoDto toDto(HorarioPadrao padrao) {
         return new HorarioPadraoDto(
                 padrao.getId(),
                 padrao.getAulasDoDia().stream().map(AulaDoDiaDto::toDto).toList()
         );
     }
 
-    public HorarioPadrao toDto() {
+    public HorarioPadrao fromDto() {
         HorarioPadrao padrao = new HorarioPadrao();
 
         padrao.setId(id);

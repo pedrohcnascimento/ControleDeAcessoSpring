@@ -23,7 +23,7 @@ public class JustificativaService {
         justificativa.setAtivo(true);
         justificativa.setDataHoraCriacao(LocalDateTime.now());
         justificativa.setDataHoraConclusao(null);
-        justificativa.setStatus(StatusDaJustificativa.ANALISE);
+        justificativa.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
         justificativaRepository.save(justificativa);
     }
 
@@ -48,7 +48,7 @@ public class JustificativaService {
     public boolean alterarStatus(Long id, StatusDaJustificativa status) {
         justificativaRepository.findById(id).map(justificativa -> {
                     justificativa.setStatus(status);
-                    if (status.equals(StatusDaJustificativa.APROVADO) || status.equals(StatusDaJustificativa.REPROVADO)) {
+                    if (status.equals(StatusDaJustificativa.APROVADA) || status.equals(StatusDaJustificativa.REPROVADA)) {
                         justificativa.setDataHoraConclusao(LocalDateTime.now());
                     }
                     justificativaRepository.save(justificativa);

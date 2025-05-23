@@ -7,6 +7,7 @@ import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 import com.senai.ControleDeAcessoSpring.domain.repository.curso.CursoRepository;
 
 import com.senai.ControleDeAcessoSpring.domain.repository.curso.UnidadeCurrricularRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.turma.horario.UnidadeCurricularRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,84 +21,68 @@ public class CursoService {
     private CursoRepository cursoRepository;
 
     @Autowired
-    private UnidadeCurrricularRepository unidadeCurrricularRepository;
+    private UnidadeCurricularRepository unidadeCurricularRepository;
 
-    public CursoDto cadastrarCurso(CursoDto cursoDto){
+    public CursoDto salvar(CursoDto dto) {
 
         final Curso curso = cursoRepository.save(
                 new Curso(
-                        cursoDto.titulo(),
-                        cursoDto.tipo(),
-                        cursoDto.cargaHoraria(),
-                        cursoDto.toleranciaMinutos()
+                        dto.titulo(),
+                        dto.tipo(),
+                        dto.cargaHoraria(),
+                        dto.toleranciaMinutos()
                 )
         );
 
-        List<UnidadeCurricularDto> unidades = cursoDto.unidadesCurriculares();
-
-    }
-
-    private List<UnidadeCurricular> mapUnidadeCurriculares(List<UnidadeCurricularDto> unidadeCurricularesDto, Curso curso) {
-        return unidadeCurricularesDto.stream()
-                .map(dto -> {
-                    UnidadeCurricular uc = new UnidadeCurricular();
-                    uc.setNome(dto.nome());
-                    uc.setCargaHorariaTotal(dto.cargaHorariaPorSemestre());
-                    uc.setCurso(curso);
-                    return uc;
-                })
-                .toList();
-    }
-
-    public List<CursoDto> listarCursos() {
-        return cursoRepository.findAll()
+        List<UnidadeCurricular> unidades = dto.unidadesCurriculares()
                 .stream()
-                .map(curso -> new CursoDto(
-                        curso.getId(),
-                        curso.getTitulo(),
-                        curso.getTipo(),
-                        curso.getCargaHoraria(),
-                        curso.getToleranciaMinutos(),
-                        mapUnidadeCurricularesParaDto(curso.getUnidadesCurriculares())
-                )).toList();
+                .map(
+                        ucDto -> ucDto.fromDto(curso)
+                )
+                .toList();
+
+        unidadeCurricularRepository.saveAll(unidades);
+
+        curso.setUnidadesCurriculares(unidades);
+
+        return CursoDto.toDto(curso);
     }
 
-    private List<UnidadeCurricularDto> mapUnidadeCurricularesParaDto(List<UnidadeCurricular> unidadeCurriculares) {
-        return unidadeCurriculares.stream()
-                .map(uc -> new UnidadeCurricularDto(
-                        uc.getId(),
-                        uc.getNome(),
-                        uc.getCargaHorariaTotal(),
-                        uc.getCargaHorariaTotal()
-                )).toList();
+    public List<CursoDto> listarTodos() {
+        return cursoRepository.findAll().stream().map(CursoDto::toDto).toList();
     }
 
-    public Optional<CursoDto> buscarCursoPorId(Long id) {
-        return cursoRepository.findById(id)
-                .map(curso -> new CursoDto(
-                        curso.getId(),
-                        curso.getTitulo(),
-                        curso.getTipo(),
-                        curso.getCargaHoraria(),
-                        curso.getToleranciaMinutos(),
-                        mapUnidadeCurricularesParaDto(curso.getUnidadesCurriculares())
-                ));
+    public Optional<CursoDto> buscarPorId(Long id) {
+        return cursoRepository.findById(id).map(CursoDto::toDto);
     }
 
-    public boolean atualizarCurso(Long id, CursoDto cursoDto) {
-        return cursoRepository.findById(id)
-                .map(curso -> {
-                    curso.setTitulo(cursoDto.titulo());
-                    curso.setTipo(cursoDto.tipo());
-                    curso.setCargaHoraria(cursoDto.cargaHoraria());
-                    curso.setToleranciaMinutos(cursoDto.toleranciaMinutos());
-                    cursoRepository.save(curso);
-                    return true;
-                }).orElse(false);
+    public CursoDto atualizar(Long id, CursoDto dto) {
+        Curso curso = cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso não encontrado"));
+
+        curso.setTitulo(dto.titulo());
+        curso.setTipo(dto.tipo());
+        curso.setCargaHoraria(dto.cargaHoraria());
+        curso.setToleranciaMinutos(dto.toleranciaMinutos());
+
+        final Curso cursoAtualizado = cursoRepository.save(curso);
+
+        unidadeCurricularRepository.deleteById(curso.getId());
+
+        List<UnidadeCurricular> novasUCs = dto.unidadesCurriculares()
+                .stream()
+                .map(ucDto -> ucDto.fromDto(cursoAtualizado))
+                .toList();
+
+        unidadeCurricularRepository.saveAll(novasUCs);
+
+        cursoAtualizado.setUnidadesCurriculares(novasUCs);
+
+        return CursoDto.toDto(cursoAtualizado);
     }
 
-    public boolean deletarCurso(Long id) {
+    public Boolean deletar(Long id) {
         if (cursoRepository.existsById(id)) {
+            unidadeCurricularRepository.deleteById(id);
             cursoRepository.deleteById(id);
             return true;
         }

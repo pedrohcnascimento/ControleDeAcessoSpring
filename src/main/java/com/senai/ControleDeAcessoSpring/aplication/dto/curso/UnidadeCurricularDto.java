@@ -1,5 +1,6 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto.curso;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 
 public record UnidadeCurricularDto(
@@ -15,12 +16,12 @@ public record UnidadeCurricularDto(
         );
     }
 
-    public UnidadeCurricular fromDto() {
+    public UnidadeCurricular fromDto(Curso curso) {
         UnidadeCurricular uc = new UnidadeCurricular();
 
-        uc.setId(id);
         uc.setNome(nome);
         uc.setCargaHorariaTotal(cargaHorariaTotal);
+        uc.setCurso(curso);
 
         return uc;
     }

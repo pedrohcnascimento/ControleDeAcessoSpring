@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.aplication.service;
+package com.senai.ControleDeAcessoSpring.aplication.service.turma;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.turma.SubTurmaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
@@ -44,13 +44,19 @@ public class SubTurmaService {
     public List<SubTurmaDto> listar() {
         return subTurmaRepository.findAll().stream().map(st -> new SubTurmaDto(
                 st.getNome(),
-                st.getStatus()
+                st.getStatus(),
+                st.getTurma()
+                        .getId()
         )).toList();
     }
 
     public SubTurmaDto listarPorId(Long id) {
         SubTurma subTurma = subTurmaRepository.findById(id).get();
-        SubTurmaDto dto = new SubTurmaDto(subTurma.getNome(), subTurma.getStatus());
+        SubTurmaDto dto = new SubTurmaDto(
+                subTurma.getNome(),
+                subTurma.getStatus(),
+                subTurma.getTurma()
+                        .getId());
         return dto;
     }
 }

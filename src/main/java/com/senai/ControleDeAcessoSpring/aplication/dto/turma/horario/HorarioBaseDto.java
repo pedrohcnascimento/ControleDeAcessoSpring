@@ -11,7 +11,7 @@ public record HorarioBaseDto(
     Long semestreId,
     List<AulaDoDiaDto> aulasDoDia
     ){
-    public static HorarioBaseDto fromDto(HorarioBase base) {
+    public static HorarioBaseDto toDto(HorarioBase base) {
         return new HorarioBaseDto(
                 base.getId(),
                 base.getSemestre().getId(),

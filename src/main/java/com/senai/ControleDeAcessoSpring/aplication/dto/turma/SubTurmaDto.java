@@ -8,7 +8,7 @@ public record SubTurmaDto(
         Long turmaId
 )
 {
-    public static SubTurmaDto fromDto(SubTurma subTurma) {
+    public static SubTurmaDto toDto(SubTurma subTurma) {
         return new SubTurmaDto(
                 subTurma.getNome(),
                 subTurma.getStatus(),
@@ -16,7 +16,7 @@ public record SubTurmaDto(
         );
     }
 
-    public SubTurma toDto(SubTurmaDto dto) {
+    public SubTurma fromDto(SubTurmaDto dto) {
         SubTurma sub = new SubTurma();
 
         sub.setNome(nome);

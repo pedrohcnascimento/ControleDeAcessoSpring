@@ -14,7 +14,7 @@ public record CursoDto(
         Integer toleranciaMinutos,
         List<UnidadeCurricularDto> unidadesCurriculares
 ) {
-    public static CursoDto fromDto(Curso curso) {
+    public static CursoDto toDto(Curso curso) {
         return new CursoDto(
                 curso.getId(),
                 curso.getTitulo(),
@@ -28,7 +28,7 @@ public record CursoDto(
         );
     }
 
-    public Curso toDto() {
+    public Curso fromDto() {
         Curso curso = new Curso();
 
         curso.setId(id);

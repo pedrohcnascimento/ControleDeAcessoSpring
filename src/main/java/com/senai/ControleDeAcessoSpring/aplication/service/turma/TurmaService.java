@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.aplication.service;
+package com.senai.ControleDeAcessoSpring.aplication.service.turma;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.turma.TurmaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
