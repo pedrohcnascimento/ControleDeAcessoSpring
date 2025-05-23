@@ -20,9 +20,10 @@ public class SubTurma {
     private Boolean status;
 
     @ManyToOne
+    @JoinColumn(name = "turma_id")
     private Turma turma;
 
-    @ManyToMany(mappedBy = "subTurmas")
+    @ManyToMany(mappedBy = "subTurmas", cascade = CascadeType.ALL)
     private List<Aluno> alunos;
 
     @OneToOne(cascade = CascadeType.ALL)
