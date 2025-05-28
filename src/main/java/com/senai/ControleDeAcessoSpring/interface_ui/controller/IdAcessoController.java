@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
-import com.senai.ControleDeAcessoSpring.aplication.service.IdAcessoService;
+import com.senai.ControleDeAcessoSpring.aplication.service.usuarios.IdAcessoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.web.bind.annotation.*;
 

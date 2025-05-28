@@ -1,5 +1,6 @@
-package com.senai.ControleDeAcessoSpring.aplication.service;
+package com.senai.ControleDeAcessoSpring.aplication.service.usuarios;
 
+import com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno.OcorrenciaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -20,7 +21,7 @@ public class IdAcessoService {
             usuarioService.atualizarIdAcesso(idUsuario, idAcesso);
         } else {
             System.out.println("[Ocorrencias] id recebido pelo service:"+idAcesso);
-            ocorrenciaService.criarOcorrenciaAtraso(idAcesso);
+            ocorrenciaService.criarOcorrenciaDeAcesso(idAcesso);
         }
     }
 }
