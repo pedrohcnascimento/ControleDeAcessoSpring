@@ -24,6 +24,6 @@ public class Aluno extends Usuario {
     private List<Justificativa> justificativas;
 
     @ManyToMany
-    @JoinColumn(name = "sub_turma_id")
+    @JoinTable(name = "sub_turma_id")
     private List<SubTurma> subTurmas;
 }

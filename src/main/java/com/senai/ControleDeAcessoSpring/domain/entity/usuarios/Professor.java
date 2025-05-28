@@ -7,7 +7,5 @@ import lombok.NoArgsConstructor;
 
 @Entity
 @DiscriminatorValue("PROFESSOR")
-@NoArgsConstructor
-@AllArgsConstructor
 public class Professor extends Usuario {
 }
