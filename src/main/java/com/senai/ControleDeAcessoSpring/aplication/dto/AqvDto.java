@@ -9,10 +9,11 @@ public record AqvDto (
         String nome,
         String cpf,
         LocalDate dataNascimento,
-        String email
+        String email,
+        String senha
 ){
     public static AqvDto toDTO(AQV aqv) {
-        return new AqvDto(aqv.getId(), aqv.getNome(), aqv.getCpf(), aqv.getDataNascimento(), aqv.getEmail());
+        return new AqvDto(aqv.getId(), aqv.getNome(), aqv.getCpf(), aqv.getDataNascimento(), aqv.getEmail(), aqv.getSenha());
     }
 
     public AQV fromDTO() {
@@ -24,7 +25,7 @@ public record AqvDto (
         aqv.setDataNascimento(dataNascimento);
         aqv.setAtivo(true);
         aqv.setIdAcesso("");
-        aqv.setSenha("");
+        aqv.setSenha(senha);
         return aqv;
     }
 }

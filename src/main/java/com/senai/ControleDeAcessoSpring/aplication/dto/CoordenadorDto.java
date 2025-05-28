@@ -10,10 +10,11 @@ public record CoordenadorDto(
         String nome,
         String cpf,
         LocalDate dataNascimento,
-        String email
+        String email,
+        String senha
 ) {
     public static CoordenadorDto toDTO(Coordenador c) {
-        return new CoordenadorDto(c.getId(), c.getNome(), c.getCpf(), c.getDataNascimento(), c.getEmail());
+        return new CoordenadorDto(c.getId(), c.getNome(), c.getCpf(), c.getDataNascimento(), c.getEmail(), c.getSenha());
     }
 
     public Coordenador fromDTO() {
@@ -25,7 +26,7 @@ public record CoordenadorDto(
         coordenador.setDataNascimento(dataNascimento);
         coordenador.setAtivo(true);
         coordenador.setIdAcesso("");
-        coordenador.setSenha("");
+        coordenador.setSenha(senha);
         return coordenador;
     }
 }

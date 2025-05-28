@@ -10,10 +10,11 @@ public record AlunoDto(
         String nome,
         String cpf,
         LocalDate dataNascimento,
-        String email
+        String email,
+        String senha
 ) {
     public static AlunoDto toDTO(Aluno a) {
-        return new AlunoDto(a.getId(), a.getNome(), a.getCpf(), a.getDataNascimento(), a.getEmail());
+        return new AlunoDto(a.getId(), a.getNome(), a.getCpf(), a.getDataNascimento(), a.getEmail(), a.getSenha());
     }
 
     public Aluno fromDTO() {
@@ -25,7 +26,7 @@ public record AlunoDto(
         aluno.setDataNascimento(dataNascimento);
         aluno.setAtivo(true);
         aluno.setIdAcesso("");
-        aluno.setSenha("");
+        aluno.setSenha(senha);
         aluno.setJustificativas(new ArrayList<>());
         aluno.setOcorrencias(new ArrayList<>());
         aluno.setSubTurmas(new ArrayList<>());
