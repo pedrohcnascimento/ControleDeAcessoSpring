@@ -71,9 +71,9 @@ public class AlunoService {
     }
 
     public boolean inativar(Long id) {
-        return alunoRepository.findById(id).map(professor -> {
-            professor.setAtivo(false);
-            alunoRepository.save(professor);
+        return alunoRepository.findById(id).map(aluno -> {
+            aluno.setAtivo(false);
+            alunoRepository.save(aluno);
             return true;
         }).orElse(false);
     }
