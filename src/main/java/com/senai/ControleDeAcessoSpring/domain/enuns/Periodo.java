@@ -1,8 +1,18 @@
 package com.senai.ControleDeAcessoSpring.domain.enuns;
 
 public enum Periodo {
-    NOTURNO,
-    DIURNO,
-    MATUTINO,
-    INTEGRAL
+    MANHA("M"),
+    TARDE("T"),
+    NOITE("N"),
+    INTEGRAL("I");
+
+    Periodo(String sigla) {
+        this.sigla = sigla;
+    }
+
+    private final String sigla;
+
+    public String getSigla() {
+        return sigla;
+    }
 }

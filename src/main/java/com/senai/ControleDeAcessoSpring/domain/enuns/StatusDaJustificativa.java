@@ -1,7 +1,7 @@
 package com.senai.ControleDeAcessoSpring.domain.enuns;
 
 public enum StatusDaJustificativa {
-    APROVADO,
-    REPROVADO,
-    ANALISE
+    AGUARDANDO_ANALISE,
+    APROVADA,
+    REPROVADA
 }
