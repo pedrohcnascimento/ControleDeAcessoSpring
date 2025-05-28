@@ -11,7 +11,7 @@ import java.util.Optional;
 
 @RestController
 @RequestMapping("/ambiente")
-public class Ambiente {
+public class AmbienteController {
 
     @Autowired
     AmbienteService ambienteService;
@@ -26,8 +26,8 @@ public class Ambiente {
         ambienteService.cadastrarAmbiente(dto);
     }
 
-    @PostMapping
-    public ResponseEntity<AmbienteDto> listarPorId(@RequestBody Long id) {
+    @GetMapping("/ambiente/{id}")
+    public ResponseEntity<AmbienteDto> listarPorId(@PathVariable Long id) {
         Optional<AmbienteDto> ambiente = ambienteService.listarPorId(id);
         if (ambiente.isPresent()) {
             return ResponseEntity.ok(ambiente.get());
