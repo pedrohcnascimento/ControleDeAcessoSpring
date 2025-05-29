@@ -2,7 +2,7 @@ package com.senai.ControleDeAcessoSpring.aplication.service.usuarios;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.CoordenadorDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Coordenador;
-import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.CoordenadorRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.CoordenadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

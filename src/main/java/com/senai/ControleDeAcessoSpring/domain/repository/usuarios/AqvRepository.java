@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno;
+package com.senai.ControleDeAcessoSpring.domain.repository.usuarios;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.AQV;
 import org.springframework.data.jpa.repository.JpaRepository;
