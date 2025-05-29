@@ -1,7 +1,7 @@
 package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.OcorrenciaDto;
-import com.senai.ControleDeAcessoSpring.aplication.service.OcorrenciaService;
+import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.OcorrenciaDto;
+import com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno.OcorrenciaService;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -53,9 +53,9 @@ public class OcorrenciaController {
         }
     }
 
-    @PostMapping("/criarOcorrenciaAtraso")
-    public void criarOcorrenciaAtraso(String idAcesso) {
-        ocorrenciaService.criarOcorrenciaAtraso(idAcesso);
+    @PostMapping("/criarOcorrenciaDeAcesso")
+    public void criarOcorrenciaDeAtraso(String idAcesso) {
+        ocorrenciaService.criarOcorrenciaDeAcesso(idAcesso);
     }
 }
 

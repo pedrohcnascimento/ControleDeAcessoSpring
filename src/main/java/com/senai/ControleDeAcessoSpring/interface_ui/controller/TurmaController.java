@@ -1,7 +1,7 @@
 package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.TurmaDto;
-import com.senai.ControleDeAcessoSpring.aplication.service.TurmaService;
+import com.senai.ControleDeAcessoSpring.aplication.dto.turma.TurmaDto;
+import com.senai.ControleDeAcessoSpring.aplication.service.turma.TurmaService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -23,7 +23,7 @@ public class TurmaController {
 
     @PostMapping("/{id}")
     public ResponseEntity<TurmaDto> acharTurmaPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.BuscarPorId(id));
+        return ResponseEntity.ok(service.BuscarPorId(id).get());
     }
 
     @GetMapping

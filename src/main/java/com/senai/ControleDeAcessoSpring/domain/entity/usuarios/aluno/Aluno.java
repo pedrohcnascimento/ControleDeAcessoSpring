@@ -2,10 +2,7 @@ package com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
-import jakarta.persistence.DiscriminatorValue;
-import jakarta.persistence.Entity;
-import jakarta.persistence.ManyToMany;
-import jakarta.persistence.OneToMany;
+import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Getter;
 import lombok.NoArgsConstructor;
@@ -27,5 +24,6 @@ public class Aluno extends Usuario {
     private List<Justificativa> justificativas;
 
     @ManyToMany
+    @JoinTable(name = "sub_turma_id")
     private List<SubTurma> subTurmas;
 }

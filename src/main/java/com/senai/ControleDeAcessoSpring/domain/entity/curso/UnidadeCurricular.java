@@ -4,12 +4,15 @@ import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
+import lombok.NoArgsConstructor;
 
 import java.util.List;
 import java.util.Map;
 
 @Entity
 @Data
+@AllArgsConstructor
+@NoArgsConstructor
 public class UnidadeCurricular {
 
     @Id
@@ -24,4 +27,9 @@ public class UnidadeCurricular {
 
     @ManyToMany
     private List<Professor> professores;
+
+    public UnidadeCurricular(String nome, Integer cargaHorariaTotal) {
+        this.nome = nome;
+        this.cargaHorariaTotal = cargaHorariaTotal;
+    }
 }

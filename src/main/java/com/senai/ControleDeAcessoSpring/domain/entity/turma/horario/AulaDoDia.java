@@ -20,12 +20,13 @@ public class AulaDoDia {
     private Long id;
 
     @Enumerated(EnumType.STRING)
-    private DiaDaSemana nome;
+    private DiaDaSemana diaDaSemana;
 
     @OneToMany(mappedBy = "aulasDoDia", cascade = CascadeType.ALL, orphanRemoval = true)
     @OrderColumn(name = "ordem")
     private List<Aula> aulas;
 
     @ManyToOne
+    @JoinColumn(name = "horario_id")
     private HorarioBase horario;
 }

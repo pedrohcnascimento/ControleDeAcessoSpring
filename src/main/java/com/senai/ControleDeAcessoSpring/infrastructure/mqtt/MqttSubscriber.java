@@ -7,7 +7,7 @@ import org.eclipse.paho.client.mqttv3.MqttException;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Component;
 
-@Component
+@Component()
 public class MqttSubscriber {
     private static final String BROKER = "tcp://localhost:1883";
     private static final String CLIENTE_ID = "ServidorJava";
@@ -22,7 +22,7 @@ public class MqttSubscriber {
             cliente.connect();
             cliente.subscribe(TOPICO, (topic, msg) -> {
                 String idAcesso = new String(msg.getPayload());
-                controller.criarOcorrenciaAtraso(idAcesso);
+                controller.criarOcorrenciaDeAtraso(idAcesso);
             });
             System.out.println("Inscrito no topico MQTT:" + TOPICO);
         } catch (MqttException e) {
