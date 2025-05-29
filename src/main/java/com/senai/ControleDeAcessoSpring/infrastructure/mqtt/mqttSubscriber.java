@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.infrastructure;
+package com.senai.ControleDeAcessoSpring.infrastructure.mqtt;
 
 import com.senai.ControleDeAcessoSpring.interface_ui.controller.IdAcessoController;
 import jakarta.annotation.PostConstruct;
