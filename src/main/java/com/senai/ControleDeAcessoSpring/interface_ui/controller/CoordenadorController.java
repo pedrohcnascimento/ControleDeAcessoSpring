@@ -1,17 +1,7 @@
-<<<<<<<< HEAD:src/main/java/com/senai/ControleDeAcessoSpring/inteface/controller/CoordenadorController.java
-package com.senai.ControleDeAcessoSpring.inteface.controller;
-
-import com.senai.ControleDeAcessoSpring.aplication.dto.AQVDto;
-import com.senai.ControleDeAcessoSpring.aplication.dto.AlunoDto;
-import com.senai.ControleDeAcessoSpring.aplication.dto.CoordenadorDto;
-import com.senai.ControleDeAcessoSpring.aplication.service.AQVService;
-import com.senai.ControleDeAcessoSpring.aplication.service.CoordenadorService;
-========
 package com.senai.ControleDeAcessoSpring.interface_ui.controller;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.CoordenadorDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.usuarios.CoordenadorService;
->>>>>>>> master:src/main/java/com/senai/ControleDeAcessoSpring/interface_ui/controller/CoordenadorController.java
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -19,11 +9,11 @@ import org.springframework.web.bind.annotation.*;
 import java.util.List;
 
 @RestController
-@RequestMapping("/coordenador")
+@RequestMapping("/coordenadores")
 public class CoordenadorController {
 
     @Autowired
-    CoordenadorService coordenadorService;
+    private CoordenadorService coordenadorService;
 
     @PostMapping
     public ResponseEntity<Void> cadastrarCoordenador(@RequestBody CoordenadorDto dto) {
@@ -43,7 +33,6 @@ public class CoordenadorController {
         return ResponseEntity.ok(coordenadorService.listarAtivos());
     }
 
-
     @PutMapping("/{id}")
     public ResponseEntity<Void> atualizar(@PathVariable Long id, @RequestBody CoordenadorDto dto) {
         if (coordenadorService.atualizar(id, dto)) {
@@ -51,7 +40,6 @@ public class CoordenadorController {
         }
         return ResponseEntity.notFound().build();
     }
-
 
     @DeleteMapping("/{id}")
     public ResponseEntity<Void> inativar(@PathVariable Long id) {
@@ -61,4 +49,3 @@ public class CoordenadorController {
         return ResponseEntity.notFound().build();
     }
 }
-

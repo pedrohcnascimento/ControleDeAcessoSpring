@@ -55,6 +55,6 @@ public class OcorrenciaController {
 
     @PostMapping("/criarOcorrenciaDeAcesso")
     public void criarOcorrenciaDeAtraso(String idAcesso) {
-        ocorrenciaService.criarOcorrenciaDeAcesso(idAcesso);
+        ocorrenciaService.criarOcorrenciaAtraso(idAcesso);
     }
 }

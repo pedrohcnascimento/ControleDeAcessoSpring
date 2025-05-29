@@ -23,6 +23,8 @@ public class Turma {
     private Integer qtdSemestres;
     private Integer qtdAulasPorDia;
 
+    private Boolean ativo;
+
     @ManyToOne
     private Curso curso;
 

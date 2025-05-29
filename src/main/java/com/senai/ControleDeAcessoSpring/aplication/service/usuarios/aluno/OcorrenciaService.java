@@ -5,12 +5,14 @@ import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
-import com.senai.ControleDeAcessoSpring.domain.repository.OcorrenciaRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.OcorrenciaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -67,15 +69,42 @@ public class OcorrenciaService {
         return false;
     }
 
-    public void criarOcorrenciaDeAcesso(String idAcesso) {
+    public void criarOcorrenciaAtraso(String idAcesso) {
         Optional<Usuario> usuarioOpt = usuarioRepository.findByIdAcesso(idAcesso);
         if (usuarioOpt.isPresent()) {
             System.out.println("O usuário existe!");
             if (usuarioOpt.get() instanceof Aluno aluno) {
                 System.out.println("O usuário " + aluno.getNome() + " é um aluno!");
+                if (verificarAtraso(aluno)) {
+                    System.out.println("Aluno atrasado");
+                    criarOcorrencia(aluno);
+                    System.out.println("Ocorrência gerada");
+                }
             }
         } else {
             System.out.println("O usuário não existe e não pode te machucar!");
         }
+    }
+
+    private boolean verificarAtraso(Aluno aluno) {
+        for (int i = 0; i < aluno.getSubTurmas().size(); i++) {
+            LocalTime horarioEntrada = aluno.getSubTurmas().get(i).getTurma().getHorarioEntrada();
+            Integer toleranciaMinutos = aluno.getSubTurmas().get(i).getTurma().getCurso().getToleranciaMinutos();
+            LocalTime horarioLimite = horarioEntrada.plusMinutes(toleranciaMinutos);
+            LocalTime horaAtual = LocalTime.now();
+            Duration diferenca = Duration.between(horarioEntrada, horaAtual);
+            long diferencaMinutos = Math.abs(diferenca.toMinutes());
+
+            if (diferencaMinutos > 300) {
+                break; //Turma errada, buscar na outra
+            } else if (horaAtual.isAfter(horarioLimite)) {
+                return true;
+            }
+        }
+        return false;
+    }
+
+    private void criarOcorrencia(Aluno aluno) {
+
     }
 }

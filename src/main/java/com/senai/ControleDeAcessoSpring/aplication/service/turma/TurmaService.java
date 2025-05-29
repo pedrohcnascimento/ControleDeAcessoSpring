@@ -63,7 +63,7 @@ public class TurmaService {
                 .map(TurmaDto::toDto).toList();
     }
 
-    public Optional<TurmaDto> BuscarPorId(Long id) {
+    public Optional<TurmaDto> buscarPorId(Long id) {
         return turmaRepository.findById(id).map(TurmaDto::toDto);
     }
 
@@ -86,7 +86,7 @@ public class TurmaService {
         turma.setDataInicial(dto.dataInicial());
         turma.setQtdSemestres(dto.qtdSemestres());
         turma.setHorarioEntrada(dto.horarioEntrada());
-        turma.setQtdAulasporDia(dto.qtdAulasPorDia());
+        turma.setQtdAulasPorDia(dto.qtdAulasPorDia());
 
         turmaRepository.save(turma);
         return true;

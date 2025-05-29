@@ -20,4 +20,9 @@ public class Ambiente {
 
     private String nome;
     private Boolean ativo;
+
+    public boolean isAtivo() {
+        if (ativo) return true;
+        else return false;
+    }
 }

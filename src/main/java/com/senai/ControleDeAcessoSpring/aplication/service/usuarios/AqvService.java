@@ -1,8 +1,8 @@
 package com.senai.ControleDeAcessoSpring.aplication.service.usuarios;
 
-import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.AqvDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.AQVDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.AQV;
-import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.AqvRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.AqvRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,25 +15,25 @@ public class AqvService {
     @Autowired
     private AqvRepository aqvRepository;
 
-    public void cadastrarAqv(AqvDto dto) {
-        aqvRepository.save(dto.fromDTO());
+    public void cadastrarAqv(AQVDto dto) {
+        aqvRepository.save(dto.fromDto());
     }
 
-    public List<AqvDto> listarAtivos() {
+    public List<AQVDto> listarAtivos() {
         return aqvRepository.findByAtivoTrue()
-                .stream().map(AqvDto::toDTO)
+                .stream().map(AQVDto::toDTO)
                 .collect(Collectors.toList());
     }
 
-    public Optional<AqvDto> buscarPorId(Long id) {
+    public Optional<AQVDto> buscarPorId(Long id) {
         return aqvRepository.findById(id)
                 .filter(AQV::getAtivo)
-                .map(AqvDto::toDTO);
+                .map(AQVDto::toDTO);
     }
 
-    public boolean atualizar(Long id, AqvDto dto) {
+    public boolean atualizar(Long id, AQVDto dto) {
         return aqvRepository.findById(id).map(aqv -> {
-            AQV aqVAtualizado = dto.fromDTO();
+            AQV aqVAtualizado = dto.fromDto();
             aqv.setNome(aqVAtualizado.getNome());
             aqv.setEmail(aqVAtualizado.getEmail());
             aqv.setDataNascimento(aqVAtualizado.getDataNascimento());

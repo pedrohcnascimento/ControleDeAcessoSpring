@@ -21,7 +21,7 @@ public class IdAcessoService {
             usuarioService.atualizarIdAcesso(idUsuario, idAcesso);
         } else {
             System.out.println("[Ocorrencias] id recebido pelo service:"+idAcesso);
-            ocorrenciaService.criarOcorrenciaDeAcesso(idAcesso);
+            ocorrenciaService.criarOcorrenciaAtraso(idAcesso);
         }
     }
 }

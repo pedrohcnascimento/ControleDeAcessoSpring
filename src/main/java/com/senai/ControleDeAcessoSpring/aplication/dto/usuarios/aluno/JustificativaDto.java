@@ -6,6 +6,7 @@ import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeJustificativa;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 public record JustificativaDto(
@@ -15,8 +16,8 @@ public record JustificativaDto(
         String anexo,
         LocalDate dataInicial,
         Integer qtdDias,
-        LocalTime dataHoraCriacao,
-        LocalTime dataHoraConclusao,
+        LocalDateTime dataHoraCriacao,
+        LocalDateTime dataHoraConclusao,
         StatusDaJustificativa status,
         Aluno aluno
 ) {

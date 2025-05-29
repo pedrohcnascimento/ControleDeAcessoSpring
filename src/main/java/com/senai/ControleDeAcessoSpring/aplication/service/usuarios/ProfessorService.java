@@ -17,24 +17,24 @@ public class ProfessorService {
     private ProfessorRepository professorRepository;
 
     public void cadastrarUsuario(ProfessorDto dto) {
-        professorRepository.save(dto.fromDto());
+        professorRepository.save(dto.fromDTO());
     }
 
     public List<ProfessorDto> listarAtivos() {
         return professorRepository.findByAtivoTrue()
-                .stream().map(ProfessorDto::toDto)
+                .stream().map(ProfessorDto::toDTO)
                 .collect(Collectors.toList());
     }
 
     public Optional<ProfessorDto> buscarPorId(Long id) {
         return professorRepository.findById(id)
                 .filter(Professor::isAtivo)
-                .map(ProfessorDto::toDto);
+                .map(ProfessorDto::toDTO);
     }
 
     public boolean atualizar(Long id, ProfessorDto dto) {
         return professorRepository.findById(id).map(professor -> {
-            Professor professorAtualizado = dto.fromDto();
+            Professor professorAtualizado = dto.fromDTO();
             professor.setNome(professorAtualizado.getNome());
             professor.setEmail(professorAtualizado.getEmail());
             professor.setDataNascimento(professorAtualizado.getDataNascimento());

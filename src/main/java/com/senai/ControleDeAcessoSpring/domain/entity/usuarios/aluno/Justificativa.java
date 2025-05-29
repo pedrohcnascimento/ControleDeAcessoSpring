@@ -6,6 +6,7 @@ import jakarta.persistence.*;
 import lombok.Data;
 
 import java.time.LocalDate;
+import java.time.LocalDateTime;
 import java.time.LocalTime;
 
 @Entity
@@ -22,8 +23,8 @@ public class Justificativa {
     private String anexo;
     private LocalDate dataInicial;
     private Integer qtdDias;
-    private LocalTime dataHoraCriacao;
-    private LocalTime dataHoraConclusao;
+    private LocalDateTime dataHoraCriacao;
+    private LocalDateTime dataHoraConclusao;
     private Boolean ativo;
 
     @Enumerated(EnumType.STRING)

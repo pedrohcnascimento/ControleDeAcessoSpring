@@ -14,7 +14,7 @@ public record TurmaDto(
         LocalTime horarioEntrada,
         Integer qtdSemestres,
         Integer qtdAulasPorDia,
-        Boolean status,
+        Boolean ativo,
         Long cursoId
 ) {
     public static TurmaDto toDto(Turma turma) {
@@ -25,8 +25,8 @@ public record TurmaDto(
                 turma.getDataInicial(),
                 turma.getHorarioEntrada(),
                 turma.getQtdSemestres(),
-                turma.getQtdAulasporDia(),
-                turma.getStatus(),
+                turma.getQtdAulasPorDia(),
+                turma.getAtivo(),
                 turma.getCurso() != null ? turma.getCurso().getId() : null
         );
     }
@@ -35,7 +35,7 @@ public record TurmaDto(
         Turma turma = new Turma();
         turma.setSiglaDaTurma(sigla);
         turma.setPeriodo(periodo);
-        turma.setStatus(status);
+        turma.setAtivo(ativo);
         turma.setDataInicial(dataInicial);
         turma.setHorarioEntrada(horarioEntrada);
         turma.setQtdSemestres(qtdSemestres);

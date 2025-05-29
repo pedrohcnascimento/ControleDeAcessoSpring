@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.infrastructure.mqtt;
 
-import com.senai.ControleDeAcessoSpring.inteface.controller.OcorrenciaController;
+import com.senai.ControleDeAcessoSpring.interface_ui.controller.OcorrenciaController;
 import jakarta.annotation.PostConstruct;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -22,7 +22,7 @@ public class MqttSubscriber {
             cliente.connect();
             cliente.subscribe(TOPICO, (topic, msg) -> {
                 String idAcesso = new String(msg.getPayload());
-                controller.criarOcorrenciaAtraso(idAcesso);
+                controller.criarOcorrenciaDeAtraso(idAcesso);
             });
             System.out.println("Inscrito no topico MQTT:" + TOPICO);
         } catch (MqttException e) {

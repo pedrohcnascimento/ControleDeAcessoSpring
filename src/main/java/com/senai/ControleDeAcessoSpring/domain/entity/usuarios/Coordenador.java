@@ -5,7 +5,6 @@ import jakarta.persistence.Entity;
 import lombok.Data;
 
 @Entity
-@Data
 @DiscriminatorValue("COORDENADOR")
 public class Coordenador extends Usuario {
 }

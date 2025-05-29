@@ -27,4 +27,9 @@ public abstract class Usuario {
     @ElementCollection(fetch = FetchType.EAGER)
     protected List<String> permissoes;
 
+    public boolean isAtivo() {
+        if (ativo) {
+            return true;
+        } else return false;
+    }
 }

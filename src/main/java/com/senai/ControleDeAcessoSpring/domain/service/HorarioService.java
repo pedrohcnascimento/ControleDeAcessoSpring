@@ -42,7 +42,7 @@ public class HorarioService {
             semanal.setSemanaReferencia(dataInicioSemestre);
         }
 
-        int aulasPorDia = horario.getSemestre().getSubTurma().getTurma().getQtdAulasporDia();
+        int aulasPorDia = horario.getSemestre().getSubTurma().getTurma().getQtdAulasPorDia();
 
         List<AulaDoDia> dias = new ArrayList<>();
 
