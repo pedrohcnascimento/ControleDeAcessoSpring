@@ -1,5 +1,8 @@
 package com.senai.ControleDeAcessoSpring.aplication.service;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.AulasDoDia;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioSemanal;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
@@ -9,6 +12,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.ArrayList;
@@ -63,7 +67,7 @@ public class OcorrenciaService {
         ocorrencia.setDataHoraCriacao(LocalDateTime.now());
         ocorrencia.setDataHoraConclusao(null);
         ocorrencia.setAluno(aluno);
-        //ocorrencia.setProfessorResponsavel(aluno.getSubTurmas().get().getHorarioPadrao().getAulasDoDia().get().getAulas().get().getProfessor());
+        //ocorrencia.setProfessorResponsavel(aluno.getSubTurmas().get().getSemestres().get().getHorariosSemanais());
         //ocorrencia.setUnidadeCurricular(aluno.getSubTurmas().get().getTurma().getCurso().getUnidadesCurriculares().get());
 
         List<Ocorrencia> ocorrenciasAtualizada = new ArrayList<>();
@@ -71,5 +75,12 @@ public class OcorrenciaService {
         ocorrenciasAtualizada.add(ocorrencia);
         aluno.setOcorrencias(ocorrenciasAtualizada);
     }
-}
 
+    private Professor procurarProfessor(Aluno aluno, ) {
+        List<HorarioSemanal> horariosSemanais = aluno.getSubTurmas().get().getSemestres().get().getHorariosSemanais();
+        horariosSemanais.forEach(horarioSemanal -> {
+            if (LocalDate.now().isSupported(horarioSemanal.getSemanaReferencia(), LocalDate.now().plusDays(6))) {
+            }
+        });
+    }
+}
