@@ -4,13 +4,19 @@ import com.senai.ControleDeAcessoSpring.domain.entity.turma.Semestre;
 import jakarta.persistence.Entity;
 import jakarta.persistence.JoinColumn;
 import jakarta.persistence.ManyToOne;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.time.LocalDate;
 
 @Entity
-@Data
-public class HorarioSemanal extends HorarioBase {
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
+public class HorarioSemanal extends HorarioBase{
     private LocalDate semanaReferencia;
 
     @ManyToOne

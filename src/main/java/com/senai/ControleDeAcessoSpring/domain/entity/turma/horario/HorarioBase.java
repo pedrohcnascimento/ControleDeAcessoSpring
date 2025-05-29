@@ -1,22 +1,33 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.turma.horario;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Semestre;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
 import jakarta.persistence.*;
-import lombok.*;
+import lombok.AllArgsConstructor;
+import lombok.Getter;
+import lombok.NoArgsConstructor;
+import lombok.Setter;
 
 import java.util.List;
 
 @Entity
+@Getter
+@Setter
+@NoArgsConstructor
+@AllArgsConstructor
 @Inheritance(strategy = InheritanceType.JOINED)
-@Data
 public abstract class HorarioBase {
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
-    protected Long id;
+    private Long id;
 
     @ManyToOne
     private Semestre semestre;
 
+    @ManyToOne
+    @JoinColumn(name = "sub_turma_id", nullable = false, unique = true)
+    protected SubTurma subTurma;
+
     @OneToMany(mappedBy = "horario", cascade = CascadeType.ALL, orphanRemoval = true)
-    private List<AulasDoDia> listaDeAulasDoDia ;
+    protected List<AulaDoDia> aulasDoDia;
 }

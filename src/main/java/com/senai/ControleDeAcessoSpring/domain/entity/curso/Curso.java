@@ -10,9 +10,10 @@ import java.util.List;
 
 @Entity
 @Data
-@AllArgsConstructor
 @NoArgsConstructor
+@AllArgsConstructor
 public class Curso {
+
     @Id
     @GeneratedValue(strategy = GenerationType.IDENTITY)
     private Long id;
@@ -20,7 +21,7 @@ public class Curso {
     private String titulo;
 
     @Enumerated(EnumType.STRING)
-    private TipoDeCurso tipoDeCurso;
+    private TipoDeCurso tipo;
 
     private Integer cargaHoraria;
     private Integer toleranciaMinutos;
@@ -28,10 +29,15 @@ public class Curso {
     @OneToMany(mappedBy = "curso")
     private List<UnidadeCurricular> unidadesCurriculares;
 
-    public Curso(String titulo, TipoDeCurso tipoDeCurso, Integer cargaHoraria, Integer tolerancia) {
+    public Curso(
+            String titulo,
+            TipoDeCurso tipo,
+            Integer cargaHoraria,
+            Integer toleranciaMinutos
+    ) {
         this.titulo = titulo;
-        this.tipoDeCurso = tipoDeCurso;
+        this.tipo = tipo;
         this.cargaHoraria = cargaHoraria;
-        this.toleranciaMinutos = tolerancia;
+        this.toleranciaMinutos = toleranciaMinutos;
     }
 }
