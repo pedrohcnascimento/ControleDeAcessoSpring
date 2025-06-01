@@ -1,7 +1,9 @@
 package com.senai.ControleDeAcessoSpring.domain.service;
 
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Semestre;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.Aula;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.AulaDoDia;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadrao;
@@ -20,16 +22,37 @@ import java.util.Locale;
 import java.util.Objects;
 
 @Service
-public class ProfessorService {
-    public Professor encontrarProfessor(Aluno aluno) {
-        return acharProfessor(Objects
+public class AtrasoService {
+    public static Professor encontrarProfessor(Aluno aluno) {
+        return acharAula(Objects
                         .requireNonNull(
                 acharDia(acharSemestre(Objects
                         .requireNonNull(encontrarSubturma(aluno))))),
-                LocalTime.of(8, 0));
+                LocalTime.of(8, 0)).getProfessor();
     }
 
-    private SubTurma encontrarSubturma(Aluno aluno) {
+    public static UnidadeCurricular acharUnidade(Aluno aluno) {
+        return acharAula(Objects
+                        .requireNonNull(
+                                acharDia(acharSemestre(Objects
+                                        .requireNonNull(encontrarSubturma(aluno))))),
+                LocalTime.of(8, 0)).getUnidadeCurricular();
+    }
+
+    public static boolean definirAtraso(Aluno aluno) {
+        Turma turma = encontrarSubturma(aluno).getTurma();
+
+        return LocalTime.now().isAfter(turma.getHorarioEntrada()) ||
+                LocalTime.now().equals(turma.getHorarioEntrada()) &&
+                        LocalTime.now().isBefore(
+                                turma.getHorarioEntrada()
+                                        .plusMinutes(turma.getCurso().getToleranciaMinutos()
+                                        )
+                        );
+    }
+
+
+    private static SubTurma encontrarSubturma(Aluno aluno) {
         List<SubTurma> subTurmas = aluno.getSubTurmas();
 
         for (SubTurma subTurma : subTurmas) {
@@ -41,13 +64,13 @@ public class ProfessorService {
         if (LocalTime.now().isAfter(LocalTime.NOON)) {
             if (LocalTime.now().isAfter(LocalTime.of(18, 0))) {
                 for (SubTurma subTurma : subTurmas) {
-                    if (subTurma.getTurma().getPeriodo() == Periodo.TARDE) {
+                    if (subTurma.getTurma().getPeriodo() == Periodo.NOITE) {
                         return subTurma;
                     }
                 }
             } else {
                 for (SubTurma subTurma : subTurmas) {
-                    if (subTurma.getTurma().getPeriodo() == Periodo.NOITE) {
+                    if (subTurma.getTurma().getPeriodo() == Periodo.TARDE) {
                         return subTurma;
                     }
                 }
@@ -63,7 +86,7 @@ public class ProfessorService {
         return null;
     }
 
-    private Semestre acharSemestre(SubTurma subTurma) {
+    private static Semestre acharSemestre(SubTurma subTurma) {
         Long qtdDias = ChronoUnit.DAYS
                 .between(
                         subTurma.getTurma().getDataInicial(),
@@ -75,7 +98,7 @@ public class ProfessorService {
         return subTurma.getSemestres().get((int) (qtdMeses / 6));
     }
 
-    private AulaDoDia acharDia(Semestre semestre) {
+    private static AulaDoDia acharDia(Semestre semestre) {
         HorarioPadrao horario = semestre.getHorarioPadrao();
 
         DiaDaSemana diaAtual = DiaDaSemana.SEGUNDA;
@@ -108,20 +131,20 @@ public class ProfessorService {
         return null;
     }
 
-    private Professor acharProfessor(AulaDoDia dia, LocalTime horarioInicial) {
+    private static Aula acharAula(AulaDoDia dia, LocalTime horarioInicial) {
         List<Aula> aulas = dia.getAulas();
 
         int c = 0;
 
         do {
             if (horarioInicial.isAfter(LocalTime.now())) {
-                return aulas.get(c).getProfessor();
+                return aulas.get(c);
             } else {
                 horarioInicial.plusMinutes(45);
             }
             c++;
         } while (c <= aulas.size());
 
-        return aulas.getLast().getProfessor();
+        return aulas.getLast();
     }
 }
