@@ -1,0 +1,9 @@
+URL: localhost:8080/alunos
+
+{
+    "nome": "Fulano",
+    "cpf": "11111111111",
+    "dataNascimento": "2000-01-01",
+    "email": "email@teste.com",
+    "senha": "senha"
+}

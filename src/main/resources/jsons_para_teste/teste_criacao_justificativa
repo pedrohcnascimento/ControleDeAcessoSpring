@@ -1,0 +1,9 @@
+URL: localhost:8080/alunos/{id}/justificativas
+
+{
+    "descricao": "Descrição da justificativa",
+    "anexo": "anexo.teste",
+    "dataInicial": "2025-06-04",
+    "qtdDias": 3,
+    "tipo": "FALTA"
+}

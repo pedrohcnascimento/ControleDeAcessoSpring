@@ -25,7 +25,6 @@ public class Justificativa {
     private Integer qtdDias;
     private LocalDateTime dataHoraCriacao;
     private LocalDateTime dataHoraConclusao;
-    private Boolean ativo;
 
     @Enumerated(EnumType.STRING)
     private StatusDaJustificativa status;

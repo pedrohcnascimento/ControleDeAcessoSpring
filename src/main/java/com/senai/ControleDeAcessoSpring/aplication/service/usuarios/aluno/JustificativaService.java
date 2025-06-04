@@ -8,9 +8,9 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
-import java.util.stream.Collectors;
 
 @Service
 public class JustificativaService {
@@ -20,7 +20,6 @@ public class JustificativaService {
 
     public void cadastrarJustificativa(JustificativaDto dto) {
         Justificativa justificativa = dto.fromDto();
-        justificativa.setAtivo(true);
         justificativa.setDataHoraCriacao(LocalDateTime.now());
         justificativa.setDataHoraConclusao(null);
         justificativa.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
@@ -28,9 +27,8 @@ public class JustificativaService {
     }
 
     public List<JustificativaDto> listar() {
-       return justificativaRepository.findByAtivoTrue()
-               .stream().map(JustificativaDto::toDto)
-               .collect(Collectors.toList());
+       return justificativaRepository.findByStatusOrStatusOrStatus(StatusDaJustificativa.AGUARDANDO_ANALISE, StatusDaJustificativa.APROVADA, StatusDaJustificativa.REPROVADA)
+               .stream().map(JustificativaDto::toDtoSemAluno).toList(); // Aprendi a língua do repository
     }
 
     public Optional<JustificativaDto> buscarPorId(Long id) {
@@ -39,7 +37,7 @@ public class JustificativaService {
 
     public boolean inativar(Long id) {
         return justificativaRepository.findById(id).map(justificativa -> {
-            justificativa.setAtivo(false);
+            justificativa.setStatus(StatusDaJustificativa.INATIVADA);
             justificativaRepository.save(justificativa);
             return true;
         }).orElse(false);

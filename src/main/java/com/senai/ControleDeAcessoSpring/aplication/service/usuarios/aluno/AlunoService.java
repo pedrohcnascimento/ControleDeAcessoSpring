@@ -41,10 +41,6 @@ public class AlunoService {
                 .map(AlunoDto::toDTO);
     }
 
-    public List<JustificativaDto> listarJustificativas(Long id) {
-        return alunoRepository.findById(id).get().getJustificativas().stream().map(JustificativaDto::toDtoSemAluno).toList();
-    }
-
     public boolean atualizar(Long id, AlunoDto dto) {
         return alunoRepository.findById(id).map(aluno -> {
             Aluno alunoAtualizado = dto.fromDTO();
@@ -57,20 +53,6 @@ public class AlunoService {
         }).orElse(false);
     }
 
-    public boolean criarJustificativa(Long id, JustificativaDto justificativaDto) {
-        Justificativa j = justificativaDto.fromDto();
-        j.setAluno(alunoRepository.findById(id).get());
-        j.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
-        j.setDataHoraCriacao(LocalDateTime.now()); // Hora em que é cadastrada
-        j.setDataHoraConclusao(null); // Ainda não foi concluída
-        j.setAtivo(true); // Ativo quando cria
-        return alunoRepository.findById(id).map(aluno -> {
-            aluno.getJustificativas().add(j);
-            justificativaRepository.save(j);
-            return true;
-        }).orElse(false);
-    }
-
     public boolean inativar(Long id) {
         return alunoRepository.findById(id).map(aluno -> {
             aluno.setAtivo(false);
@@ -78,4 +60,51 @@ public class AlunoService {
             return true;
         }).orElse(false);
     }
+
+    // Justificativas
+    public List<JustificativaDto> listarJustificativas(Long id) {
+        return justificativaRepository.findByAlunoAndStatusOrStatusOrStatus(alunoRepository.findById(id).get(), StatusDaJustificativa.APROVADA, StatusDaJustificativa.REPROVADA, StatusDaJustificativa.AGUARDANDO_ANALISE).stream().map(JustificativaDto::toDtoSemAluno).toList();
+    }
+
+    public Optional<JustificativaDto> listarJustificativaPorId(Long idJustificativa) {
+        return justificativaRepository.findById(idJustificativa).map(JustificativaDto::toDtoSemAluno);
+    }
+
+    public boolean criarJustificativa(Long id, JustificativaDto justificativaDto) {
+        Justificativa j = justificativaDto.fromDto();
+        j.setAluno(alunoRepository.findById(id).get());
+        j.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
+        j.setDataHoraCriacao(LocalDateTime.now()); // Hora em que é cadastrada
+        j.setDataHoraConclusao(null); // Ainda não foi concluída
+        return alunoRepository.findById(id).map(aluno -> {
+            aluno.getJustificativas().add(j);
+            justificativaRepository.save(j);
+            return true;
+        }).orElse(false);
+    }
+
+    public boolean alterarStatusJustificativa(Long idJustificativa, StatusDaJustificativa status) {
+        justificativaRepository.findById(idJustificativa).map(justificativa -> {
+                    justificativa.setStatus(status);
+                    if (status.equals(StatusDaJustificativa.APROVADA) || status.equals(StatusDaJustificativa.REPROVADA)) {
+                        justificativa.setDataHoraConclusao(LocalDateTime.now());
+                    }
+                    justificativaRepository.save(justificativa);
+                    return true;
+                }
+        );
+        return false;
+    }
+
+    public boolean inativarJustificativa(Long idJustificativa) {
+        justificativaRepository.findById(idJustificativa).map(justificativa -> {
+            justificativa.setStatus(StatusDaJustificativa.INATIVADA);
+            justificativaRepository.save(justificativa);
+            return true;
+        });
+        return false;
+    }
+
+
+
 }
