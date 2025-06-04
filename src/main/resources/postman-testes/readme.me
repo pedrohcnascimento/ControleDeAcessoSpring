@@ -142,3 +142,30 @@ Usuario deletado com sucesso
 * **Resposta Esperada:**
 
 * **Status:** 200 OK
+
+### 8. criar Horário (POST)
+
+* **URL:** `/horarios-padrao/{id}`
+* **Método:** POST
+* **Descrição:** Cria um novo horário padrão vinculado a um semestre específico.
+
+* **Exemplo de Body:**
+{
+    "id": null,
+    "listaAulasDoDia": [
+    {
+      "diaDaSemana": "SEGUNDA",
+      "aulas": [
+        { "unidadeCurricularId": 1, "professorId": 1, "ambienteId": 1 },
+        { "unidadeCurricularId": 2, "professorId": 2, "ambienteId": 2 },
+        { "unidadeCurricularId": 3, "professorId": 3, "ambienteId": 3 },
+        { "unidadeCurricularId": 4, "professorId": 4, "ambienteId": 4 },
+        { "unidadeCurricularId": 5, "professorId": 5, "ambienteId": 5 }
+      ]
+    },
+    ...
+]
+
+* **Resposta Esperada:**
+
+* **Status:** 200 OK
