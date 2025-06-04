@@ -21,14 +21,14 @@ public class TurmaController {
         return ResponseEntity.ok("Turma adicionada com sucesso!");
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TurmaDto> acharTurmaPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.BuscarPorId(id).get());
     }
 
     @GetMapping
-    public List<TurmaDto> listarTurmas() {
-        return service.listar();
+    public ResponseEntity<List<TurmaDto>> listarTurmas() {
+        return ResponseEntity.ok(service.listarTurmas());
     }
 
     @DeleteMapping("/{id}")

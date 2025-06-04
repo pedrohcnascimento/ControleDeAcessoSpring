@@ -24,10 +24,6 @@ public abstract class HorarioBase {
     @ManyToOne
     private Semestre semestre;
 
-    @ManyToOne
-    @JoinColumn(name = "sub_turma_id", nullable = false, unique = true)
-    protected SubTurma subTurma;
-
     @OneToMany(mappedBy = "horario", cascade = CascadeType.ALL, orphanRemoval = true)
     protected List<AulaDoDia> aulasDoDia;
 }

@@ -106,3 +106,39 @@ Usuario deletado com sucesso
 ```
 
 * **Status 404:** Caso o usuário não seja encontrado.
+
+### 6.Cadastrar Professor (POST)
+
+* **URL:** `/professores`
+* **Método:** POST
+* **Descrição:** Cria um novo professor no sistema.
+* **Exemplo de Body:**
+{
+  "id": null,
+  "nome": "João da Silva",
+  "cpf": "123.456.789-00",
+  "dataNascimento": "1980-05-10",
+  "email": "joao.silva@exemplo.com",
+  "senha": "senhaSegura123"
+}
+* **Resposta Esperada:**
+
+* **Status:** 200 OK
+
+### 7. Cadastrar Ambientes (POST)
+
+* **URL:** `/ambiente`
+* **Método:** POST
+* **Descrição:** Cria um novo ambiente no sistema.
+
+* **Exemplo de Body:**
+```json
+{
+  "id": null,
+  "nome": "Laboratório de Informática",
+  "ativo": true
+}
+
+* **Resposta Esperada:**
+
+* **Status:** 200 OK

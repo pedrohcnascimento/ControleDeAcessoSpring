@@ -18,7 +18,7 @@ public class AmbienteService {
         ambienteRepository.save(dto.fromDto());
     }
 
-    public List<AmbienteDto> listar() {
+    public List<AmbienteDto> listarAtivos() {
         return ambienteRepository.findAll()
                 .stream()
                 .filter(Ambiente::getAtivo)
@@ -26,7 +26,7 @@ public class AmbienteService {
                 .toList();
     }
 
-    public Optional<AmbienteDto> listarPorId(Long id) {
+    public Optional<AmbienteDto> buscarPorId(Long id) {
         return ambienteRepository.findById(id)
                 .filter(Ambiente::getAtivo)
                 .map(AmbienteDto::toDto);

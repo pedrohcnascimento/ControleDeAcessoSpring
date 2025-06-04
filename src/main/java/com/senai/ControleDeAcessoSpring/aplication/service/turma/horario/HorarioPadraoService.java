@@ -8,10 +8,12 @@ import com.senai.ControleDeAcessoSpring.domain.repository.turma.horario.HorarioP
 import com.senai.ControleDeAcessoSpring.domain.service.HorarioService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.stereotype.Service;
 
 import java.util.List;
 import java.util.Optional;
 
+@Service
 public class HorarioPadraoService {
     @Autowired
     private HorarioPadraoRepository repository;
@@ -32,6 +34,7 @@ public class HorarioPadraoService {
         horarioService.preencherHorario(horario, dto.listaAulasDoDia());
         repository.save(horario);
     }
+
 
     public List<HorarioPadraoDto> listar() {
         return repository.findAll().stream()

@@ -17,18 +17,19 @@ public class AmbienteController {
     AmbienteService ambienteService;
 
     @GetMapping
-    public ResponseEntity<List<AmbienteDto>> listar() {
-        return ResponseEntity.ok(ambienteService.listar());
+    public ResponseEntity<List<AmbienteDto>> listarAtivos() {
+        return ResponseEntity.ok(ambienteService.listarAtivos());
     }
 
     @PostMapping
-    public void adicionar(@RequestBody AmbienteDto dto) {
+    public ResponseEntity<Void> adicionar(@RequestBody AmbienteDto dto) {
         ambienteService.cadastrarAmbiente(dto);
+        return  ResponseEntity.ok().build();
     }
 
-    @GetMapping("/ambiente/{id}")
-    public ResponseEntity<AmbienteDto> listarPorId(@PathVariable Long id) {
-        Optional<AmbienteDto> ambiente = ambienteService.listarPorId(id);
+    @GetMapping("/{id}")
+    public ResponseEntity<AmbienteDto> buscarPorId(@PathVariable Long id) {
+        Optional<AmbienteDto> ambiente = ambienteService.buscarPorId(id);
         if (ambiente.isPresent()) {
             return ResponseEntity.ok(ambiente.get());
         }

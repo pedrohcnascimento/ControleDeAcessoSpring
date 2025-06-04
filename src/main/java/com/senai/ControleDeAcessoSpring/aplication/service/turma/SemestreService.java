@@ -42,7 +42,7 @@ public class SemestreService {
                         subTurma.getTurma().getPeriodo().getSigla()
         );
         semestre.setHorarioPadrao(horarioService.criarHorarioPadraoVazio(semestre));
-        semestre.setHorarioSemanais(new ArrayList<>());
+        semestre.setHorariosSemanais(new ArrayList<>());
         semestreRepository.save(semestre);
     }
 
