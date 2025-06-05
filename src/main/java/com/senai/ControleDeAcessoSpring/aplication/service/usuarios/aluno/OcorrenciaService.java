@@ -77,6 +77,7 @@ public class OcorrenciaService {
             if (usuarioOpt.get() instanceof Aluno aluno) {
                 System.out.println("O usuário " + aluno.getNome() + " é um aluno!");
                 if (AtrasoService.definirAtraso(aluno)) {
+                    System.out.println(aluno + "Está atrasado!");
                     Aula aula = AtrasoService.definirAula(aluno);
                     ocorrenciaRepository.save(
                             new Ocorrencia(

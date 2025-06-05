@@ -78,8 +78,15 @@ public class AtrasoService {
 
     public static boolean definirAtraso(Aluno aluno) {
         LocalTime agora = LocalTime.now();
-        LocalTime horarioDeEntrada = definirSubTurma(aluno).getTurma().getHorarioEntrada();
-        Integer tolerancia = definirSubTurma(aluno).getTurma().getCurso().getToleranciaMinutos();
+        System.out.println(agora);
+
+        Turma turma = definirSubTurma(aluno).getTurma();
+
+        LocalTime horarioDeEntrada = turma.getHorarioEntrada();
+        System.out.println(horarioDeEntrada);
+
+        Integer tolerancia = turma.getCurso().getToleranciaMinutos();
+        System.out.println(tolerancia);
 
         return !(agora.isBefore(horarioDeEntrada.plusMinutes(tolerancia)));
     }
