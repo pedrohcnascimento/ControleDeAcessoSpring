@@ -7,7 +7,6 @@ import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeJustificativa;
 
 import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 
 public record JustificativaDto(
         Long id,
@@ -37,21 +36,21 @@ public record JustificativaDto(
     }
 
     public Justificativa fromDto() {
-        Justificativa justificativa = new Justificativa();
-        justificativa.setId(id);
-        justificativa.setTipo(tipo);
-        justificativa.setDescricao(descricao);
-        justificativa.setAnexo(anexo);
-        justificativa.setDataInicial(dataInicial);
-        justificativa.setQtdDias(qtdDias);
-        justificativa.setDataHoraCriacao(dataHoraCriacao);
-        justificativa.setDataHoraConclusao(dataHoraConclusao);
-        justificativa.setStatus(status);
-        justificativa.setAluno(aluno);
-        return justificativa;
+        Justificativa j = new Justificativa();
+        j.setId(id);
+        j.setTipo(tipo);
+        j.setDescricao(descricao);
+        j.setAnexo(anexo);
+        j.setDataInicial(dataInicial);
+        j.setQtdDias(qtdDias);
+        j.setDataHoraCriacao(dataHoraCriacao);
+        j.setDataHoraConclusao(dataHoraConclusao);
+        j.setStatus(status);
+        j.setAluno(aluno);
+        return j;
     }
 
-    public static JustificativaDto toDtoSemAluno(Justificativa j) {
+    public static JustificativaDto toDtoSemAluno(Justificativa j) { //Gambiarra
         return new JustificativaDto(
                 j.getId(),
                 j.getTipo(),

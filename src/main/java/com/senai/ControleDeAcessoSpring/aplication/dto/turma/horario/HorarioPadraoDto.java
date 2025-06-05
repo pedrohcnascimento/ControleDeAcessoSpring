@@ -5,9 +5,9 @@ import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadra
 import java.util.List;
 
 public record HorarioPadraoDto(
-    Long id,
-    List<AulaDoDiaDto> listaAulasDoDia
-    )
+        Long id,
+        List<AulaDoDiaDto> listaAulasDoDia
+)
 {
     public static HorarioPadraoDto toDto(HorarioPadrao padrao) {
         return new HorarioPadraoDto(

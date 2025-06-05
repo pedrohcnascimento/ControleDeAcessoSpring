@@ -39,6 +39,7 @@ public record TurmaDto(
         turma.setDataInicial(dataInicial);
         turma.setHorarioEntrada(horarioEntrada);
         turma.setQtdSemestres(qtdSemestres);
+        turma.setQtdAulasPorDia(qtdAulasPorDia);
         return turma;
     }
 }
