@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.interface_ui.controller;
+package com.senai.ControleDeAcessoSpring.interface_ui.controller.turma;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.turma.TurmaDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.turma.TurmaService;
@@ -21,14 +21,14 @@ public class TurmaController {
         return ResponseEntity.ok("Turma adicionada com sucesso!");
     }
 
-    @PostMapping("/{id}")
+    @GetMapping("/{id}")
     public ResponseEntity<TurmaDto> acharTurmaPorId(@PathVariable Long id) {
         return ResponseEntity.ok(service.buscarPorId(id).get());
     }
 
     @GetMapping
-    public List<TurmaDto> listarTurmas() {
-        return service.listar();
+    public ResponseEntity<List<TurmaDto>> listarTurmas() {
+        return ResponseEntity.ok(service.listarTurmas());
     }
 
     @DeleteMapping("/{id}")

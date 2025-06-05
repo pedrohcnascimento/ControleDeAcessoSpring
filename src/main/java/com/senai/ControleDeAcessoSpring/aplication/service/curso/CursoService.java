@@ -32,7 +32,7 @@ public class CursoService {
                 )
         );
 
-        List<UnidadeCurricular> unidades = dto.unidadesCurriculares()
+        List<UnidadeCurricular> unidades = dto.unidadesCurricularesDto()
                 .stream()
                 .map(
                         ucDto -> ucDto.fromDto(curso)
@@ -64,7 +64,7 @@ public class CursoService {
 
         unidadeCurricularRepository.deleteById(curso.getId());
 
-        List<UnidadeCurricular> novasUCs = dto.unidadesCurriculares()
+        List<UnidadeCurricular> novasUCs = dto.unidadesCurricularesDto()
                 .stream()
                 .map(ucDto -> ucDto.fromDto(cursoAtualizado))
                 .toList();

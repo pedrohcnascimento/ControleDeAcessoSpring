@@ -106,3 +106,66 @@ Usuario deletado com sucesso
 ```
 
 * **Status 404:** Caso o usuário não seja encontrado.
+
+### 6.Cadastrar Professor (POST)
+
+* **URL:** `/professores`
+* **Método:** POST
+* **Descrição:** Cria um novo professor no sistema.
+* **Exemplo de Body:**
+{
+  "id": null,
+  "nome": "João da Silva",
+  "cpf": "123.456.789-00",
+  "dataNascimento": "1980-05-10",
+  "email": "joao.silva@exemplo.com",
+  "senha": "senhaSegura123"
+}
+* **Resposta Esperada:**
+
+* **Status:** 200 OK
+
+### 7. Cadastrar Ambientes (POST)
+
+* **URL:** `/ambiente`
+* **Método:** POST
+* **Descrição:** Cria um novo ambiente no sistema.
+
+* **Exemplo de Body:**
+```json
+{
+  "id": null,
+  "nome": "Laboratório de Informática",
+  "ativo": true
+}
+
+* **Resposta Esperada:**
+
+* **Status:** 200 OK
+
+### 8. criar Horário (POST)
+
+* **URL:** `/horarios-padrao/{id}`
+* **Método:** POST
+* **Descrição:** Cria um novo horário padrão vinculado a um semestre específico.
+
+* **Exemplo de Body:**
+{
+    "id": null,
+    "listaAulasDoDia": [
+    {
+      "diaDaSemana": "SEGUNDA",
+      "aulas": [
+        { "unidadeCurricularId": 1, "professorId": 1, "ambienteId": 1 },
+        { "unidadeCurricularId": 2, "professorId": 2, "ambienteId": 2 },
+        { "unidadeCurricularId": 3, "professorId": 3, "ambienteId": 3 },
+        { "unidadeCurricularId": 4, "professorId": 4, "ambienteId": 4 },
+        { "unidadeCurricularId": 5, "professorId": 5, "ambienteId": 5 }
+      ]
+    },
+    ...
+]
+
+* **Resposta Esperada:**
+
+* **Status:** 200 OK

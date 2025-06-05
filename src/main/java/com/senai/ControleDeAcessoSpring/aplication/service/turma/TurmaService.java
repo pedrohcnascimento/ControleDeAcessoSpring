@@ -36,12 +36,14 @@ public class TurmaService {
         turma.setCurso(curso);
 
         SubTurma subTurma = new SubTurma();
+        turma.setSubTurmas(new ArrayList<>());
         turma.getSubTurmas().add(subTurma);
 
         subTurma.setNome("Turma " + turma.getSubTurmas().size());
         subTurma.setTurma(turma);
 
         Semestre semestre = new Semestre();
+        subTurma.setSemestres(new ArrayList<>());
         subTurma.getSemestres().add(semestre);
         semestre.setNomeDaTurma(
                 subTurma.getSemestres().size() +
@@ -53,12 +55,12 @@ public class TurmaService {
         semestre.setNumero(subTurma.getSemestres().size());
 
         semestre.setHorarioPadrao(horarioService.criarHorarioPadraoVazio(semestre));
-        semestre.setHorarioSemanais(new ArrayList<>());
+        semestre.setHorariosSemanais(new ArrayList<>());
 
         turmaRepository.save(turma);
     }
     
-    public List<TurmaDto> listar() {
+    public List<TurmaDto> listarTurmas() {
         return turmaRepository.findAll().stream()
                 .map(TurmaDto::toDto).toList();
     }

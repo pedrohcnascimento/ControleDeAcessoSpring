@@ -2,7 +2,6 @@ package com.senai.ControleDeAcessoSpring.domain.entity.turma;
 
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadrao;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioSemanal;
-import com.senai.ControleDeAcessoSpring.domain.service.HorarioService;
 import jakarta.persistence.*;
 import lombok.AllArgsConstructor;
 import lombok.Data;
@@ -21,6 +20,7 @@ public class Semestre {
     private Long id;
 
     private Integer numero;
+
     private String nomeDaTurma;
 
     @OneToOne(cascade = CascadeType.ALL)
@@ -28,7 +28,7 @@ public class Semestre {
     private HorarioPadrao horarioPadrao;
 
     @OneToMany(mappedBy = "semestre", cascade = CascadeType.ALL)
-    private List<HorarioSemanal> horarioSemanais;
+    private List<HorarioSemanal> horariosSemanais;
 
     @ManyToOne
     @JoinColumn(name = "sub_turma_id")

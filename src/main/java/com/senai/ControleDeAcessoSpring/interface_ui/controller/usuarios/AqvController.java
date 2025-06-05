@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.interface_ui.controller;
+package com.senai.ControleDeAcessoSpring.interface_ui.controller.usuarios;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.AQVDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.usuarios.AqvService;
