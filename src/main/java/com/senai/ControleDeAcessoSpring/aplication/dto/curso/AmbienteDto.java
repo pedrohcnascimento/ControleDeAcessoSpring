@@ -4,14 +4,12 @@ import com.senai.ControleDeAcessoSpring.domain.entity.curso.Ambiente;
 
 public record AmbienteDto(
         Long id,
-        String nome,
-        Boolean ativo
+        String nome
 ) {
     public static AmbienteDto toDto(Ambiente ambiente) {
         return new AmbienteDto(
                 ambiente.getId(),
-                ambiente.getNome(),
-                ambiente.getAtivo()
+                ambiente.getNome()
         );
     }
 
@@ -20,7 +18,7 @@ public record AmbienteDto(
 
         ambiente.setId(id);
         ambiente.setNome(nome);
-        ambiente.setAtivo(ativo);
+        ambiente.setAtivo(true);
 
         return ambiente;
     }

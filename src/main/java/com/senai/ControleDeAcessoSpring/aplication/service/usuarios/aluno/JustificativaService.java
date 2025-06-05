@@ -18,17 +18,17 @@ public class JustificativaService {
     @Autowired
     JustificativaRepository justificativaRepository;
 
-    public void cadastrarJustificativa(JustificativaDto dto) {
-        Justificativa justificativa = dto.fromDto();
-        justificativa.setDataHoraCriacao(LocalDateTime.now());
-        justificativa.setDataHoraConclusao(null);
-        justificativa.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
-        justificativaRepository.save(justificativa);
-    }
+//    public void cadastrarJustificativa(JustificativaDto dto) {
+//        Justificativa justificativa = dto.fromDto();
+//        justificativa.setDataHoraCriacao(LocalDateTime.now());
+//        justificativa.setDataHoraConclusao(null);
+//        justificativa.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
+//        justificativaRepository.save(justificativa);
+//    }
 
     public List<JustificativaDto> listar() {
        return justificativaRepository.findByStatusOrStatusOrStatus(StatusDaJustificativa.AGUARDANDO_ANALISE, StatusDaJustificativa.APROVADA, StatusDaJustificativa.REPROVADA)
-               .stream().map(JustificativaDto::toDtoSemAluno).toList(); // Aprendi a língua do repository
+               .stream().map(JustificativaDto::toDto).toList(); // Aprendi a língua do repository
     }
 
     public Optional<JustificativaDto> buscarPorId(Long id) {

@@ -16,11 +16,11 @@ public class JustificativaController {
     @Autowired
     JustificativaService justificativaService;
 
-    @PostMapping
-    public ResponseEntity<Void> cadastrarJustificativa(@RequestBody JustificativaDto dto) {
-        justificativaService.cadastrarJustificativa(dto);
-        return ResponseEntity.ok().build();
-    }
+//    @PostMapping
+//    public ResponseEntity<Void> cadastrarJustificativa(@RequestBody JustificativaDto dto) {
+//        justificativaService.cadastrarJustificativa(dto);
+//        return ResponseEntity.ok().build();
+//    }
 
     @GetMapping
     public ResponseEntity<List<JustificativaDto>> listarJustificativas() {

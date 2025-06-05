@@ -1,6 +1,5 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeJustificativa;
@@ -18,7 +17,7 @@ public record JustificativaDto(
         LocalDateTime dataHoraCriacao,
         LocalDateTime dataHoraConclusao,
         StatusDaJustificativa status,
-        Aluno aluno
+        Long alunoId
 ) {
     public static JustificativaDto toDto(Justificativa j) {
         return new JustificativaDto(
@@ -31,7 +30,7 @@ public record JustificativaDto(
                 j.getDataHoraCriacao(),
                 j.getDataHoraConclusao(),
                 j.getStatus(),
-                j.getAluno()
+                j.getAluno().getId()
         );
     }
 
@@ -46,22 +45,6 @@ public record JustificativaDto(
         j.setDataHoraCriacao(dataHoraCriacao);
         j.setDataHoraConclusao(dataHoraConclusao);
         j.setStatus(status);
-        j.setAluno(aluno);
         return j;
-    }
-
-    public static JustificativaDto toDtoSemAluno(Justificativa j) { //Gambiarra
-        return new JustificativaDto(
-                j.getId(),
-                j.getTipo(),
-                j.getDescricao(),
-                j.getAnexo(),
-                j.getDataInicial(),
-                j.getQtdDias(),
-                j.getDataHoraCriacao(),
-                j.getDataHoraConclusao(),
-                j.getStatus(),
-                null
-        );
     }
 }

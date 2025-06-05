@@ -39,8 +39,11 @@ public class AmbienteController {
     }
 
     @DeleteMapping("/{id}")
-    public Boolean inativar(@PathVariable Long id) {
-        return ambienteService.inativarAmbiente(id);
+    public ResponseEntity<Void> inativar(@PathVariable Long id) {
+        if (ambienteService.inativarAmbiente(id)) {
+            return ResponseEntity.ok().build();
+        }
+        return ResponseEntity.notFound().build();
     }
 
     @PutMapping("/{id}")

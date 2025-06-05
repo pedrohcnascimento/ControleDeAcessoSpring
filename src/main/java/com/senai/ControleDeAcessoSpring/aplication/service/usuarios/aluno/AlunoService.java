@@ -25,8 +25,10 @@ public class AlunoService {
     private JustificativaRepository justificativaRepository;
 
 
-    public void cadastrarAluno(AlunoDto dto) {
-        alunoRepository.save(dto.fromDTO());
+    public void cadastrarAluno(List<AlunoDto> listaDtos) {
+        listaDtos.forEach(alunoDto -> {
+            alunoRepository.save(alunoDto.fromDTO());
+        });
     }
 
     public List<AlunoDto> listarAtivos() {
@@ -63,11 +65,15 @@ public class AlunoService {
 
     // Justificativas
     public List<JustificativaDto> listarJustificativas(Long id) {
-        return alunoRepository.findById(id).get().getJustificativas().stream().map(JustificativaDto::toDtoSemAluno).toList();
+        return alunoRepository.findById(id).get().getJustificativas().stream().filter(justificativa -> {
+            if (justificativa.getStatus().equals(StatusDaJustificativa.INATIVADA)) {
+                return false;
+            } else return true;
+        }) .map(JustificativaDto::toDto).toList();
     }
 
     public Optional<JustificativaDto> listarJustificativaPorId(Long idJustificativa) {
-        return justificativaRepository.findById(idJustificativa).map(JustificativaDto::toDtoSemAluno);
+        return justificativaRepository.findById(idJustificativa).map(JustificativaDto::toDto);
     }
 
     public boolean criarJustificativa(Long id, JustificativaDto justificativaDto) {

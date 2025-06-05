@@ -18,9 +18,11 @@ public class AlunoController {
     @Autowired
     AlunoService alunoService;
 
+    //INSERT INTO usuario(ativo, id_acesso, nome, cpf, data_nascimento, email, senha, tipo_usuario) VALUES(true, "", "Nome", 11111111111, "2000-01-01", "email.exemplo@teste.com", "senha", "ALUNO");
+
     @PostMapping
-    public ResponseEntity<Void> cadastrarUsuario(@RequestBody AlunoDto dto) {
-        alunoService.cadastrarAluno(dto);
+    public ResponseEntity<Void> cadastrarUsuario(@RequestBody List<AlunoDto> listaDtos) {
+        alunoService.cadastrarAluno(listaDtos);
         return ResponseEntity.ok().build();
     }
 
