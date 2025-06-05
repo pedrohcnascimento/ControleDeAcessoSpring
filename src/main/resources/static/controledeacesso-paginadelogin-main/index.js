@@ -11,3 +11,10 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
+function buscarDadosLogin() {
+    fetch("http://localhost:8080/auth")
+    .then(response => response.json())
+    console.log(response)
+}
+
+buscarDadosLogin()
