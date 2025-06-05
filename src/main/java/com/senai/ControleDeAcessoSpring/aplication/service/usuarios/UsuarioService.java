@@ -5,6 +5,7 @@ import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.UsuarioDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -14,9 +15,14 @@ import java.util.stream.Collectors;
 @Service
 public class UsuarioService {
     @Autowired private UsuarioRepository usuarioRepository;
+    @Autowired
+    private PasswordEncoder passwordEncoder;
 
     public void cadastrarUsuario(UsuarioDto dto) {
-        usuarioRepository.save(dto.fromDto());
+        Usuario usuario = dto.fromDto();
+        usuario.setSenha(passwordEncoder.encode(dto.senha()));
+        System.out.println(usuario.getSenha());
+        usuarioRepository.save(usuario);
     }
 
     public List<UsuarioDto> listarAtivos() {

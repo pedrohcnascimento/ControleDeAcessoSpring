@@ -28,7 +28,7 @@ public class AuthController {
         String username = payload.get("username");
         String password = payload.get("password");
         Usuario user = authService.authenticate(username, password);
-        String token = jwtUtil.generateToken(user.getId(), user.getCpf(), UsuarioDto.toDto(user).tipoDeUsuario() );
+        String token = jwtUtil.generateToken(user.getId(), user.getCpf());
         return ResponseEntity.ok(Map.of("token", token));
     }
 
