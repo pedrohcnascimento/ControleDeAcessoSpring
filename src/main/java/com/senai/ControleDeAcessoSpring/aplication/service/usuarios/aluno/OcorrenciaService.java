@@ -1,12 +1,15 @@
 package com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.OcorrenciaDto;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.Aula;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.OcorrenciaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.UsuarioRepository;
+import com.senai.ControleDeAcessoSpring.domain.service.AtrasoService;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -73,6 +76,23 @@ public class OcorrenciaService {
             System.out.println("O usuário existe!");
             if (usuarioOpt.get() instanceof Aluno aluno) {
                 System.out.println("O usuário " + aluno.getNome() + " é um aluno!");
+                if (AtrasoService.definirAtraso(aluno)) {
+                    Aula aula = AtrasoService.definirAula(aluno);
+                    ocorrenciaRepository.save(
+                            new Ocorrencia(
+                                    null,
+                                    TipoDeOcorrencia.ATRASO,
+                                    "",
+                                    StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO,
+                                    LocalDateTime.now(),
+                                    null,
+                                    aluno,
+                                    aula.getProfessor(),
+                                    aula.getUnidadeCurricular(),
+                                    true
+                            )
+                    );
+                }
             }
         } else {
             System.out.println("O usuário não existe e não pode te machucar!");
