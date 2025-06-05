@@ -1,116 +1,109 @@
 <!DOCTYPE html>
-<html lang="pt-br">
+<html lang="pt-BR">
+
 <head>
     <meta charset="UTF-8">
-    <title>Controle de Acesso</title>
+    <meta name="viewport" content="width=device-width, initial-scale=1.0">
+    <title>SENAI - Controle de Acesso</title>
+    <link rel="stylesheet" href="https://cdnjs.cloudflare.com/ajax/libs/font-awesome/6.0.0/css/all.min.css">
+    <link rel="stylesheet" href="controledeacesso-paginadelogin-main/style.css">
+    <link rel="stylesheet" href="controledeacesso-paginadelogin-main/media.css">
+    <script src="controledeacesso-paginadelogin-main/index.js" defer></script>
 </head>
+
 <body>
+    <div class="page-container">
+        <aside class="hero-section" role="complementar" aria-label="Destaques do SENAI">
+            <div class="hero-content">
+                    <h1>Transformando o futuro da indústria</h1>
+                <p>Com décadas de experiência, o SENAI é sinônimo de qualidade,
+                    confiança e compromisso com a educação.</p>
+                <div class="feature-grid" role="list" aria-label="Áreas de atuação">
+                    <div class="feature-item" role="listitem">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-industry"></i>
+                        </div>
+                        <p>Indústria 4.0</p>
+                    </div>
 
-<h2>Lista de Usuários</h2>
-<table border="1">
-    <thead>
-    <tr>
-        <th>ID</th>
-        <th>Nome</th>
-        <th>Ações</th>
-    </tr>
-    </thead>
-    <tbody id="tabela-usuarios">
-    <!-- usuários serão listados aqui -->
-    </tbody>
-</table>
+                    <div class="feature-item" role="listitem">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-graduation-cap"></i>
+                        </div>
+                        <p>Educação</p>
+                    </div>
 
-<h2 id="form-titulo">Novo Usuário</h2>
-<form id="form-usuario">
-    ID: <input type="number" id="usuario-id" required><br><br>
-    Nome: <input type="text" id="usuario-nome" required><br><br>
-    <button type="submit">Salvar Usuário</button>
-    <button type="button" onclick="resetForm()">Cancelar</button>
-</form>
-<script>
-    let modoEdicao = false;
+                    <div class="feature-item" role="listitem">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-cogs"></i>
+                        </div>
+                        <p>Tecnologia</p>
+                    </div>
 
-    function carregarUsuarios() {
-        fetch('http://localhost:8080/usuarios')
-            .then(resposta => resposta.json())
-            .then(usuarios => {
-                const tabela = document.getElementById('tabela-usuarios');
-                tabela.innerHTML = '';
+                    <div class="feature-item" role="listitem">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-users"></i>
+                        </div>
+                        <p>Pessoas</p>
+                    </div>
 
-                usuarios.forEach(usuario => {
-                    const linha = document.createElement('tr');
+                    <div class="feature-item" role="listitem">
+                        <div class="feature-icon" aria-hidden="true">
+                            <i class="fas fa-chart-line"></i>
+                        </div>
+                        <p>Inovação</p>
+                    </div>
+                </div>
+            </div>
+        </aside>
+        <main class="login-section" role="main">
+            <div class="login-card">
+                <header class="login-header">
+                    <img src="/controledeacesso-paginadelogin-main/imagens/senai-logo.png" alt="Logotipo SENAI" width="200" height="auto">
+                </header>
 
-                    const celulaId = document.createElement('td');
-                    celulaId.textContent = usuario.id;
+                <form class="login-form" action="" method="POST">
+                    <h2 id="login-title">Insira as informações para entrar</h2>
 
-                    const celulaNome = document.createElement('td');
-                    celulaNome.textContent = usuario.nome;
+                    <div class="form-field">
+                        <label for="email-ou-cpf">E-mail ou CPF</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-user" aria-hidden="true"></i>
+                            <input type="text" id="email-ou-cpf" name="email-ou-cpf"
+                                placeholder="Digite seu e-mail ou CPF" required autocomplete="username">
+                        </div>
+                    </div>
 
-                    const celulaAcoes = document.createElement('td');
-                    celulaAcoes.innerHTML = `
-                        <button onclick="editarUsuario(${usuario.id}, '${usuario.nome}')">Editar</button>
-                        <button onclick="deletarUsuario(${usuario.id})">Excluir</button>
-                    `;
+                    <div class="form-field">
+                        <label for="senha">Senha</label>
+                        <div class="input-wrapper">
+                            <i class="fas fa-lock" aria-hidden="true"></i>
+                            <input type="password" id="senha" name="senha" placeholder="Digite sua senha" required
+                                autocomplete="current-password">
+                            <button type="button" class="toggle-password">
+                                <i class="fas fa-eye"></i>
+                            </button>
+                        </div>
+                    </div>
 
-                    linha.appendChild(celulaId);
-                    linha.appendChild(celulaNome);
-                    linha.appendChild(celulaAcoes);
-
-                    tabela.appendChild(linha);
-                });
-            });
-    }
-
-    document.getElementById('form-usuario').addEventListener('submit', function (evento) {
-        evento.preventDefault();
-
-        const id = parseInt(document.getElementById('usuario-id').value);
-        const nome = document.getElementById('usuario-nome').value;
-
-        const metodo = modoEdicao ? 'PUT' : 'POST';
-        const url = modoEdicao ? `http://localhost:8080/usuarios/${id}` : 'http://localhost:8080/usuarios';
-
-        fetch(url, {
-            method: metodo,
-            headers: { 'Content-Type': 'application/json' },
-            body: JSON.stringify({ id, nome })
-        })
-        .then(() => {
-            alert(`Usuário ${modoEdicao ? 'atualizado' : 'adicionado'} com sucesso!`);
-            carregarUsuarios();
-            resetForm();
-        })
-        .catch(() => alert('Erro ao salvar usuário.'));
-    });
-
-    function editarUsuario(id, nome) {
-        modoEdicao = true;
-        document.getElementById('form-titulo').textContent = 'Editar Usuário';
-        document.getElementById('usuario-id').value = id;
-        document.getElementById('usuario-id').disabled = true;
-        document.getElementById('usuario-nome').value = nome;
-    }
-
-    function deletarUsuario(id) {
-        if (confirm('Deseja excluir este usuário?')) {
-            fetch(`http://localhost:8080/usuarios/${id}`, { method: 'DELETE' })
-                .then(() => {
-                    alert('Usuário deletado com sucesso!');
-                    carregarUsuarios();
-                })
-                .catch(() => alert('Erro ao deletar usuário.'));
-        }
-    }
-
-    function resetForm() {
-        modoEdicao = false;
-        document.getElementById('form-titulo').textContent = 'Novo Usuário';
-        document.getElementById('usuario-id').value = '';
-        document.getElementById('usuario-id').disabled = false;
-        document.getElementById('usuario-nome').value = '';
-    }
-
-    carregarUsuarios();
-</script>
+                    <button id="login-button" type="submit">
+                        <i class="fas fa-sign-in-alt" aria-hidden="true"></i>
+                        Entrar
+                    </button>
+                </form>
+            </div>
+            <footer class="page-footer" role="contentinfo">
+                <p>Controle de acesso - SENAI-SP</p>
+                <nav aria-label="Links legais">
+                    <p>
+                        <a href="#" aria-label="Leia os termos de uso">Termos de uso</a> |
+                        <a href="#" aria-label="Leia a política de privacidade">Política de privacidade</a>
+                    </p>
+                </nav>
+                <p aria-label="Copyright">© SENAI-SP - 2025</p>
+            </footer>
+        </main>
+    </div>
 </body>
+
 </html>
