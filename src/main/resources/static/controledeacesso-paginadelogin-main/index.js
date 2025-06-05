@@ -11,10 +11,38 @@ document.addEventListener('DOMContentLoaded', () => {
     });
 });
 
-function buscarDadosLogin() {
-    fetch("http://localhost:8080/auth")
-    .then(response => response.json())
-    console.log(response)
-}
+    const loginForm = document.querySelector(".login-form");
+    loginForm.addEventListener("submit", async (e) => {
+        e.preventDefault();
 
-buscarDadosLogin()
+    const username = document.getElementById("email-ou-cpf").value
+    const password = document.getElementById("senha").value
+
+        try {
+            const response = await fetch('http://localhost:8080/auth/login', {
+                method: 'POST',
+                headers: {
+                    'Content-Type': 'application/json'
+                },
+                body: JSON.stringify({
+                    username: username,
+                    password: password
+                })
+            });
+
+            if (response.ok) {
+                const data = await response.json();
+                // Salvar o token no localStorage
+                localStorage.setItem('token', data.token);
+                console.log(data.token)
+                // Redirecionar para a página principal após login
+               alert("login realizado com sucesso!")
+            } else {
+                alert('Credenciais inválidas. Por favor, tente novamente.');
+            }
+        } catch (error) {
+            console.error('Erro ao fazer login:', error);
+            alert('Erro ao fazer login. Por favor, tente novamente.');
+        }
+
+           });
