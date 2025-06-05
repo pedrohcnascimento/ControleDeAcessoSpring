@@ -63,7 +63,7 @@ public class AlunoService {
 
     // Justificativas
     public List<JustificativaDto> listarJustificativas(Long id) {
-        return justificativaRepository.findByAlunoAndStatusOrStatusOrStatus(alunoRepository.findById(id).get(), StatusDaJustificativa.APROVADA, StatusDaJustificativa.REPROVADA, StatusDaJustificativa.AGUARDANDO_ANALISE).stream().map(JustificativaDto::toDtoSemAluno).toList();
+        return alunoRepository.findById(id).get().getJustificativas().stream().map(JustificativaDto::toDtoSemAluno).toList();
     }
 
     public Optional<JustificativaDto> listarJustificativaPorId(Long idJustificativa) {

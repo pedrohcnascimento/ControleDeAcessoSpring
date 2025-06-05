@@ -84,7 +84,7 @@ public class AlunoController {
     @DeleteMapping("/{id}/justificativas/{idJustificativa}")
     public ResponseEntity<String> inativarJustificativa(@PathVariable Long id, @PathVariable Long idJustificativa) {
         if (alunoService.inativarJustificativa(idJustificativa)) {
-            return ResponseEntity.ok("Justificativa apagada");
+            return ResponseEntity.ok("Justificativa inativada");
         } else {
             return ResponseEntity.notFound().build();
         }

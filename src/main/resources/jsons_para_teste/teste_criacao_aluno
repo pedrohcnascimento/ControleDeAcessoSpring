@@ -1,9 +1,74 @@
 URL: localhost:8080/alunos
 
-{
-    "nome": "Fulano",
-    "cpf": "11111111111",
-    "dataNascimento": "2000-01-01",
-    "email": "email@teste.com",
-    "senha": "senha"
-}
+[
+    {
+        "nome": "Ana Paula",
+        "cpf": "12345678901",
+        "dataNascimento": "1992-05-10",
+        "email": "ana.paula@example.com",
+        "senha": "senha123"
+    },
+    {
+        "nome": "Carlos Eduardo",
+        "cpf": "23456789012",
+        "dataNascimento": "1988-11-22",
+        "email": "carlos.edu@example.com",
+        "senha": "minhaSenha1"
+    },
+    {
+        "nome": "Juliana Mendes",
+        "cpf": "34567890123",
+        "dataNascimento": "1995-03-14",
+        "email": "juliana.mendes@example.com",
+        "senha": "juliana95"
+    },
+    {
+        "nome": "Fernando Rocha",
+        "cpf": "45678901234",
+        "dataNascimento": "1979-07-01",
+        "email": "fernando.rocha@example.com",
+        "senha": "senha1979"
+    },
+    {
+        "nome": "Patrícia Lima",
+        "cpf": "56789012345",
+        "dataNascimento": "2001-09-30",
+        "email": "patricia.lima@example.com",
+        "senha": "plima2001"
+    },
+    {
+        "nome": "Ricardo Alves",
+        "cpf": "67890123456",
+        "dataNascimento": "1990-12-15",
+        "email": "ricardo.alves@example.com",
+        "senha": "r1card0!"
+    },
+    {
+        "nome": "Mariana Silva",
+        "cpf": "78901234567",
+        "dataNascimento": "1997-08-05",
+        "email": "mariana.silva@example.com",
+        "senha": "msilva97"
+    },
+    {
+        "nome": "Gabriel Souza",
+        "cpf": "89012345678",
+        "dataNascimento": "1985-01-18",
+        "email": "gabriel.souza@example.com",
+        "senha": "g@b1985"
+    },
+    {
+        "nome": "Vanessa Teixeira",
+        "cpf": "90123456789",
+        "dataNascimento": "2003-04-09",
+        "email": "vanessa.teixeira@example.com",
+        "senha": "vanessa03"
+    },
+    {
+        "nome": "Lucas Martins",
+        "cpf": "01234567890",
+        "dataNascimento": "1993-06-21",
+        "email": "lucas.martins@example.com",
+        "senha": "lucas#1993"
+    }
+]
