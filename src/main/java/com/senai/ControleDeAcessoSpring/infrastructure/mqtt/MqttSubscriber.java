@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.infrastructure.mqtt;
 
-import com.senai.ControleDeAcessoSpring.interface_ui.controller.OcorrenciaController;
+import com.senai.ControleDeAcessoSpring.interface_ui.controller.usuarios.aluno.OcorrenciaController;
 import jakarta.annotation.PostConstruct;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;

@@ -1,15 +1,18 @@
 package com.senai.ControleDeAcessoSpring.aplication.service.turma;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.turma.SubTurmaDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.AlunoDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Semestre;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadrao;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.repository.turma.SubTurmaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.turma.TurmaRepository;
 import com.senai.ControleDeAcessoSpring.domain.service.HorarioService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.http.ResponseEntity;
 import org.springframework.stereotype.Service;
 
 import java.util.ArrayList;
@@ -87,5 +90,12 @@ public class SubTurmaService {
 
     public Optional<SubTurmaDto> buscarPorId(Long id) {
         return subTurmaRepository.findById(id).map(SubTurmaDto::toDto);
+    }
+
+    public boolean adicionarAlunos(Long id, List<AlunoDto> listaAlunosDto) {
+        listaAlunosDto.forEach(alunoDto -> {
+            subTurmaRepository.findById(id).get().getAlunos().add(alunoDto.fromDTO());
+        });
+        return true;
     }
 }
