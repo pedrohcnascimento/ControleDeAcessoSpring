@@ -1,14 +1,18 @@
 package com.senai.ControleDeAcessoSpring.aplication.service.turma;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.turma.SubTurmaDto;
+import com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno.AlunoService;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Semestre;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Turma;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadrao;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.repository.turma.SubTurmaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.turma.TurmaRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.AlunoRepository;
 import com.senai.ControleDeAcessoSpring.domain.service.HorarioService;
 import jakarta.transaction.Transactional;
+import lombok.extern.java.Log;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -25,6 +29,8 @@ public class SubTurmaService {
     private TurmaRepository turmaRepository;
     @Autowired
     private HorarioService horarioService;
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     @Transactional
     public void criarSubTurma(Long turmaId) {
@@ -86,5 +92,34 @@ public class SubTurmaService {
 
     public Optional<SubTurmaDto> buscarPorId(Long id) {
         return subTurmaRepository.findById(id).map(SubTurmaDto::toDto);
+    }
+
+    @Transactional
+    public List<Aluno> adicionarAluno(Long id, List<Aluno> alunos){
+        Optional<SubTurma> optinal = subTurmaRepository.findById(id);
+        if (optinal.isEmpty()) return null;
+
+        SubTurma subTurma = optinal.get();
+
+        for (Aluno aluno : alunos) {
+            if (alunoRepository.findByAtivoTrue().contains(aluno)) {
+                subTurma.getAlunos().add(alunoRepository.findById(aluno.getId()).get());
+            }
+        }
+
+        subTurmaRepository.save(subTurma);
+        return alunos;
+    }
+
+    public Boolean removerAluno(Long idSubTurma, Long idAluno) {
+        Optional<SubTurma> optinal = subTurmaRepository.findById(idSubTurma);
+        if (optinal.isEmpty()) return false;
+
+        SubTurma subTurma = optinal.get();
+
+        subTurma.getAlunos().removeIf(aluno -> aluno.getId().equals(idAluno));
+
+        subTurmaRepository.save(subTurma);
+        return true;
     }
 }

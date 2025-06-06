@@ -2,6 +2,7 @@ package com.senai.ControleDeAcessoSpring.interface_ui.controller.turma;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.turma.SubTurmaDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.turma.SubTurmaService;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
 import org.springframework.web.bind.annotation.*;
@@ -36,6 +37,26 @@ public class SubTurmaController {
     public ResponseEntity<String> atualizarSubTurma(@PathVariable Long id, @RequestBody SubTurmaDto subTurmaDto) {
         service.atualizar(id, subTurmaDto);
         return ResponseEntity.ok("Sub Turma atualizada!");
+    }
+
+    @PutMapping("/{id}/alunos")
+    public ResponseEntity<List<Aluno>> adicionarAlunos(@PathVariable Long id, @RequestBody List<Aluno> alunos) {
+        List<Aluno> resposta = service.adicionarAluno(id, alunos);
+
+        if (resposta.isEmpty()) {
+            return ResponseEntity.notFound().build();
+        }
+
+        return ResponseEntity.ok(resposta);
+    }
+
+    @DeleteMapping("/{id}/alunos")
+    public ResponseEntity<Boolean> deletarAluno(@PathVariable Long idSubTurma, @PathVariable Long idAluno) {
+        if (service.removerAluno(idSubTurma, idAluno)) {
+            return ResponseEntity.ok(true);
+        }
+
+        return ResponseEntity.notFound().build();
     }
 
     @DeleteMapping("/{id}")
