@@ -1,4 +1,4 @@
-package com.senai.ControleDeAcessoSpring.interface_ui.controller;
+package com.senai.ControleDeAcessoSpring.interface_ui.controller.turma;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.turma.SubTurmaDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.turma.SubTurmaService;
@@ -19,26 +19,28 @@ public class SubTurmaController {
         return ResponseEntity.ok(service.listar());
     }
 
-    @PostMapping
-    public ResponseEntity<String> cadastrarSubTurma(@RequestBody SubTurmaDto subTurma) {
-        service.cadastrarSubTurma(subTurma);
+    @PostMapping("/{idTurma}")
+    public ResponseEntity<String> cadastrarSubTurma(@PathVariable Long turmaId) {
+        service.criarSubTurma(turmaId);
         return ResponseEntity.ok("Sub Turma criada com sucesso!");
     }
 
-    @PostMapping("/{id}")
-    public ResponseEntity<SubTurmaDto> listarPorId(@PathVariable Long id) {
-        return ResponseEntity.ok(service.listarPorId(id));
+    @GetMapping("/{id}")
+    public ResponseEntity<SubTurmaDto> buscarPorID(@PathVariable Long id) {
+        return service.buscarPorId(id)
+                .map(ResponseEntity::ok)
+                .orElse(ResponseEntity.notFound().build());
     }
 
     @PutMapping("/{id}")
     public ResponseEntity<String> atualizarSubTurma(@PathVariable Long id, @RequestBody SubTurmaDto subTurmaDto) {
-        service.atualizarSubTurma(id, subTurmaDto);
+        service.atualizar(id, subTurmaDto);
         return ResponseEntity.ok("Sub Turma atualizada!");
     }
 
     @DeleteMapping("/{id}")
     public ResponseEntity<String> deletarSubTurma(@PathVariable Long id) {
-        service.deletarSubTurma(id);
+        service.deletar(id);
         return ResponseEntity.ok("Sub Turma deletada com sucesso!");
     }
 }

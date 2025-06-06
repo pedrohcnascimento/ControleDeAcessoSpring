@@ -12,7 +12,7 @@ public record CursoDto(
         TipoDeCurso tipo,
         Integer cargaHoraria,
         Integer toleranciaMinutos,
-        List<UnidadeCurricularDto> unidadesCurriculares
+        List<UnidadeCurricularDto> unidadesCurricularesDto
 ) {
     public static CursoDto toDto(Curso curso) {
         return new CursoDto(
@@ -36,14 +36,13 @@ public record CursoDto(
         curso.setTipo(tipo);
         curso.setCargaHoraria(cargaHoraria);
         curso.setToleranciaMinutos(toleranciaMinutos);
-        curso.setUnidadesCurriculares(unidadesCurriculares
+
+        List<UnidadeCurricular> ucs = unidadesCurricularesDto
                 .stream()
-                .map(uc -> new UnidadeCurricular(
-                        uc.nome(),
-                        uc.cargaHorariaTotal()
-                ))
-                .toList()
-        );
+                .map(dto -> dto.fromDto(curso))
+                .toList();
+
+        curso.setUnidadesCurriculares(ucs);
 
         return curso;
     }

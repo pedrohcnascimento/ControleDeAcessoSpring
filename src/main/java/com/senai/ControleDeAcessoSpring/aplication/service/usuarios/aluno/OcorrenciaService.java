@@ -1,21 +1,19 @@
 package com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.OcorrenciaDto;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.Aula;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
-import com.senai.ControleDeAcessoSpring.domain.repository.OcorrenciaRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.OcorrenciaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.UsuarioRepository;
 import com.senai.ControleDeAcessoSpring.domain.service.AtrasoService;
-import com.senai.ControleDeAcessoSpring.infrastructure.util.JwtAuthHandshakeIntersept;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
-import java.time.LocalDate;
 import java.time.LocalDateTime;
-import java.time.LocalTime;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -60,7 +58,7 @@ public class OcorrenciaService {
     }
 
     public boolean alterarStatus(Long id, StatusDaOcorrencia status) {
-        return ocorrenciaRepository.findById(id).map(ocorrencia -> {
+        ocorrenciaRepository.findById(id).map(ocorrencia -> {
                     ocorrencia.setStatus(status);
                     if (status.equals(StatusDaOcorrencia.APROVADO) || status.equals(StatusDaOcorrencia.REPROVADO)) {
                         ocorrencia.setDataHoraConclusao(LocalDateTime.now());
@@ -69,6 +67,7 @@ public class OcorrenciaService {
                     return true;
                 }
         ).orElse(false);
+        return false;
     }
 
     public void criarOcorrenciaDeAcesso(String idAcesso) {
@@ -78,18 +77,22 @@ public class OcorrenciaService {
             if (usuarioOpt.get() instanceof Aluno aluno) {
                 System.out.println("O usuário " + aluno.getNome() + " é um aluno!");
                 if (AtrasoService.definirAtraso(aluno)) {
-                    System.out.println("Aluno está atrasado!");
-                    ocorrenciaRepository.save(new Ocorrencia(
-                            TipoDeOcorrencia.ATRASO,
-                            "Aluno atrasou.",
-                            StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO,
-                            LocalDateTime.now(),
-                            null,
-                            aluno,
-                            AtrasoService.encontrarProfessor(aluno),
-                            AtrasoService.acharUnidade(aluno),
-                            true
-                    ));
+                    System.out.println(aluno + "Está atrasado!");
+                    Aula aula = AtrasoService.definirAula(aluno);
+                    ocorrenciaRepository.save(
+                            new Ocorrencia(
+                                    null,
+                                    TipoDeOcorrencia.ATRASO,
+                                    "",
+                                    StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO,
+                                    LocalDateTime.now(),
+                                    null,
+                                    aluno,
+                                    aula.getProfessor(),
+                                    aula.getUnidadeCurricular(),
+                                    true
+                            )
+                    );
                 }
             }
         } else {

@@ -1,8 +1,8 @@
 package com.senai.ControleDeAcessoSpring.infrastructure.websocket;
 
-import com.senai.ControleDeAcessoSpring.infrastructure.util.JwtAuthHandshakeIntersept;
-import com.senai.ControleDeAcessoSpring.infrastructure.util.JwtUtil;
 import com.senai.ControleDeAcessoSpring.infrastructure.util.UsernamePrincipal;
+import com.senai.ControleDeAcessoSpring.infrastructure.util.JwtAuthHandshakeInterceptor;
+import com.senai.ControleDeAcessoSpring.infrastructure.util.JwtUtil;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.context.annotation.Configuration;
 import org.springframework.http.server.ServerHttpRequest;
@@ -15,6 +15,7 @@ import org.springframework.web.socket.server.support.DefaultHandshakeHandler;
 
 import java.security.Principal;
 import java.util.Map;
+
 @Configuration
 @EnableWebSocketMessageBroker
 public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
@@ -31,7 +32,7 @@ public class WebSocketConfig implements WebSocketMessageBrokerConfigurer {
     @Override
     public void registerStompEndpoints(StompEndpointRegistry registry) {
         registry.addEndpoint("/ws")
-                .addInterceptors(new JwtAuthHandshakeIntersept(jwtUtil))
+                .addInterceptors(new JwtAuthHandshakeInterceptor(jwtUtil))
                 .setHandshakeHandler(new DefaultHandshakeHandler() {
                     @Override
                     protected Principal determineUser(ServerHttpRequest request, WebSocketHandler wsHandler, Map<String, Object> attributes) {

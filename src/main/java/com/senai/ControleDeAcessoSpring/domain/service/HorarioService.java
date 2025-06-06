@@ -97,8 +97,8 @@ public class HorarioService {
                     aulaExistente.setProfessor(null);
                 }
 
-                if(aulaDto.ambientId() != null) {
-                    ambienteRepository.findById(aulaDto.ambientId())
+                if(aulaDto.ambienteId() != null) {
+                    ambienteRepository.findById(aulaDto.ambienteId())
                             .ifPresent(aulaExistente::setAmbiente);
                 } else {
                     aulaExistente.setAmbiente(null);

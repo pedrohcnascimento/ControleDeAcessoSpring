@@ -1,19 +1,20 @@
 package com.senai.ControleDeAcessoSpring.infrastructure.util;
 
-import org.springframework.stereotype.Component;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeUsuario;
 import io.jsonwebtoken.Jwts;
 import io.jsonwebtoken.SignatureAlgorithm;
 import io.jsonwebtoken.security.Keys;
+import org.springframework.stereotype.Component;
 
 import java.security.Key;
 import java.util.Date;
 
 @Component
-public class JwtUtil{
+public class JwtUtil {
     private final Key key = Keys.secretKeyFor(SignatureAlgorithm.HS256);
     private final long EXPIRATION = 1000 * 60 * 60; // 1 hora
 
-    public String generateToken(Long userId, String username, String tipoDeUsuario) {
+    public String generateToken(Long userId, String username, TipoDeUsuario tipoDeUsuario) {
         return Jwts.builder()
                 .setSubject(username)
                 .claim("userId", userId)
