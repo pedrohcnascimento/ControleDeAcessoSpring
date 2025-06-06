@@ -8,6 +8,7 @@ import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
 
 import java.time.LocalDateTime;
+import java.util.Optional;
 
 public record OcorrenciaDto(
         Long id,
@@ -16,9 +17,9 @@ public record OcorrenciaDto(
         StatusDaOcorrencia status,
         LocalDateTime dataHoraCriacao,
         LocalDateTime dataHoraConclusao,
-        Aluno aluno,
-        Professor professorResponsavel,
-        UnidadeCurricular unidadeCurricular
+        Long alunoId,
+        Long professorResponsavelId,
+        Long unidadeCurricularId
 
 ) {
     public static OcorrenciaDto toDto(Ocorrencia o){
@@ -29,12 +30,27 @@ public record OcorrenciaDto(
                 o.getStatus(),
                 o.getDataHoraCriacao(),
                 o.getDataHoraConclusao(),
-                o.getAluno(),
-                o.getProfessorResponsavel(),
-                o.getUnidadeCurricular());
+                o.getAluno().getId(),
+                o.getProfessorResponsavel().getId(),
+                o.getUnidadeCurricular().getId()
+        );
     }
 
-    public Ocorrencia fromDto(){
+    public Ocorrencia fromDto(Optional<Aluno> byId, Professor professor, UnidadeCurricular unidadeCurricular){
+        Ocorrencia o = new Ocorrencia();
+        o.setId(id);
+        o.setTipo(tipo);
+        o.setDescricao(descricao);
+        o.setStatus(status);
+        o.setDataHoraCriacao(dataHoraCriacao);
+        o.setDataHoraConclusao(dataHoraConclusao);
+        o.setAluno(null);
+        o.setProfessorResponsavel(null);
+        o.setUnidadeCurricular(null);
+        return o;
+    }
+
+    public Ocorrencia fromDto(Aluno aluno, Professor professor, UnidadeCurricular unidadeCurricular){
         Ocorrencia o = new Ocorrencia();
         o.setId(id);
         o.setTipo(tipo);
@@ -43,7 +59,7 @@ public record OcorrenciaDto(
         o.setDataHoraCriacao(dataHoraCriacao);
         o.setDataHoraConclusao(dataHoraConclusao);
         o.setAluno(aluno);
-        o.setProfessorResponsavel(professorResponsavel);
+        o.setProfessorResponsavel(professor);
         o.setUnidadeCurricular(unidadeCurricular);
         return o;
     }

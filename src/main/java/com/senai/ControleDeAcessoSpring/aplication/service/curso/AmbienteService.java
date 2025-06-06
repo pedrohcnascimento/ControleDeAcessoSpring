@@ -14,8 +14,11 @@ public class AmbienteService {
     @Autowired
     private AmbienteRepository ambienteRepository;
 
-    public void cadastrarAmbiente(AmbienteDto dto) {
-        ambienteRepository.save(dto.fromDto());
+    public void cadastrarAmbiente(List<AmbienteDto> dtos) {
+        dtos.forEach(dto -> {
+            ambienteRepository.save(dto.fromDto());
+
+        });
     }
 
     public List<AmbienteDto> listarAtivos() {

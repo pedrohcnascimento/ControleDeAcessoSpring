@@ -7,6 +7,7 @@ import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.UsuarioReposi
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.util.ArrayList;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -15,8 +16,11 @@ import java.util.stream.Collectors;
 public class UsuarioService {
     @Autowired private UsuarioRepository usuarioRepository;
 
-    public void cadastrarUsuario(UsuarioDto dto) {
-        usuarioRepository.save(dto.fromDto());
+    public void cadastrarUsuario(List<UsuarioDto> listaDtos) {
+        ArrayList<UsuarioDto> lista = new ArrayList<>();
+        listaDtos.forEach(usuarioDto -> {
+            usuarioRepository.save(usuarioDto.fromDto());
+        });
     }
 
     public List<UsuarioDto> listarAtivos() {

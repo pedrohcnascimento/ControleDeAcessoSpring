@@ -16,11 +16,11 @@ public class OcorrenciaController {
     @Autowired
     OcorrenciaService ocorrenciaService;
 
-    @PostMapping
-    public ResponseEntity<Void> cadastrarOcorrencia(@RequestBody OcorrenciaDto dto) {
-        ocorrenciaService.cadastrarOcorrencia(dto);
-        return ResponseEntity.ok().build();
-    }
+//    @PostMapping
+//    public ResponseEntity<Void> cadastrarOcorrencia(@RequestBody OcorrenciaDto dto) {
+//        ocorrenciaService.cadastrarOcorrencia(dto);
+//        return ResponseEntity.ok().build();
+//    }
 
     @GetMapping
     public ResponseEntity<List<OcorrenciaDto>> listarOcorrencias() {

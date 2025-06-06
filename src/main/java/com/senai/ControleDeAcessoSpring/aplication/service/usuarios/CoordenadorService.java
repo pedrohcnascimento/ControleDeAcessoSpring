@@ -16,8 +16,10 @@ public class CoordenadorService {
     @Autowired
     private CoordenadorRepository coordenadorRepository;
 
-    public void cadastrarCoordenador(CoordenadorDto dto) {
-        coordenadorRepository.save(dto.fromDTO());
+    public void cadastrarCoordenador(List<CoordenadorDto> dtos) {
+        dtos.forEach(coordenadorDto -> {
+            coordenadorRepository.save(coordenadorDto.fromDTO());
+        });
     }
 
     public List<CoordenadorDto> listarAtivos() {

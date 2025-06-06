@@ -16,7 +16,7 @@ public class CoordenadorController {
     private CoordenadorService coordenadorService;
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarCoordenador(@RequestBody CoordenadorDto dto) {
+    public ResponseEntity<Void> cadastrarCoordenador(@RequestBody List<CoordenadorDto> dto) {
         coordenadorService.cadastrarCoordenador(dto);
         return ResponseEntity.ok().build();
     }

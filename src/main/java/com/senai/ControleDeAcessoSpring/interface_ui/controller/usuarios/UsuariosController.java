@@ -17,8 +17,8 @@ public class UsuariosController {
     UsuarioService usuarioService;
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarUsuario(@RequestBody UsuarioDto dto) {
-        usuarioService.cadastrarUsuario(dto);
+    public ResponseEntity<Void> cadastrarUsuario(@RequestBody List<UsuarioDto> dtos) {
+        usuarioService.cadastrarUsuario(dtos);
         return ResponseEntity.ok().build();
     }
 

@@ -2,11 +2,17 @@ package com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.AlunoDto;
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.JustificativaDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.OcorrenciaDto;
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
+import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.AlunoRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.JustificativaRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.OcorrenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -23,6 +29,11 @@ public class AlunoService {
 
     @Autowired
     private JustificativaRepository justificativaRepository;
+
+    @Autowired
+    private OcorrenciaRepository ocorrenciaRepository;
+
+
 
 
     public void cadastrarAluno(List<AlunoDto> listaDtos) {
@@ -106,6 +117,54 @@ public class AlunoService {
         justificativaRepository.findById(idJustificativa).map(justificativa -> {
             justificativa.setStatus(StatusDaJustificativa.INATIVADA);
             justificativaRepository.save(justificativa);
+            return true;
+        });
+        return false;
+    }
+
+    // Ocorrência Saída
+    public List<OcorrenciaDto> listarOcorrencias(Long id) {
+        return alunoRepository.findById(id).get().getOcorrencias().stream().filter(ocorrencia -> {
+            if (ocorrencia.getStatus().equals(StatusDaOcorrencia.INATIVADA)) {
+                return false;
+            } else return true;
+        }) .map(OcorrenciaDto::toDto).toList();
+    }
+
+    public Optional<OcorrenciaDto> listarOcorrenciaPorId(Long idOcorrencia) {
+        return ocorrenciaRepository.findById(idOcorrencia).map(OcorrenciaDto::toDto);
+    }
+
+    public boolean criarOcorrenciaSaida(Long id, OcorrenciaDto ocorrenciaDto) {
+        Ocorrencia o = ocorrenciaDto.fromDto(alunoRepository.findById(id), new Professor(), new UnidadeCurricular()); // Arrumar depois
+        o.setAluno(alunoRepository.findById(id).get());
+        o.setStatus(StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO);
+        o.setDataHoraCriacao(LocalDateTime.now()); // Hora em que é cadastrada
+        o.setDataHoraConclusao(null); // Ainda não foi concluída
+        return alunoRepository.findById(id).map(aluno -> {
+            aluno.getOcorrencias().add(o);
+            ocorrenciaRepository.save(o);
+            return true;
+        }).orElse(false);
+    }
+
+    public boolean alterarStatusOcorrencia(Long idOcorrencia, StatusDaOcorrencia status) {
+        ocorrenciaRepository.findById(idOcorrencia).map(ocorrencia -> {
+                    ocorrencia.setStatus(status);
+                    if (status.equals(StatusDaJustificativa.APROVADA) || status.equals(StatusDaJustificativa.REPROVADA)) {
+                        ocorrencia.setDataHoraConclusao(LocalDateTime.now());
+                    }
+                    ocorrenciaRepository.save(ocorrencia);
+                    return true;
+                }
+        );
+        return false;
+    }
+
+    public boolean inativarOcorrencia(Long idOcorrencia) {
+        ocorrenciaRepository.findById(idOcorrencia).map(ocorrencia -> {
+            ocorrencia.setStatus(StatusDaOcorrencia.INATIVADA);
+            ocorrenciaRepository.save(ocorrencia);
             return true;
         });
         return false;

@@ -32,8 +32,9 @@ public class SubTurmaService {
                 .orElseThrow(() -> new RuntimeException("Turma não encontrada"));
 
         SubTurma subTurma = new SubTurma();
-        subTurma.setNome("Turma "+subTurma.getTurma().getSubTurmas().size());
         subTurma.setTurma(turma);
+        subTurma.setNome("Turma "+subTurma.getTurma().getSubTurmas().size());
+
 
         turma.getSubTurmas().add(subTurma);
 

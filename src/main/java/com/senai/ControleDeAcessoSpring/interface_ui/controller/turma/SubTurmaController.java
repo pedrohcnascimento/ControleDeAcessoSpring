@@ -20,8 +20,8 @@ public class SubTurmaController {
     }
 
     @PostMapping("/{idTurma}")
-    public ResponseEntity<String> cadastrarSubTurma(@PathVariable Long turmaId) {
-        service.criarSubTurma(turmaId);
+    public ResponseEntity<String> cadastrarSubTurma(@PathVariable Long idTurma) {
+        service.criarSubTurma(idTurma);
         return ResponseEntity.ok("Sub Turma criada com sucesso!");
     }
 

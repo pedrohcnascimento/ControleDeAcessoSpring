@@ -1,10 +1,13 @@
 package com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.OcorrenciaDto;
+import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.OcorrenciaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.UsuarioRepository;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -26,17 +29,15 @@ public class OcorrenciaService {
     @Autowired
     UsuarioRepository usuarioRepository;
 
-    public void cadastrarOcorrencia(OcorrenciaDto dto) {
-        Ocorrencia ocorrencia = dto.fromDto();
-        ocorrencia.setAtivo(true);
-        ocorrencia.setStatus(StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO);
-        ocorrencia.setDataHoraCriacao(LocalDateTime.now());
-        ocorrencia.setDataHoraConclusao(null);
-        ocorrencia.setAluno(null);
-        ocorrencia.setProfessorResponsavel(null);
-        ocorrencia.setUnidadeCurricular(null);
-        ocorrenciaRepository.save(ocorrencia);
-    }
+//    public void cadastrarOcorrenciaSaida(OcorrenciaDto dto) {
+//        Ocorrencia ocorrencia = dto.fromDto(alunoRepository.findById(id), new Professor(), new UnidadeCurricular());
+//        ocorrencia.setTipo(TipoDeOcorrencia.SAIDA_ANTECIPADA);
+//        ocorrencia.setAtivo(true);
+//        ocorrencia.setStatus(StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO);
+//        ocorrencia.setDataHoraCriacao(LocalDateTime.now());
+//        ocorrencia.setDataHoraConclusao(null);
+//        ocorrenciaRepository.save(ocorrencia);
+//    }
 
     public List<OcorrenciaDto> listar() {
         return ocorrenciaRepository.findByAtivoTrue()

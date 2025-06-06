@@ -15,8 +15,10 @@ public class AqvService {
     @Autowired
     private AqvRepository aqvRepository;
 
-    public void cadastrarAqv(AQVDto dto) {
-        aqvRepository.save(dto.fromDto());
+    public void cadastrarAqv(List<AQVDto> dtos) {
+        dtos.forEach(dto -> {
+            aqvRepository.save(dto.fromDto());
+        });
     }
 
     public List<AQVDto> listarAtivos() {

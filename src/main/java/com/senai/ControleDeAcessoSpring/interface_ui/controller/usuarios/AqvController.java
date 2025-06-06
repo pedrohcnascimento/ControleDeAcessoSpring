@@ -16,8 +16,8 @@ public class AqvController {
     AqvService aqvService;
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarAqv(@RequestBody AQVDto dto) {
-        aqvService.cadastrarAqv(dto);
+    public ResponseEntity<Void> cadastrarAqv(@RequestBody List<AQVDto> dtos) {
+        aqvService.cadastrarAqv(dtos);
         return ResponseEntity.ok().build();
     }
 

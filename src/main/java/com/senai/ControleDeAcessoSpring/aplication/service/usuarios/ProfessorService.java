@@ -16,8 +16,10 @@ public class ProfessorService {
     @Autowired
     private ProfessorRepository professorRepository;
 
-    public void cadastrarUsuario(ProfessorDto dto) {
-        professorRepository.save(dto.fromDTO());
+    public void cadastrarUsuario(List<ProfessorDto> listaDtos) {
+        listaDtos.forEach(professorDto -> {
+            professorRepository.save(professorDto.fromDTO());
+        });
     }
 
     public List<ProfessorDto> listarAtivos() {

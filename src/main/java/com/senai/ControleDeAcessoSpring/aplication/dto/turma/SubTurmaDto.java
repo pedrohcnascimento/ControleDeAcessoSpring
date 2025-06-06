@@ -5,7 +5,7 @@ import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
 public record SubTurmaDto(
         String nome,
         Boolean status,
-        Long turmaId
+        Long idTurma
 )
 {
     public static SubTurmaDto toDto(SubTurma subTurma) {

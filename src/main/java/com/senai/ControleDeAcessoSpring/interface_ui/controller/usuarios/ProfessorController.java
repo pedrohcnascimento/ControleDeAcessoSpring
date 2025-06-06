@@ -16,8 +16,8 @@ public class ProfessorController {
     private ProfessorService professorService;
 
     @PostMapping
-    public ResponseEntity<Void> cadastrarUsuario(@RequestBody ProfessorDto dto) {
-        professorService.cadastrarUsuario(dto);
+    public ResponseEntity<Void> cadastrarUsuario(@RequestBody List<ProfessorDto> listaDtos) {
+        professorService.cadastrarUsuario(listaDtos);
         return ResponseEntity.ok().build();
     }
 

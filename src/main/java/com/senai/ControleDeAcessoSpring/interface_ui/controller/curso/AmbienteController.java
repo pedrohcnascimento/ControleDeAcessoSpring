@@ -22,8 +22,8 @@ public class AmbienteController {
     }
 
     @PostMapping
-    public ResponseEntity<Void> adicionar(@RequestBody AmbienteDto dto) {
-        ambienteService.cadastrarAmbiente(dto);
+    public ResponseEntity<Void> adicionar(@RequestBody List<AmbienteDto> dtos) {
+        ambienteService.cadastrarAmbiente(dtos);
         return  ResponseEntity.ok().build();
     }
 
