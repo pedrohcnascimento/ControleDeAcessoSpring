@@ -38,7 +38,7 @@ public class SubTurmaController {
         service.atualizar(id, subTurmaDto);
         return ResponseEntity.ok("Sub Turma atualizada!");
     }
-
+    
     @PutMapping("/{id}/alunos")
     public ResponseEntity<List<Aluno>> adicionarAlunos(@PathVariable Long id, @RequestBody List<Aluno> alunos) {
         List<Aluno> resposta = service.adicionarAluno(id, alunos);

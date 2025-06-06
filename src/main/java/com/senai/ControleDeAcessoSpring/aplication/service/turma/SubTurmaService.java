@@ -38,7 +38,7 @@ public class SubTurmaService {
                 .orElseThrow(() -> new RuntimeException("Turma não encontrada"));
 
         SubTurma subTurma = new SubTurma();
-        subTurma.setNome("Turma "+subTurma.getTurma().getSubTurmas().size());
+        subTurma.setNome("Turma " + subTurma.getTurma().getSubTurmas().size());
         subTurma.setTurma(turma);
 
         turma.getSubTurmas().add(subTurma);
@@ -111,6 +111,7 @@ public class SubTurmaService {
         return alunos;
     }
 
+    @Transactional
     public Boolean removerAluno(Long idSubTurma, Long idAluno) {
         Optional<SubTurma> optinal = subTurmaRepository.findById(idSubTurma);
         if (optinal.isEmpty()) return false;
