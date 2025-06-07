@@ -7,7 +7,7 @@ public record AulaDto(
         Integer ordem,
         Long unidadeCurricularId,
         Long professorId,
-        Long ambientId
+        Long ambienteId
 ) {
     public static AulaDto toDto(Aula a) {
         return new AulaDto(

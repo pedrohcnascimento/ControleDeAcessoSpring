@@ -48,10 +48,10 @@ public class SubTurmaController {
     }
 
     @PutMapping("/{id}/adicionar-alunos")
-    public ResponseEntity<String> adicionarAlunos(@PathVariable Long id, @RequestBody List<AlunoDto> listaAlunos) {
-        if (service.adicionarAlunos(id, listaAlunos)){
+    public ResponseEntity<String> adicionarAlunos(@PathVariable Long id, @RequestBody List<Long> listaIdAlunos) {
+        if (service.adicionarAlunos(id, listaIdAlunos)){
             return ResponseEntity.ok("Alunos adicionados");
-        };
+        }
         return ResponseEntity.notFound().build();
     }
 }

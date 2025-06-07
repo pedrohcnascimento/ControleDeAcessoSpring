@@ -9,6 +9,7 @@ import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadra
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.repository.turma.SubTurmaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.turma.TurmaRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.AlunoRepository;
 import com.senai.ControleDeAcessoSpring.domain.service.HorarioService;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -28,6 +29,8 @@ public class SubTurmaService {
     private TurmaRepository turmaRepository;
     @Autowired
     private HorarioService horarioService;
+    @Autowired
+    private AlunoRepository alunoRepository;
 
     @Transactional
     public void criarSubTurma(Long turmaId) {
@@ -92,9 +95,9 @@ public class SubTurmaService {
         return subTurmaRepository.findById(id).map(SubTurmaDto::toDto);
     }
 
-    public boolean adicionarAlunos(Long id, List<AlunoDto> listaAlunosDto) {
-        listaAlunosDto.forEach(alunoDto -> {
-            subTurmaRepository.findById(id).get().getAlunos().add(alunoDto.fromDTO());
+    public boolean adicionarAlunos(Long id, List<Long> listaIdAlunos) {
+        listaIdAlunos.forEach(idAluno -> {
+            subTurmaRepository.findById(id).get().getAlunos().add(alunoRepository.findById(idAluno).get());
         });
         return true;
     }
