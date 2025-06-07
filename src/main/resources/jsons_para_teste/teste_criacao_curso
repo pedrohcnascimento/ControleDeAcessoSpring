@@ -1,0 +1,30 @@
+URL: localhost:8080/cursos
+
+{
+    "titulo": "Desenvolvimento de Sistemas",
+    "tipo": "TECNICO",
+    "cargaHoraria": 4000,
+    "toleranciaMinutos": 15,
+    "unidadesCurricularesDto": [
+        {
+            "nome": "Back-end",
+            "cargaHorariaTotal": 200
+        },
+        {
+            "nome": "Front-end",
+            "cargaHorariaTotal": 200
+        },
+        {
+            "nome": "Banco de Dados",
+            "cargaHorariaTotal": 200
+        },
+        {
+            "nome": "Projeto de Software",
+            "cargaHorariaTotal": 200
+        },
+        {
+            "nome": "Iot",
+            "cargaHorariaTotal": 200
+        }
+    ]
+}

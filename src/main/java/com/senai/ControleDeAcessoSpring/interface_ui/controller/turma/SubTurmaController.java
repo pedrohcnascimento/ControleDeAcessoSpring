@@ -3,6 +3,7 @@ package com.senai.ControleDeAcessoSpring.interface_ui.controller.turma;
 import com.senai.ControleDeAcessoSpring.aplication.dto.turma.SubTurmaDto;
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.AlunoDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.turma.SubTurmaService;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.AlunoRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.http.ResponseEntity;
@@ -48,9 +49,17 @@ public class SubTurmaController {
     }
 
     @PutMapping("/{id}/adicionar-alunos")
-    public ResponseEntity<String> adicionarAlunos(@PathVariable Long id, @RequestBody List<Long> listaIdAlunos) {
-        if (service.adicionarAlunos(id, listaIdAlunos)){
+    public ResponseEntity<String> adicionarAlunosPorId(@PathVariable Long id, @RequestBody List<Long> listaIdAlunos) {
+        if (service.adicionarAlunosPorId(id, listaIdAlunos)){
             return ResponseEntity.ok("Alunos adicionados");
+        }
+        return ResponseEntity.notFound().build();
+    }
+
+    @DeleteMapping("/{id}/remover-alunos")
+    public ResponseEntity<String> removerAlunosPorId(@PathVariable Long id, @RequestBody List<Long> listaIdAlunos) {
+        if (service.removerAlunosPorId(id, listaIdAlunos)) {
+            return ResponseEntity.ok("Alunos removidos");
         }
         return ResponseEntity.notFound().build();
     }

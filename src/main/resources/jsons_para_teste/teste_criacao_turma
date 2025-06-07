@@ -1,0 +1,11 @@
+URL: localhost:8080/turmas
+
+{
+    "sigla": "DEV",
+    "periodo": "TARDE",
+    "dataInicial": "2024-07-24",
+    "horarioEntrada": "13:25",
+    "qtdSemestres": 3,
+    "qtdAulasPorDia": 5,
+    "cursoId": 1
+}

@@ -39,10 +39,10 @@ public class SubTurmaService {
 
         SubTurma subTurma = new SubTurma();
         subTurma.setTurma(turma);
-        subTurma.setNome("Turma "+subTurma.getTurma().getSubTurmas().size());
-
+        subTurma.setStatus(true); // Ver isso aq
 
         turma.getSubTurmas().add(subTurma);
+        turma.getSubTurmas().getLast().setNome("Turma " + turma.getSubTurmas().size());
 
         Semestre semestre = new Semestre();
         subTurma.setSemestres(new ArrayList<>());
@@ -95,9 +95,44 @@ public class SubTurmaService {
         return subTurmaRepository.findById(id).map(SubTurmaDto::toDto);
     }
 
-    public boolean adicionarAlunos(Long id, List<Long> listaIdAlunos) {
+    @Transactional
+    public boolean adicionarAlunosPorId(Long id, List<Long> listaIdAlunos) {
+        if (subTurmaRepository.findById(id).isEmpty()) {
+            return false;
+        }
         listaIdAlunos.forEach(idAluno -> {
-            subTurmaRepository.findById(id).get().getAlunos().add(alunoRepository.findById(idAluno).get());
+            if (alunoRepository.findById(idAluno).isEmpty()) {
+                return;
+            }
+            Aluno aluno = alunoRepository.findById(idAluno).get();
+            SubTurma subturma = subTurmaRepository.findById(id).get();
+
+            aluno.getSubTurmas().add(subturma);
+            subturma.getAlunos().add(aluno);
+
+            alunoRepository.save(aluno);
+
+        });
+        return true;
+    }
+
+    @Transactional
+    public boolean removerAlunosPorId(Long id, List<Long> listaIdAlunos) {
+        if (subTurmaRepository.findById(id).isEmpty()) {
+            return false;
+        }
+        listaIdAlunos.forEach(idAluno -> {
+            if (alunoRepository.findById(idAluno).isEmpty()) {
+                return;
+            }
+            Aluno aluno = alunoRepository.findById(idAluno).get();
+            SubTurma subturma = subTurmaRepository.findById(id).get();
+
+            aluno.getSubTurmas().remove(subturma);
+            subturma.getAlunos().remove(aluno);
+
+            alunoRepository.save(aluno);
+
         });
         return true;
     }

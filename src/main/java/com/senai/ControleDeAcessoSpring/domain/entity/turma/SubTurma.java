@@ -1,7 +1,5 @@
 package com.senai.ControleDeAcessoSpring.domain.entity.turma;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadrao;
-import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioSemanal;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import jakarta.persistence.*;
 import lombok.Data;
@@ -24,7 +22,7 @@ public class SubTurma {
     @JoinColumn(name = "turma_id")
     private Turma turma;
 
-    @ManyToMany(mappedBy = "subTurmas", cascade = CascadeType.ALL)
+    @ManyToMany(mappedBy = "subTurmas")
     private List<Aluno> alunos;
 
     @OneToMany(mappedBy = "subTurma", cascade = CascadeType.ALL, orphanRemoval = true)

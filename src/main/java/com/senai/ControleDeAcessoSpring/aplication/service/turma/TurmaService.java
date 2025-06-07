@@ -40,6 +40,7 @@ public class TurmaService {
         turma.getSubTurmas().add(subTurma);
 
         subTurma.setNome("Turma " + turma.getSubTurmas().size());
+        subTurma.setStatus(true);
         subTurma.setTurma(turma);
 
         Semestre semestre = new Semestre();

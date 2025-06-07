@@ -1,0 +1,19 @@
+URL: localhost:8080/ambiente
+
+[
+    {
+        "nome": "Lab 7"
+    },
+    {
+        "nome": "Lab 8"
+    },
+    {
+        "nome": "Lab 9"
+    },
+    {
+        "nome": "Lab 14"
+    },
+    {
+        "nome": "Lab 15"
+    }
+]
