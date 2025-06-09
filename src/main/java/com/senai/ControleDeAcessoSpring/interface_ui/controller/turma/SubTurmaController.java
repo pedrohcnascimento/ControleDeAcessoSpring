@@ -40,10 +40,10 @@ public class SubTurmaController {
     }
     
     @PutMapping("/{id}/alunos")
-    public ResponseEntity<List<Aluno>> adicionarAlunos(@PathVariable Long id, @RequestBody List<Aluno> alunos) {
-        List<Aluno> resposta = service.adicionarAluno(id, alunos);
+    public ResponseEntity<Long> adicionarAlunos(@PathVariable Long id, @RequestBody Long idAluno) {
+        Long resposta = service.adicionarAluno(id, idAluno);
 
-        if (resposta.isEmpty()) {
+        if (resposta == null) {
             return ResponseEntity.notFound().build();
         }
 
@@ -51,7 +51,7 @@ public class SubTurmaController {
     }
 
     @DeleteMapping("/{id}/alunos")
-    public ResponseEntity<Boolean> deletarAluno(@PathVariable Long idSubTurma, @PathVariable Long idAluno) {
+    public ResponseEntity<Boolean> deletarAluno(@PathVariable Long idSubTurma, @RequestBody Long idAluno) {
         if (service.removerAluno(idSubTurma, idAluno)) {
             return ResponseEntity.ok(true);
         }

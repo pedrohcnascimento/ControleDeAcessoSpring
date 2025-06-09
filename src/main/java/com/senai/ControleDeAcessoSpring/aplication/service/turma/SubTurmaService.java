@@ -95,20 +95,20 @@ public class SubTurmaService {
     }
 
     @Transactional
-    public List<Aluno> adicionarAluno(Long id, List<Aluno> alunos){
+    public Long adicionarAluno(Long id, Long alunoId){
         Optional<SubTurma> optinal = subTurmaRepository.findById(id);
         if (optinal.isEmpty()) return null;
 
         SubTurma subTurma = optinal.get();
 
-        for (Aluno aluno : alunos) {
-            if (alunoRepository.findByAtivoTrue().contains(aluno)) {
-                subTurma.getAlunos().add(alunoRepository.findById(aluno.getId()).get());
-            }
-        }
+        Optional<Aluno> aluno = alunoRepository.findById(alunoId);
+
+        if (aluno.isEmpty()) return null;
+
+        subTurma.getAlunos().add(aluno.get());
 
         subTurmaRepository.save(subTurma);
-        return alunos;
+        return alunoId;
     }
 
     @Transactional
