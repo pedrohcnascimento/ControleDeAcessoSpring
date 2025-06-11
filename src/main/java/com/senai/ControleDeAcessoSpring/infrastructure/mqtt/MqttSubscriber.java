@@ -1,6 +1,6 @@
 package com.senai.ControleDeAcessoSpring.infrastructure.mqtt;
 
-import com.senai.ControleDeAcessoSpring.interface_ui.controller.usuarios.aluno.OcorrenciaController;
+import com.senai.ControleDeAcessoSpring.interface_ui.controller.IdAcessoController;
 import jakarta.annotation.PostConstruct;
 import org.eclipse.paho.client.mqttv3.MqttClient;
 import org.eclipse.paho.client.mqttv3.MqttException;
@@ -13,7 +13,7 @@ public class MqttSubscriber {
     private static final String CLIENTE_ID = "ServidorJava";
     private static final String TOPICO = "catraca/rfid";
     @Autowired
-    private OcorrenciaController controller;
+    private IdAcessoController controller;
 
     @PostConstruct
     public void iniciarMqtt() {
@@ -22,7 +22,7 @@ public class MqttSubscriber {
             cliente.connect();
             cliente.subscribe(TOPICO, (topic, msg) -> {
                 String idAcesso = new String(msg.getPayload());
-                controller.criarOcorrenciaDeAtraso(idAcesso);
+                controller.direcionarIdAcessoRecebido(idAcesso);
             });
             System.out.println("Inscrito no topico MQTT:" + TOPICO);
         } catch (MqttException e) {
