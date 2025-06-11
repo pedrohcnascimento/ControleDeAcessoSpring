@@ -35,12 +35,13 @@ public class HorarioPadraoService {
         repository.save(horario);
     }
 
-
+    @Transactional
     public List<HorarioPadraoDto> listar() {
         return repository.findAll().stream()
                 .map(HorarioPadraoDto::toDto).toList();
     }
 
+    @Transactional
     public Optional<HorarioPadraoDto> buscarPorId(Long id) {
         return repository.findById(id).map(HorarioPadraoDto::toDto);
     }
@@ -56,6 +57,7 @@ public class HorarioPadraoService {
         return true;
     }
 
+    @Transactional
     public boolean deletar(Long id) {
         if (!repository.existsById(id)) return false;
         repository.deleteById(id);

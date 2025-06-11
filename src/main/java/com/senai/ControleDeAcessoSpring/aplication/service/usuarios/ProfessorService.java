@@ -3,6 +3,7 @@ package com.senai.ControleDeAcessoSpring.aplication.service.usuarios;
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.ProfessorDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.ProfessorRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -16,22 +17,26 @@ public class ProfessorService {
     @Autowired
     private ProfessorRepository professorRepository;
 
+    @Transactional
     public void cadastrarProfessor(ProfessorDto dto) {
         professorRepository.save(dto.fromDTO());
     }
 
+    @Transactional
     public List<ProfessorDto> listarAtivos() {
         return professorRepository.findByAtivoTrue()
                 .stream().map(ProfessorDto::toDTO)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public Optional<ProfessorDto> buscarPorId(Long id) {
         return professorRepository.findById(id)
                 .filter(Professor::getAtivo)
                 .map(ProfessorDto::toDTO);
     }
 
+    @Transactional
     public boolean atualizar(Long id, ProfessorDto dto) {
         return professorRepository.findById(id).map(professor -> {
             Professor professorAtualizado = dto.fromDTO();
@@ -44,6 +49,7 @@ public class ProfessorService {
         }).orElse(false);
     }
 
+    @Transactional
     public boolean inativar(Long id) {
         return professorRepository.findById(id).map(professor -> {
             professor.setAtivo(false);

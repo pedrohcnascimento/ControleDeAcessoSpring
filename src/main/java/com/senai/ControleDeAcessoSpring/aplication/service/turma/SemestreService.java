@@ -46,10 +46,12 @@ public class SemestreService {
         semestreRepository.save(semestre);
     }
 
+    @Transactional
     public Optional<SemestreDto> buscarPorId(Long id) {
         return semestreRepository.findById(id).map(SemestreDto::toDto);
     }
 
+    @Transactional
     public List<SemestreDto> listarTodos() {
         return semestreRepository.findAll().stream()
                 .map(SemestreDto::toDto)
@@ -68,6 +70,7 @@ public class SemestreService {
         return true;
     }
 
+    @Transactional
     public boolean deletar(Long id) {
         Optional<Semestre> optional = semestreRepository.findById(id);
         if (optional.isEmpty()) return false;

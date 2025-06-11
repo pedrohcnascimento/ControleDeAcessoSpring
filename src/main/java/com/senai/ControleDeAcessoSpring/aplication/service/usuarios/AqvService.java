@@ -3,6 +3,7 @@ package com.senai.ControleDeAcessoSpring.aplication.service.usuarios;
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.AqvDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.AQV;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.AqvRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -15,22 +16,26 @@ public class AqvService {
     @Autowired
     private AqvRepository aqvRepository;
 
+    @Transactional
     public void cadastrarAqv(AqvDto dto) {
         aqvRepository.save(dto.fromDTO());
     }
 
+    @Transactional
     public List<AqvDto> listarAtivos() {
         return aqvRepository.findByAtivoTrue()
                 .stream().map(AqvDto::toDTO)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public Optional<AqvDto> buscarPorId(Long id) {
         return aqvRepository.findById(id)
                 .filter(AQV::getAtivo)
                 .map(AqvDto::toDTO);
     }
 
+    @Transactional
     public boolean atualizar(Long id, AqvDto dto) {
         return aqvRepository.findById(id).map(aqv -> {
             AQV aqVAtualizado = dto.fromDTO();
@@ -43,6 +48,7 @@ public class AqvService {
         }).orElse(false);
     }
 
+    @Transactional
     public boolean inativar(Long id) {
         return aqvRepository.findById(id).map(aqv -> {
             aqv.setAtivo(false);

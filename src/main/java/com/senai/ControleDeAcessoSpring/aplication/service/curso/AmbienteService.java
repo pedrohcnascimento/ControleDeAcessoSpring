@@ -3,6 +3,7 @@ package com.senai.ControleDeAcessoSpring.aplication.service.curso;
 import com.senai.ControleDeAcessoSpring.aplication.dto.curso.AmbienteDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.Ambiente;
 import com.senai.ControleDeAcessoSpring.domain.repository.curso.AmbienteRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -18,6 +19,7 @@ public class AmbienteService {
         ambienteRepository.save(dto.fromDto());
     }
 
+    @Transactional
     public List<AmbienteDto> listarAtivos() {
         return ambienteRepository.findAll()
                 .stream()
@@ -26,12 +28,14 @@ public class AmbienteService {
                 .toList();
     }
 
+    @Transactional
     public Optional<AmbienteDto> buscarPorId(Long id) {
         return ambienteRepository.findById(id)
                 .filter(Ambiente::getAtivo)
                 .map(AmbienteDto::toDto);
     }
 
+    @Transactional
     public Boolean inativarAmbiente(Long id) {
         return ambienteRepository.findById(id)
                 .map(ambiente -> {
@@ -41,6 +45,7 @@ public class AmbienteService {
                 }).orElse(false);
     }
 
+    @Transactional
     public Boolean atualizarAmbiente(Long id, AmbienteDto dto) {
         return ambienteRepository.findById(id)
                 .map(ambiente -> {

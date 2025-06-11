@@ -59,12 +59,14 @@ public class TurmaService {
 
         turmaRepository.save(turma);
     }
-    
+
+    @Transactional
     public List<TurmaDto> listarTurmas() {
         return turmaRepository.findAll().stream()
                 .map(TurmaDto::toDto).toList();
     }
 
+    @Transactional
     public Optional<TurmaDto> BuscarPorId(Long id) {
         return turmaRepository.findById(id).map(TurmaDto::toDto);
     }

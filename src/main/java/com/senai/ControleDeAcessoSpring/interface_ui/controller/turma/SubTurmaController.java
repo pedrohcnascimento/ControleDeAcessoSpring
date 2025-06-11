@@ -1,6 +1,7 @@
 package com.senai.ControleDeAcessoSpring.interface_ui.controller.turma;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.turma.SubTurmaDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.AlunoDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.turma.SubTurmaService;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import org.springframework.beans.factory.annotation.Autowired;
@@ -40,8 +41,8 @@ public class SubTurmaController {
     }
     
     @PutMapping("/{id}/alunos")
-    public ResponseEntity<Long> adicionarAlunos(@PathVariable Long id, @RequestBody Long idAluno) {
-        Long resposta = service.adicionarAluno(id, idAluno);
+    public ResponseEntity<AlunoDto> adicionarAlunos(@PathVariable Long id, @RequestBody AlunoDto alunoDto) {
+        AlunoDto resposta = service.adicionarAluno(id, alunoDto);
 
         if (resposta == null) {
             return ResponseEntity.notFound().build();

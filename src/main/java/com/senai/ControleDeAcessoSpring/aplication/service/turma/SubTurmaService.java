@@ -1,6 +1,7 @@
 package com.senai.ControleDeAcessoSpring.aplication.service.turma;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.turma.SubTurmaDto;
+import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.AlunoDto;
 import com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno.AlunoService;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.Semestre;
 import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
@@ -84,31 +85,33 @@ public class SubTurmaService {
         return true;
     }
 
+    @Transactional
     public List<SubTurmaDto> listar() {
         return subTurmaRepository.findAll().stream()
                 .map(SubTurmaDto::toDto)
                 .collect(Collectors.toList());
     }
 
+    @Transactional
     public Optional<SubTurmaDto> buscarPorId(Long id) {
         return subTurmaRepository.findById(id).map(SubTurmaDto::toDto);
     }
 
     @Transactional
-    public Long adicionarAluno(Long id, Long alunoId){
+    public AlunoDto adicionarAluno(Long id, AlunoDto alunoId){
         Optional<SubTurma> optinal = subTurmaRepository.findById(id);
         if (optinal.isEmpty()) return null;
 
         SubTurma subTurma = optinal.get();
 
-        Optional<Aluno> aluno = alunoRepository.findById(alunoId);
+        Optional<Aluno> aluno = alunoRepository.findById(alunoId.id());
 
         if (aluno.isEmpty()) return null;
 
         subTurma.getAlunos().add(aluno.get());
 
         subTurmaRepository.save(subTurma);
-        return alunoId;
+        return AlunoDto.toDTO(aluno.get());
     }
 
     @Transactional

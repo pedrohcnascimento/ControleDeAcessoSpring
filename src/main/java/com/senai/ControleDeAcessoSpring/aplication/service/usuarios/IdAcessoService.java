@@ -1,6 +1,7 @@
 package com.senai.ControleDeAcessoSpring.aplication.service.usuarios;
 
 import com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno.OcorrenciaService;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -13,6 +14,7 @@ public class IdAcessoService {
     @Autowired
     OcorrenciaService ocorrenciaService;
 
+    @Transactional
     public void direcionarIdAcessoRecebido(String idAcesso, String rota, Long idUsuario) {
         System.out.println("Teste"+rota);
         if (rota.equals("cadastrar")) {

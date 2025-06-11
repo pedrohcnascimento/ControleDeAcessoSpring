@@ -6,6 +6,7 @@ import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 import com.senai.ControleDeAcessoSpring.domain.repository.curso.CursoRepository;
 
 import com.senai.ControleDeAcessoSpring.domain.repository.turma.horario.UnidadeCurricularRepository;
+import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
@@ -21,6 +22,7 @@ public class CursoService {
     @Autowired
     private UnidadeCurricularRepository unidadeCurricularRepository;
 
+    @Transactional
     public void salvar(CursoDto dto) {
 
         final Curso curso = cursoRepository.save(
@@ -44,14 +46,17 @@ public class CursoService {
         curso.setUnidadesCurriculares(unidades);
     }
 
+    @Transactional
     public List<CursoDto> listarTodos() {
         return cursoRepository.findAll().stream().map(CursoDto::toDto).toList();
     }
 
+    @Transactional
     public Optional<CursoDto> buscarPorId(Long id) {
         return cursoRepository.findById(id).map(CursoDto::toDto);
     }
 
+    @Transactional
     public CursoDto atualizar(Long id, CursoDto dto) {
         Curso curso = cursoRepository.findById(id).orElseThrow(() -> new RuntimeException("Curso não encontrado"));
 
@@ -76,6 +81,7 @@ public class CursoService {
         return CursoDto.toDto(cursoAtualizado);
     }
 
+    @Transactional
     public Boolean deletar(Long id) {
         if (cursoRepository.existsById(id)) {
             unidadeCurricularRepository.deleteById(id);
