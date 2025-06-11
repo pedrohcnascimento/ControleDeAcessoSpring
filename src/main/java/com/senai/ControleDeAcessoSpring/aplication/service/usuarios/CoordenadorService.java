@@ -4,6 +4,7 @@ import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.CoordenadorDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Coordenador;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.CoordenadorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,9 +17,14 @@ public class CoordenadorService {
     @Autowired
     private CoordenadorRepository coordenadorRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public void cadastrarCoordenador(List<CoordenadorDto> dtos) {
         dtos.forEach(coordenadorDto -> {
-            coordenadorRepository.save(coordenadorDto.fromDTO());
+            Coordenador coordenador = coordenadorDto.fromDTO();
+            coordenador.setSenha(passwordEncoder.encode(coordenadorDto.senha()));
+            coordenadorRepository.save(coordenador);
         });
     }
 

@@ -1,9 +1,11 @@
 package com.senai.ControleDeAcessoSpring.aplication.service.usuarios;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.ProfessorDto;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.AQV;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.ProfessorRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -16,8 +18,14 @@ public class ProfessorService {
     @Autowired
     private ProfessorRepository professorRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public void cadastrarUsuario(List<ProfessorDto> listaDtos) {
         listaDtos.forEach(professorDto -> {
+            Professor professor = professorDto.fromDTO();
+            professor.setSenha(passwordEncoder.encode(professorDto.senha()));
+            professorRepository.save(professor);
             professorRepository.save(professorDto.fromDTO());
         });
     }

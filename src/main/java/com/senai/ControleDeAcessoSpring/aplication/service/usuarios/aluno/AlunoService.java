@@ -5,6 +5,7 @@ import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.Justificat
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.OcorrenciaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
@@ -14,6 +15,7 @@ import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.AlunoRe
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.JustificativaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.OcorrenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -33,12 +35,17 @@ public class AlunoService {
     @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
 
 
 
     public void cadastrarAluno(List<AlunoDto> listaDtos) {
         listaDtos.forEach(alunoDto -> {
-            alunoRepository.save(alunoDto.fromDTO());
+            Aluno aluno = alunoDto.fromDTO();
+            aluno.setSenha(passwordEncoder.encode(alunoDto.senha()));
+            alunoRepository.save(aluno);
         });
     }
 
