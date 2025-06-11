@@ -31,7 +31,7 @@ public class UsuarioService {
 
     public Optional<UsuarioDto> buscarPorId(Long id) {
         return usuarioRepository.findById(id)
-                .filter(Usuario::isAtivo)
+                .filter(Usuario::getAtivo)
                 .map(UsuarioDto::toDto);
     }
 
