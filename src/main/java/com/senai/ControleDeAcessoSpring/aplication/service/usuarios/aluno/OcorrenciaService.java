@@ -2,6 +2,8 @@ package com.senai.ControleDeAcessoSpring.aplication.service.usuarios.aluno;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.OcorrenciaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioBase;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioSemanal;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
@@ -14,6 +16,7 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
 import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
 import java.util.List;
@@ -79,6 +82,7 @@ public class OcorrenciaService {
                 if (verificarAtraso(aluno)) {
                     System.out.println("Aluno atrasado");
                     criarOcorrencia(aluno);
+
                     System.out.println("Ocorrência gerada");
                 }
             }
@@ -106,6 +110,29 @@ public class OcorrenciaService {
     }
 
     private void criarOcorrencia(Aluno aluno) {
+        Ocorrencia ocorrencia = new Ocorrencia(
+                0l,
+                TipoDeOcorrencia.ATRASO,
+                "O aluno " + aluno.getNome() + " está atrasado.",
+                StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO,
+                LocalDateTime.now(),
+                null,
+                true,
+                aluno,
+                new Professor(),
+                new UnidadeCurricular());
+//        Professor professor1 = new Professor();
+//        HorarioBase horarioBase;
+//        List<HorarioSemanal> horariosSemanais = aluno.getSubTurmas().get().getSemestres().get().getHorariosSemanais();
+//        horariosSemanais.forEach(horario -> {
+//            if (horario.getSemanaReferencia().isBefore(LocalDate.now()) && horario.getSemanaReferencia().isAfter(LocalDate.now().minusDays(7))) {
+//                HorarioSemanal horarioEscolhido = horario;
+//                professor1 = aluno.getSubTurmas().get().getSemestres().get().getHorariosSemanais().get(horarioEscolhido).getAulasDoDia().get().getAulas().get().getProfessor();
+//            }
+//        });
 
+        ocorrenciaRepository.save(ocorrencia);
     }
+
+
 }
