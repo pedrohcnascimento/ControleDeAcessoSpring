@@ -5,6 +5,7 @@ import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.Justificat
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.OcorrenciaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;

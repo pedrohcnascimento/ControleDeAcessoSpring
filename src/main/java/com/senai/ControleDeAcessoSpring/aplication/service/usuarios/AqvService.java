@@ -2,6 +2,7 @@ package com.senai.ControleDeAcessoSpring.aplication.service.usuarios;
 
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.AQVDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.AQV;
+import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.AqvRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
