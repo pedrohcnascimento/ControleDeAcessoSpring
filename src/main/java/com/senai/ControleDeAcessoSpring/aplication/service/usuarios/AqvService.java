@@ -4,6 +4,7 @@ import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.AQVDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.AQV;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.AqvRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
 import java.util.List;
@@ -15,9 +16,14 @@ public class AqvService {
     @Autowired
     private AqvRepository aqvRepository;
 
+    @Autowired
+    private PasswordEncoder passwordEncoder;
+
     public void cadastrarAqv(List<AQVDto> dtos) {
         dtos.forEach(dto -> {
-            aqvRepository.save(dto.fromDto());
+            AQV aqv = dto.fromDto();
+            aqv.setSenha(passwordEncoder.encode(dto.senha()));
+            aqvRepository.save(aqv);
         });
     }
 
