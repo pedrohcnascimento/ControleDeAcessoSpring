@@ -10,10 +10,14 @@ import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificati
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.repository.turma.horario.UnidadeCurricularRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.ProfessorRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.AlunoRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.JustificativaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.OcorrenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
+import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -32,6 +36,12 @@ public class AlunoService {
 
     @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
+
+    @Autowired
+    private ProfessorRepository professorRepository;
+
+    @Autowired
+    private UnidadeCurricularRepository unidadeCurricularRepository;
 
 
 
@@ -136,11 +146,15 @@ public class AlunoService {
     }
 
     public boolean criarOcorrenciaSaida(Long id, OcorrenciaDto ocorrenciaDto) {
-        Ocorrencia o = ocorrenciaDto.fromDto(alunoRepository.findById(id), new Professor(), new UnidadeCurricular()); // Arrumar depois
+        Ocorrencia o = ocorrenciaDto.fromDto();
         o.setAluno(alunoRepository.findById(id).get());
         o.setStatus(StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO);
+        o.setTipo(TipoDeOcorrencia.SAIDA_ANTECIPADA); // Só pode ser de saída
         o.setDataHoraCriacao(LocalDateTime.now()); // Hora em que é cadastrada
         o.setDataHoraConclusao(null); // Ainda não foi concluída
+        Professor professor = new Professor(); professor.setId(2l); o.setProfessorResponsavel(professor);
+        UnidadeCurricular uc = new UnidadeCurricular(); uc.setId(1l); o.setUnidadeCurricular(uc);
+        // Ver a questão do horário solicitado para saída antecipada e se precisa de prof e uc
         return alunoRepository.findById(id).map(aluno -> {
             aluno.getOcorrencias().add(o);
             ocorrenciaRepository.save(o);
@@ -151,7 +165,7 @@ public class AlunoService {
     public boolean alterarStatusOcorrencia(Long idOcorrencia, StatusDaOcorrencia status) {
         ocorrenciaRepository.findById(idOcorrencia).map(ocorrencia -> {
                     ocorrencia.setStatus(status);
-                    if (status.equals(StatusDaJustificativa.APROVADA) || status.equals(StatusDaJustificativa.REPROVADA)) {
+                    if (status.equals(StatusDaOcorrencia.APROVADO) || status.equals(StatusDaOcorrencia.REPROVADO)) {
                         ocorrencia.setDataHoraConclusao(LocalDateTime.now());
                     }
                     ocorrenciaRepository.save(ocorrencia);
@@ -169,7 +183,4 @@ public class AlunoService {
         });
         return false;
     }
-
-
-
 }

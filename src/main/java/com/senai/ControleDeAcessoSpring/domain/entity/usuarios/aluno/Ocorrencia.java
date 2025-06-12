@@ -31,7 +31,6 @@ public class Ocorrencia {
 
     private LocalDateTime dataHoraCriacao;
     private LocalDateTime dataHoraConclusao;
-    private Boolean ativo;
 
     @ManyToOne
     private Aluno aluno;

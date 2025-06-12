@@ -20,8 +20,6 @@ public class AlunoController {
     @Autowired
     AlunoService alunoService;
 
-    //INSERT INTO usuario(ativo, id_acesso, nome, cpf, data_nascimento, email, senha, tipo_usuario) VALUES(true, "", "Nome", 11111111111, "2000-01-01", "email.exemplo@teste.com", "senha", "ALUNO");
-
     @PostMapping
     public ResponseEntity<Void> cadastrarUsuario(@RequestBody List<AlunoDto> listaDtos) {
         alunoService.cadastrarAluno(listaDtos);
@@ -106,7 +104,7 @@ public class AlunoController {
     }
 
     @PutMapping("/{id}/ocorrencias")
-    public ResponseEntity<String> criarJustificativa(@PathVariable Long id, @RequestBody OcorrenciaDto ocorrenciaDto) {
+    public ResponseEntity<String> criarOcorrenciaSaida(@PathVariable Long id, @RequestBody OcorrenciaDto ocorrenciaDto) {
         if (alunoService.criarOcorrenciaSaida(id, ocorrenciaDto)) {
             return ResponseEntity.ok("Ocorrência de saída adiantada adicionada!");
         }
@@ -114,8 +112,8 @@ public class AlunoController {
     }
 
     @PutMapping("/{id}/ocorrencias/{idOcorrencia}")
-    public ResponseEntity<String> alterarStatusJustificativa(@PathVariable Long id, @PathVariable Long idOcorrencia,
-                                                             @RequestBody StatusDaOcorrencia status) {
+    public ResponseEntity<String> alterarStatusOcorrencia(@PathVariable Long id, @PathVariable Long idOcorrencia,
+                                                          @RequestBody StatusDaOcorrencia status) {
         if (alunoService.alterarStatusOcorrencia(idOcorrencia, status)) {
             return ResponseEntity.ok("Status alterado");
         } else {
@@ -131,7 +129,4 @@ public class AlunoController {
             return ResponseEntity.notFound().build();
         }
     }
-
-
-
 }

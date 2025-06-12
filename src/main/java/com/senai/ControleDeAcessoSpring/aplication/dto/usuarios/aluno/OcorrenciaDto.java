@@ -36,7 +36,7 @@ public record OcorrenciaDto(
         );
     }
 
-    public Ocorrencia fromDto(Optional<Aluno> byId, Professor professor, UnidadeCurricular unidadeCurricular){
+    public Ocorrencia fromDto(){
         Ocorrencia o = new Ocorrencia();
         o.setId(id);
         o.setTipo(tipo);
@@ -44,23 +44,6 @@ public record OcorrenciaDto(
         o.setStatus(status);
         o.setDataHoraCriacao(dataHoraCriacao);
         o.setDataHoraConclusao(dataHoraConclusao);
-        o.setAluno(null);
-        o.setProfessorResponsavel(null);
-        o.setUnidadeCurricular(null);
-        return o;
-    }
-
-    public Ocorrencia fromDto(Aluno aluno, Professor professor, UnidadeCurricular unidadeCurricular){
-        Ocorrencia o = new Ocorrencia();
-        o.setId(id);
-        o.setTipo(tipo);
-        o.setDescricao(descricao);
-        o.setStatus(status);
-        o.setDataHoraCriacao(dataHoraCriacao);
-        o.setDataHoraConclusao(dataHoraConclusao);
-        o.setAluno(aluno);
-        o.setProfessorResponsavel(professor);
-        o.setUnidadeCurricular(unidadeCurricular);
         return o;
     }
 }
