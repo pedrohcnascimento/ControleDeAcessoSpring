@@ -11,13 +11,10 @@ import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
-import com.senai.ControleDeAcessoSpring.domain.repository.turma.horario.UnidadeCurricularRepository;
-import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.ProfessorRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.AlunoRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.JustificativaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.OcorrenciaRepository;
 import org.springframework.beans.factory.annotation.Autowired;
-import org.springframework.data.domain.Example;
 import org.springframework.stereotype.Service;
 
 import java.time.LocalDateTime;
@@ -36,14 +33,6 @@ public class AlunoService {
 
     @Autowired
     private OcorrenciaRepository ocorrenciaRepository;
-
-    @Autowired
-    private ProfessorRepository professorRepository;
-
-    @Autowired
-    private UnidadeCurricularRepository unidadeCurricularRepository;
-
-
 
 
     public void cadastrarAluno(List<AlunoDto> listaDtos) {
