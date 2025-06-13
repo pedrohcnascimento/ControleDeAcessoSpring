@@ -1,14 +1,10 @@
 package com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno;
 
-import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
-import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
-import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
 import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
 
 import java.time.LocalDateTime;
-import java.util.Optional;
 
 public record OcorrenciaDto(
         Long id,

@@ -148,8 +148,8 @@ public class AlunoService {
         o.setTipo(TipoDeOcorrencia.SAIDA_ANTECIPADA); // Só pode ser de saída
         o.setDataHoraCriacao(LocalDateTime.now()); // Hora em que é cadastrada
         o.setDataHoraConclusao(null); // Ainda não foi concluída
-        Professor professor = new Professor(); professor.setId(2l); o.setProfessorResponsavel(professor);
-        UnidadeCurricular uc = new UnidadeCurricular(); uc.setId(1l); o.setUnidadeCurricular(uc);
+        Professor professor = new Professor(); professor.setId(2l); o.setProfessorResponsavel(professor); //Implementar como achar prof
+        UnidadeCurricular uc = new UnidadeCurricular(); uc.setId(1l); o.setUnidadeCurricular(uc); //Implementar como achar uc
         // Ver a questão do horário solicitado para saída antecipada e se precisa de prof e uc
         return alunoRepository.findById(id).map(aluno -> {
             aluno.getOcorrencias().add(o);
