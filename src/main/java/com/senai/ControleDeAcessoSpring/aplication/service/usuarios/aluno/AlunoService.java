@@ -4,14 +4,16 @@ import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.AlunoDto;
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.JustificativaDto;
 import com.senai.ControleDeAcessoSpring.aplication.dto.usuarios.aluno.OcorrenciaDto;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.Semestre;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.SubTurma;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.Aula;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.AulaDoDia;
+import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.HorarioPadrao;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Professor;
-import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.Usuario;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Aluno;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Justificativa;
 import com.senai.ControleDeAcessoSpring.domain.entity.usuarios.aluno.Ocorrencia;
-import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaJustificativa;
-import com.senai.ControleDeAcessoSpring.domain.enums.StatusDaOcorrencia;
-import com.senai.ControleDeAcessoSpring.domain.enums.TipoDeOcorrencia;
+import com.senai.ControleDeAcessoSpring.domain.enums.*;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.AlunoRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.JustificativaRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.aluno.OcorrenciaRepository;
@@ -19,7 +21,11 @@ import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.security.crypto.password.PasswordEncoder;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
+import java.time.LocalDate;
 import java.time.LocalDateTime;
+import java.time.LocalTime;
+import java.time.temporal.ChronoUnit;
 import java.util.List;
 import java.util.Optional;
 import java.util.stream.Collectors;
@@ -141,23 +147,6 @@ public class AlunoService {
         return ocorrenciaRepository.findById(idOcorrencia).map(OcorrenciaDto::toDto);
     }
 
-    public boolean criarOcorrenciaSaida(Long id, OcorrenciaDto ocorrenciaDto) {
-        Ocorrencia o = ocorrenciaDto.fromDto();
-        o.setAluno(alunoRepository.findById(id).get());
-        o.setStatus(StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO);
-        o.setTipo(TipoDeOcorrencia.SAIDA_ANTECIPADA); // Só pode ser de saída
-        o.setDataHoraCriacao(LocalDateTime.now()); // Hora em que é cadastrada
-        o.setDataHoraConclusao(null); // Ainda não foi concluída
-        Professor professor = new Professor(); professor.setId(2l); o.setProfessorResponsavel(professor); //Implementar como achar prof
-        UnidadeCurricular uc = new UnidadeCurricular(); uc.setId(1l); o.setUnidadeCurricular(uc); //Implementar como achar uc
-        // Ver a questão do horário solicitado para saída antecipada e se precisa de prof e uc
-        return alunoRepository.findById(id).map(aluno -> {
-            aluno.getOcorrencias().add(o);
-            ocorrenciaRepository.save(o);
-            return true;
-        }).orElse(false);
-    }
-
     public boolean alterarStatusOcorrencia(Long idOcorrencia, StatusDaOcorrencia status) {
         ocorrenciaRepository.findById(idOcorrencia).map(ocorrencia -> {
                     ocorrencia.setStatus(status);
@@ -178,5 +167,118 @@ public class AlunoService {
             return true;
         });
         return false;
+    }
+
+    public boolean criarOcorrenciaSaida(Long id, OcorrenciaDto ocorrenciaDto) {
+        Optional<Aluno> alunoOpt = alunoRepository.findById(id);
+        if (alunoOpt.isPresent()) {
+            SubTurma subTurma = definirSubTurma(alunoOpt.get(), ocorrenciaDto.dataHoraConclusao());
+            Semestre semestre =definirSemestre(subTurma);
+            Aula aula = definirAula(semestre, subTurma);
+            Ocorrencia o = ocorrenciaDto.fromDto();
+            o.setAluno(alunoRepository.findById(id).get());
+            o.setStatus(StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO);
+            o.setTipo(TipoDeOcorrencia.SAIDA_ANTECIPADA); // Só pode ser de saída
+            o.setDataHoraCriacao(LocalDateTime.now()); // Hora em que é cadastrada
+            o.setDataHoraConclusao(null); // Utilizar dataHoraConclusao como a horaDaSaidaAntecipada?
+            o.setProfessorResponsavel(aula.getProfessor());
+            o.setUnidadeCurricular(aula.getUnidadeCurricular());
+            return alunoRepository.findById(id).map(aluno -> {
+                aluno.getOcorrencias().add(o);
+                ocorrenciaRepository.save(o);
+                return true;
+            }).orElse(false);
+        }
+        return false;
+    }
+    private SubTurma definirSubTurma(Aluno aluno, LocalDateTime dataHoraConclusao) {
+        LocalTime horaSaidaAntecipada = dataHoraConclusao.toLocalTime();
+        SubTurma subTurma = null;
+
+        for (SubTurma st : aluno.getSubTurmas()) {
+            if (st.getTurma().getPeriodo().equals(Periodo.INTEGRAL)) {
+                subTurma = st;
+                break;
+            }
+
+            LocalTime horarioDeEntrada = st.getTurma().getHorarioEntrada();
+
+            LocalTime horarioDeSaida = horarioDeEntrada.plusMinutes(
+                    ((long) st.getTurma().getQtdAulasPorDia() *
+                            st.getTurma().getCurso().getTipo().getMinutosPorAula()) +
+                            st.getTurma().getCurso().getTipo().getIntervaloMinutos()
+            );
+
+            if (horaSaidaAntecipada.isAfter(horarioDeEntrada) &&
+                    horaSaidaAntecipada.isBefore(horarioDeSaida)) {
+                subTurma = st;
+            }
+        }
+
+        return subTurma;
+    }
+
+    private Semestre definirSemestre(SubTurma subTurma) {
+        Semestre semestre = null;
+
+        LocalDate dataInicial = subTurma.getTurma().getDataInicial();
+        LocalDate hoje = LocalDate.now();
+
+        long mesesPassados = ChronoUnit.MONTHS.between(dataInicial, hoje);
+
+        semestre = subTurma.getSemestres().get(((int) mesesPassados / 6));
+
+        return semestre;
+    }
+
+    private Aula definirAula(Semestre semestre, SubTurma subTurma) {
+        HorarioPadrao horario = semestre.getHorarioPadrao();
+        DiaDaSemana diaDaSemanaHoje = (
+                switch (LocalDate.now().getDayOfWeek()) {
+                    case MONDAY -> DiaDaSemana.SEGUNDA;
+                    case TUESDAY -> DiaDaSemana.TERCA;
+                    case WEDNESDAY -> DiaDaSemana.QUARTA;
+                    case THURSDAY -> DiaDaSemana.QUINTA;
+                    case FRIDAY -> DiaDaSemana.SEXTA;
+                    default -> DiaDaSemana.SEGUNDA;
+                }
+        );
+        System.out.println("Dia da semana: " + diaDaSemanaHoje.name());
+
+        AulaDoDia aulas = horario.getAulasDoDia().stream()
+                .filter(aulaDoDia -> aulaDoDia.getDiaDaSemana().equals(diaDaSemanaHoje))
+                .findFirst()
+                .orElse(null);
+
+        if (aulas == null) throw new RuntimeException("Lista de aulas não determinada!");
+
+        aulas.getAulas().forEach(aula -> {
+            System.out.println(aula.getUnidadeCurricular().getNome());
+        });
+
+        LocalTime inicioDoDia = subTurma.getTurma().getHorarioEntrada();
+        System.out.println("Horario limite de entrada: " + inicioDoDia);
+
+
+        long minutosPassados = Duration.between(inicioDoDia, LocalTime.now()).toMinutes();
+
+        System.out.println("Horas passadas: " + minutosPassados / 60);
+
+        long aula = (minutosPassados /
+                ((long) subTurma.getTurma().getCurso().getTipo().getMinutosPorAula() *
+                        subTurma.getTurma().getQtdAulasPorDia()))
+                + 1;
+        System.out.println("aula N° " + aula);
+
+        Aula aulaEncontrada = aulas.getAulas().get((int) aula);
+
+        System.out.println("Aula encontrada: " + aulaEncontrada.getAmbiente());
+
+        if (aulaEncontrada == null) throw new RuntimeException("Aula não encontrada");
+
+        System.out.println("Aula - " + aulas.getAulas().indexOf(aulaEncontrada));
+        System.out.println(aulaEncontrada.getUnidadeCurricular().getNome());
+
+        return aulaEncontrada;
     }
 }
