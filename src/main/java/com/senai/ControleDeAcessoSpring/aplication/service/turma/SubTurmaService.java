@@ -104,14 +104,18 @@ public class SubTurmaService {
 
         SubTurma subTurma = optinal.get();
 
-        Optional<Aluno> aluno = alunoRepository.findById(alunoId.id());
+        Optional<Aluno> optionalAluno = alunoRepository.findById(alunoId.id());
 
-        if (aluno.isEmpty()) return null;
+        if (optionalAluno.isEmpty()) return null;
 
-        subTurma.getAlunos().add(aluno.get());
+        Aluno aluno = optionalAluno.get();
 
+        subTurma.getAlunos().add(aluno);
+        aluno.getSubTurmas().add(subTurma);
+
+        alunoRepository.save(aluno);
         subTurmaRepository.save(subTurma);
-        return AlunoDto.toDTO(aluno.get());
+        return AlunoDto.toDTO(aluno);
     }
 
     @Transactional
@@ -121,8 +125,16 @@ public class SubTurmaService {
 
         SubTurma subTurma = optinal.get();
 
-        subTurma.getAlunos().removeIf(aluno -> aluno.getId().equals(idAluno));
+        Optional<Aluno> optionalAluno = alunoRepository.findById(idAluno);
 
+        if (optionalAluno.isEmpty()) return false;
+
+        Aluno aluno = optionalAluno.get();
+
+        aluno.getSubTurmas().removeIf(st -> st.getId().equals(idSubTurma));
+        subTurma.getAlunos().removeIf(al -> aluno.getId().equals(idAluno));
+
+        alunoRepository.save(aluno);
         subTurmaRepository.save(subTurma);
         return true;
     }
