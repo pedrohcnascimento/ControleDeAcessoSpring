@@ -39,10 +39,10 @@ public class SubTurmaService {
                 .orElseThrow(() -> new RuntimeException("Turma não encontrada"));
 
         SubTurma subTurma = new SubTurma();
-        subTurma.setNome("Turma " + subTurma.getTurma().getSubTurmas().size());
         subTurma.setTurma(turma);
 
         turma.getSubTurmas().add(subTurma);
+        subTurma.setNome("Turma " + subTurma.getTurma().getSubTurmas().size());
 
         Semestre semestre = new Semestre();
         subTurma.setSemestres(new ArrayList<>());
@@ -99,10 +99,10 @@ public class SubTurmaService {
 
     @Transactional
     public AlunoDto adicionarAluno(Long id, AlunoDto alunoId){
-        Optional<SubTurma> optinal = subTurmaRepository.findById(id);
-        if (optinal.isEmpty()) return null;
+        Optional<SubTurma> optionalSubTurma = subTurmaRepository.findById(id);
+        if (optionalSubTurma.isEmpty()) return null;
 
-        SubTurma subTurma = optinal.get();
+        SubTurma subTurma = optionalSubTurma.get();
 
         Optional<Aluno> optionalAluno = alunoRepository.findById(alunoId.id());
 
@@ -119,20 +119,20 @@ public class SubTurmaService {
     }
 
     @Transactional
-    public Boolean removerAluno(Long idSubTurma, Long idAluno) {
+    public Boolean removerAluno(Long idSubTurma, AlunoDto idAluno) {
         Optional<SubTurma> optinal = subTurmaRepository.findById(idSubTurma);
         if (optinal.isEmpty()) return false;
 
         SubTurma subTurma = optinal.get();
 
-        Optional<Aluno> optionalAluno = alunoRepository.findById(idAluno);
+        Optional<Aluno> optionalAluno = alunoRepository.findById(idAluno.id());
 
         if (optionalAluno.isEmpty()) return false;
 
         Aluno aluno = optionalAluno.get();
 
         aluno.getSubTurmas().removeIf(st -> st.getId().equals(idSubTurma));
-        subTurma.getAlunos().removeIf(al -> aluno.getId().equals(idAluno));
+        subTurma.getAlunos().removeIf(al -> aluno.getId().equals(idAluno.id()));
 
         alunoRepository.save(aluno);
         subTurmaRepository.save(subTurma);

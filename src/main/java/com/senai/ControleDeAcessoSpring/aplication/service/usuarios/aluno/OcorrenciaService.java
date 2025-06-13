@@ -20,6 +20,7 @@ import jdk.dynalink.linker.ConversionComparator;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 
+import java.time.Duration;
 import java.time.LocalDate;
 import java.time.LocalDateTime;
 import java.time.LocalTime;
@@ -94,6 +95,14 @@ public class OcorrenciaService {
             if (usuarioOpt.get() instanceof Aluno aluno) {
                 SubTurma st = definirSubTurma(aluno);
 
+                System.out.println("Usuario é um aluno!");
+
+                System.out.println("infos do aluno:");
+                System.out.println(" Sub-turmas: ");
+                for (SubTurma subTurma : aluno.getSubTurmas()) {
+                    System.out.println("- " + subTurma.getNome() + " | " + subTurma.getTurma().getPeriodo().name());
+                }
+
                 System.out.println("Atrasado: " + ((st != null) ? "Sim":"Não"));
 
                 if (st != null) {
@@ -120,6 +129,8 @@ public class OcorrenciaService {
                     novaOcorrencia.setUnidadeCurricular(aula.getUnidadeCurricular());
 
                     ocorrenciaRepository.save(novaOcorrencia);
+
+                    System.out.println("Ocorrencia salva com sucesso!");
                 }
             }
         } else {
@@ -182,28 +193,43 @@ public class OcorrenciaService {
                     default -> DiaDaSemana.SEGUNDA;
                 }
                 );
+        System.out.println("Dia da semana: " + diaDaSemanaHoje.name());
 
         AulaDoDia aulas = horario.getAulasDoDia().stream()
                 .filter(aulaDoDia -> aulaDoDia.getDiaDaSemana().equals(diaDaSemanaHoje))
                 .findFirst()
                 .orElse(null);
 
-        if (aulas != null) return null;
+        if (aulas == null) throw new RuntimeException("Lista de aulas não determinada!");
 
-        LocalTime agora = LocalTime.now();
+        aulas.getAulas().forEach(aula -> {
+            System.out.println(aula.getUnidadeCurricular().getNome());
+        });
+
         LocalTime inicioDoDia = subTurma.getTurma().getHorarioEntrada();
+        System.out.println("Horario limite de entrada: " + inicioDoDia);
 
-        long minutosPassados = (
-                (agora.getHour() * 60 + agora.getMinute()) +
-                (inicioDoDia.getHour() * 60 + agora.getMinute())
-        );
 
-        int aula = (int)
-                (minutosPassados /
-                        subTurma.getTurma().getCurso().getTipo().getMinutosPorAula())
+        long minutosPassados = Duration.between(inicioDoDia, LocalTime.now()).toMinutes();
+
+        System.out.println("Horas passadas: " + minutosPassados / 60);
+
+        long aula = (minutosPassados /
+                        ((long) subTurma.getTurma().getCurso().getTipo().getMinutosPorAula() *
+                        subTurma.getTurma().getQtdAulasporDia()))
                 + 1;
+        System.out.println("aula N° " + aula);
 
-        return aulas.getAulas().get(aula);
+        Aula aulaEncontrada = aulas.getAulas().get((int) aula);
+
+        System.out.println("Aula encontrada: " + aulaEncontrada.getAmbiente());
+
+        if (aulaEncontrada == null) throw new RuntimeException("Aula não encontrada");
+
+        System.out.println("Aula - " + aulas.getAulas().indexOf(aulaEncontrada));
+        System.out.println(aulaEncontrada.getUnidadeCurricular().getNome());
+
+        return aulaEncontrada;
     }
 }
 

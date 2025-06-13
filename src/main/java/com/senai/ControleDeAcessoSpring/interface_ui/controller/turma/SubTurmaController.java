@@ -21,7 +21,7 @@ public class SubTurmaController {
         return ResponseEntity.ok(service.listar());
     }
 
-    @PostMapping("/{idTurma}")
+    @PostMapping("/{turmaId}")
     public ResponseEntity<String> cadastrarSubTurma(@PathVariable Long turmaId) {
         service.criarSubTurma(turmaId);
         return ResponseEntity.ok("Sub Turma criada com sucesso!");
@@ -51,8 +51,8 @@ public class SubTurmaController {
         return ResponseEntity.ok(resposta);
     }
 
-    @DeleteMapping("/{id}/alunos")
-    public ResponseEntity<Boolean> deletarAluno(@PathVariable Long idSubTurma, @RequestBody Long idAluno) {
+    @DeleteMapping("/{idSubTurma}/alunos")
+    public ResponseEntity<Boolean> deletarAluno(@PathVariable Long idSubTurma, @RequestBody AlunoDto idAluno) {
         if (service.removerAluno(idSubTurma, idAluno)) {
             return ResponseEntity.ok(true);
         }
