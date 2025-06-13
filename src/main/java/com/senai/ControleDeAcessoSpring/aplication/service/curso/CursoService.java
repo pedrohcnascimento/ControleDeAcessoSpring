@@ -5,7 +5,7 @@ import com.senai.ControleDeAcessoSpring.domain.entity.curso.Curso;
 import com.senai.ControleDeAcessoSpring.domain.entity.curso.UnidadeCurricular;
 import com.senai.ControleDeAcessoSpring.domain.repository.curso.CursoRepository;
 
-import com.senai.ControleDeAcessoSpring.domain.repository.turma.horario.UnidadeCurricularRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.curso.UnidadeCurricularRepository;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
 

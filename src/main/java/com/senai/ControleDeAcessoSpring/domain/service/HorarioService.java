@@ -7,7 +7,7 @@ import com.senai.ControleDeAcessoSpring.domain.entity.turma.horario.*;
 import com.senai.ControleDeAcessoSpring.domain.enums.DiaDaSemana;
 import com.senai.ControleDeAcessoSpring.domain.repository.curso.AmbienteRepository;
 import com.senai.ControleDeAcessoSpring.domain.repository.usuarios.ProfessorRepository;
-import com.senai.ControleDeAcessoSpring.domain.repository.curso.UnidadeCurrricularRepository;
+import com.senai.ControleDeAcessoSpring.domain.repository.curso.UnidadeCurricularRepository;
 import jakarta.transaction.Transactional;
 import org.springframework.beans.factory.annotation.Autowired;
 import org.springframework.stereotype.Service;
@@ -20,7 +20,7 @@ import java.util.List;
 public class HorarioService {
 
     @Autowired
-    private UnidadeCurrricularRepository unidadeCurrricularRepository;
+    private UnidadeCurricularRepository unidadeCurrricularRepository;
 
     @Autowired
     private ProfessorRepository professorRepository;
