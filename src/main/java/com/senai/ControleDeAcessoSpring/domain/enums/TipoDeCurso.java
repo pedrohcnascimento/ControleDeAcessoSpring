@@ -2,7 +2,7 @@ package com.senai.ControleDeAcessoSpring.domain.enums;
 
 public enum TipoDeCurso {
     CAI(20, 50),
-    TECNICO(1, 1); // Originalmente 15 e 45 (alterado para testes)
+    TECNICO(15, 45);
 
     private final int intervaloMinutos;
     private final int minutosPorAula;

@@ -26,7 +26,6 @@ public class ProfessorService {
             Professor professor = professorDto.fromDTO();
             professor.setSenha(passwordEncoder.encode(professorDto.senha()));
             professorRepository.save(professor);
-            professorRepository.save(professorDto.fromDTO());
         });
     }
 

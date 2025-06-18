@@ -104,7 +104,7 @@ public class AlunoService {
         j.setAluno(alunoRepository.findById(id).get());
         j.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
         j.setDataHoraCriacao(LocalDateTime.now()); // Hora em que é cadastrada
-        j.setDataHoraConclusao(LocalDate.now().atTime(justificativaDto.dataHoraConclusao().toLocalTime())); // Hora escolhida no dia de hoje
+        j.setDataHoraConclusao(null); // Ainda não foi cincluída
         return alunoRepository.findById(id).map(aluno -> {
             aluno.getJustificativas().add(j);
             justificativaRepository.save(j);
@@ -115,9 +115,9 @@ public class AlunoService {
     public boolean alterarStatusJustificativa(Long idJustificativa, StatusDaJustificativa status) {
         justificativaRepository.findById(idJustificativa).map(justificativa -> {
                     justificativa.setStatus(status);
-//                    if (status.equals(StatusDaJustificativa.APROVADA) || status.equals(StatusDaJustificativa.REPROVADA)) {
-//                        justificativa.setDataHoraConclusao(LocalDateTime.now());
-//                    }
+                    if (status.equals(StatusDaJustificativa.APROVADA) || status.equals(StatusDaJustificativa.REPROVADA)) {
+                        justificativa.setDataHoraConclusao(LocalDateTime.now());
+                    }
                     justificativaRepository.save(justificativa);
                     return true;
                 }
@@ -150,8 +150,10 @@ public class AlunoService {
     public boolean alterarStatusOcorrencia(Long idOcorrencia, StatusDaOcorrencia status) {
         ocorrenciaRepository.findById(idOcorrencia).map(ocorrencia -> {
                     ocorrencia.setStatus(status);
-                    if (status.equals(StatusDaOcorrencia.APROVADO) || status.equals(StatusDaOcorrencia.REPROVADO)) {
-                        ocorrencia.setDataHoraConclusao(LocalDateTime.now());
+                    if (ocorrencia.getTipo().equals(TipoDeOcorrencia.ATRASO)) {
+                        if (status.equals(StatusDaOcorrencia.APROVADO) || status.equals(StatusDaOcorrencia.REPROVADO)) {
+                            ocorrencia.setDataHoraConclusao(LocalDateTime.now());
+                        }
                     }
                     ocorrenciaRepository.save(ocorrencia);
                     return true;
@@ -169,20 +171,24 @@ public class AlunoService {
         return false;
     }
 
+    // Utilizando dataHoraConclusao como o horário de saída
     public boolean criarOcorrenciaSaida(Long id, OcorrenciaDto ocorrenciaDto) {
         Optional<Aluno> alunoOpt = alunoRepository.findById(id);
         if (alunoOpt.isPresent()) {
-            SubTurma subTurma = definirSubTurma(alunoOpt.get(), ocorrenciaDto.dataHoraConclusao());
-            Semestre semestre =definirSemestre(subTurma);
-            Aula aula = definirAula(semestre, subTurma);
             Ocorrencia o = ocorrenciaDto.fromDto();
             o.setAluno(alunoRepository.findById(id).get());
             o.setStatus(StatusDaOcorrencia.AGUARDANDO_AUTORIZACAO);
             o.setTipo(TipoDeOcorrencia.SAIDA_ANTECIPADA); // Só pode ser de saída
             o.setDataHoraCriacao(LocalDateTime.now()); // Hora em que é cadastrada
-            o.setDataHoraConclusao(null); // Utilizar dataHoraConclusao como a horaDaSaidaAntecipada?
+            o.setDataHoraConclusao(LocalDate.now().atTime(ocorrenciaDto.dataHoraConclusao().toLocalTime())); // Dia de hoje, hora da saída
+
+            SubTurma subTurma = definirSubTurma(alunoOpt.get(), o.getDataHoraConclusao());
+            Semestre semestre = definirSemestre(subTurma);
+            Aula aula = definirAula(semestre, subTurma);
+
             o.setProfessorResponsavel(aula.getProfessor());
             o.setUnidadeCurricular(aula.getUnidadeCurricular());
+
             return alunoRepository.findById(id).map(aluno -> {
                 aluno.getOcorrencias().add(o);
                 ocorrenciaRepository.save(o);
