@@ -104,7 +104,7 @@ public class AlunoService {
         j.setAluno(alunoRepository.findById(id).get());
         j.setStatus(StatusDaJustificativa.AGUARDANDO_ANALISE);
         j.setDataHoraCriacao(LocalDateTime.now()); // Hora em que é cadastrada
-        j.setDataHoraConclusao(null); // Ainda não foi concluída
+        j.setDataHoraConclusao(LocalDate.now().atTime(justificativaDto.dataHoraConclusao().toLocalTime())); // Hora escolhida no dia de hoje
         return alunoRepository.findById(id).map(aluno -> {
             aluno.getJustificativas().add(j);
             justificativaRepository.save(j);
@@ -115,9 +115,9 @@ public class AlunoService {
     public boolean alterarStatusJustificativa(Long idJustificativa, StatusDaJustificativa status) {
         justificativaRepository.findById(idJustificativa).map(justificativa -> {
                     justificativa.setStatus(status);
-                    if (status.equals(StatusDaJustificativa.APROVADA) || status.equals(StatusDaJustificativa.REPROVADA)) {
-                        justificativa.setDataHoraConclusao(LocalDateTime.now());
-                    }
+//                    if (status.equals(StatusDaJustificativa.APROVADA) || status.equals(StatusDaJustificativa.REPROVADA)) {
+//                        justificativa.setDataHoraConclusao(LocalDateTime.now());
+//                    }
                     justificativaRepository.save(justificativa);
                     return true;
                 }
